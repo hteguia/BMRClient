@@ -1,0 +1,94 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif!important;
+}
+
+.btn {
+    color: inherit;
+    display: inline-block;
+    font-weight: 600;
+    line-height: 1.71;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    font-family: inherit;
+    outline: none;
+    box-shadow: 1px 1px 3px 0 rgba(50, 50, 54, 0.13), 0 0 3px 1px rgba(63, 63, 68, 0.05);
+}
+
+.btn--primary:not(:disabled) {
+    background-color: var(--primary) !important;
+    color: #fff!important;
+}
+
+.btn--primary:disabled {
+    background-color: rgba(0, 0, 0, 0.12);
+    color: #fff!important;
+}
+  
+.btn--default {
+    background-color: var(--default) !important;
+    color: #000!important;
+}
+
+.btn-group {
+    margin: 2px 8px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.btn--close{
+    background-color: rgba(0, 0, 0, 0.22);
+    color:rgba(0, 0, 0, 0.8);
+}
+
+.dx-widget, .dx-pager {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif!important;
+}
+  
+.dx-pager .dx-page-sizes .dx-selection,
+.dx-pager .dx-pages .dx-selection {
+    background-color:  var(--primary) !important;
+}
+
+.dx-datagrid-headers{
+    background-color: rgba(0, 0, 0, 0.189);
+}
+
+.dx-datagrid-headers .dx-datagrid-text-content{
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+.mat-mdc-standard-chip .mdc-evolution-chip__text-label{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif!important;
+}
+
+.mat-h3, .mat-subtitle-1, .mat-typography .mat-h3, .mat-typography .mat-subtitle-1, .mat-typography h3 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif!important;
+  }
+
+
+  .mat-mdc-unelevated-button:not(:disabled) {
+    background-color: var(--mdc-filled-button-container-color, transparent);
+  }
+

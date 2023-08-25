@@ -1,0 +1,59 @@
+<div   class="grid-filter card" >                  
+    <div class="card-body" style="padding: 0;">
+        <div class="header-item">Date</div>
+        <div class="form-row">
+            <mat-chip-listbox aria-label="Fish selection">
+                <mat-chip-option value="TODAY" (selectionChange)="change($event)">Today</mat-chip-option>
+                <mat-chip-option value="WEEK" (selectionChange)="change($event)">Last 7 Days</mat-chip-option>
+                <mat-chip-option value="MONTHS" (selectionChange)="change($event)">1 Month</mat-chip-option>
+                <mat-chip-option value="YEAR" (selectionChange)="change($event)">1 Year</mat-chip-option>
+              </mat-chip-listbox>
+        </div>
+        <mat-divider class="divider"></mat-divider>
+        <div class="form-row">
+            <mat-form-field appearance="outline" floatLabel="always">
+                <mat-label>Date de debut</mat-label>
+                <input class="input-control" 
+                      matInput  
+                      [matDatepicker]="startDate" 
+                      [formControl]="startDateCtrl">
+                <mat-datepicker-toggle matIconSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field appearance="outline" floatLabel="always">
+                <mat-label>Date de fin</mat-label>
+                <input class="input-control" 
+                       matInput 
+                      [matDatepicker]="endDate" 
+                      [formControl]="endDateCtrl">
+                <mat-datepicker-toggle matIconSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+              </mat-form-field>
+        </div>
+        <!-- <div class="header-item">Type de service</div>
+        <div class="form-row">
+             <mat-form-field >
+                <mat-label>Type de service</mat-label>
+                <mat-select >
+                    <mat-option *ngFor="let option of serviceTypes" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+                <mat-error>Ce champs est obligatoire</mat-error>
+            </mat-form-field> 
+        </div>
+        <div class="header-item">Status du traitement</div>
+        <div class="form-row">
+            <mat-checkbox class="example-section">En attente de payment</mat-checkbox>
+            <mat-checkbox class="example-section">En attente de traitement</mat-checkbox>
+            <mat-checkbox class="example-section">Traitement encours</mat-checkbox>
+            <mat-checkbox class="example-section">Fin traitement</mat-checkbox>
+        </div>                     -->
+    </div>
+    <div class="card-footer">
+        <button mat-flat-button class="btn btn--primary" (click)="onApplyFilter()">
+            Filter
+          </button>
+          <button mat-flat-button class="btn btn--default float-right" (click)="onCancelFilter()">
+            Annuler
+          </button>
+    </div>
+  </div>

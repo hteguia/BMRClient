@@ -1,0 +1,19 @@
+.dx-widget, .dx-pager {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif!important;
+}
+
+.dx-pager .dx-pages .dx-selection {
+  background-color:  #000!important;
+}
+
+.dx-pager .dx-page-sizes .dx-selection,
+.dx-pager .dx-pages .dx-selection {
+  background-color:  #000!important;
+}
+
+.dx-data-row.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row):not(.dx-focused) > td{  
+  
+  color: blue!important;  
+  
+} 
+

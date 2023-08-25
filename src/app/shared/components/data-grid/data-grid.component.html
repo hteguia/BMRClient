@@ -1,0 +1,37 @@
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="dataSource"
+    keyExpr="id"
+    [showBorders]="false"
+    [hoverStateEnabled]="true"
+    [rowAlternationEnabled]="true"
+    (onRowClick)="onRowClick($event)"
+    (onSelectionChanged)="onSelectionChanged($event)">
+        <dxo-selection
+            [selectAllMode]="allMode"
+            [showCheckBoxesMode]="checkBoxesMode"
+            mode="multiple"/>
+        <dxo-pager
+            [visible]="true"
+            [allowedPageSizes]="allowedPageSizes"
+            [displayMode]="displayMode"
+            [showPageSizeSelector]="showPageSizeSelector"
+            [showInfo]="showInfo"
+            [showNavigationButtons]="showNavButtons">
+        </dxo-pager>
+        <dxi-column 
+            *ngFor="let col of columns"
+                dataField="{{col.dataField}}"
+                caption="{{col.caption}}"
+                dataType="{{col.dataType}}"
+                cellTemplate="{{col.template}}"
+                visible="{{col.visible}}"
+                [calculateCellValue]="calculateCellValue">  
+        </dxi-column>
+        <div *dxTemplate="let options of 'statusTemplate'">
+            <small class="badge badge-success">{{options.value}}</small>
+        </div>
+        <div *dxTemplate="let options of 'amountTemplate'">
+            {{options.value | amount}}
+        </div>
+</dx-data-grid>

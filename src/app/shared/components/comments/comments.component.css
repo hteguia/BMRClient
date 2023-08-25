@@ -1,0 +1,20 @@
+mat-list-item{
+    border-bottom: thin solid #555;
+    color:#000!important;
+}
+
+.comments-row {
+    display: flex;
+    border-top: thin solid #555;
+    padding-top: 10px;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  mat-form-field {
+    width: 90%;
+  }
+
+  .mdc-list-item{
+    color:#000;
+  }

@@ -1,0 +1,27 @@
+<div class="card" >
+    <div class="card-header">
+        <div class="margin">
+            <div class="btn-group">
+                <button mat-flat-button class="btn btn--primary" color="primary" (click)="onAddNewRole()">
+                    <mat-icon>add</mat-icon>
+                    Nouveau rôle
+                  </button>
+            </div>
+            <div class="btn-group" *ngIf="selectedRows.length" [@listItem]="listItemAnimateState">
+                <button mat-flat-button color="primary">
+                    <mat-icon>edit</mat-icon>
+                    Modifier
+                  </button>
+            </div>
+        </div> 
+    </div>
+    <div class="card-body">
+        <app-data-grid 
+            [columns]="columns" 
+            [dataSource]="roles | async"
+            (selectedRow)="onSelectRow($event)"
+            (rowClick)="onRowClick($event)">
+        </app-data-grid>
+    </div>
+</div>
+
