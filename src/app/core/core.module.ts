@@ -11,6 +11,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { AuthGuard } from "./guards/auth.guard";
+import { LayoutComponent } from "./components/layout/layout.component";
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { AuthGuard } from "./guards/auth.guard";
      NavbarComponent,
      MenuComponent,
      BreadcrumbComponent,
-     ShellComponent
+     ShellComponent,
+     LayoutComponent,
     ],
     imports: [
         CommonModule,
@@ -35,6 +37,7 @@ import { AuthGuard } from "./guards/auth.guard";
       MenuComponent,
       BreadcrumbComponent,
       ShellComponent,
+      LayoutComponent,
     ],
     providers: [
       AuthGuard

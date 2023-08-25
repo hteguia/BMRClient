@@ -4,9 +4,9 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
 import { ShellComponent } from './core/components/shell/shell.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { AuthService } from './auth/services/auth.service';
-import { LayoutComponent } from './layout.component';
 import { AuthChildGuard } from './core/guards/auth.child.guard';
 import { PageNotFoundComponent } from './page.not.found.component';
+import { LayoutComponent } from './core/components/layout/layout.component';
 
 const routes: Routes = [
   {path: 'auth', loadChildren: ()=> import('./auth/auth.module').then(m=>m.AuthModule) },
