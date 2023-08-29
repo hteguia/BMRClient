@@ -1,56 +1,60 @@
-<div class="login-page">
-  <div class="login-box">
-    <div class="card card-outline card-primary">
-      <div class="card-header text-center">
-        <a href="../../index2.html" class="h1"><b>BMR-AFRICA</b></a>
+<div class="account-layout">
+  <div class="account-header">
+      <a href="/" class="account-layout-header-item">
+          <img src="../../../../assets/img/logo_bmr.png" width="150px"/>
+      </a> 
+      <div class="account-layout__header__item">
+          <a routerLink="/auth/register" class="btn btn--primary">Créer un compte</a>
       </div>
-      <div class="card-body">
-        <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Email">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
+  </div>
+  <div class="account-body">
+      <div class="account-body-flex">
+          <div class="account-container">
+              <div class="account">
+                  <div class="account-form" [@formTrigger]="triggerState">
+                    <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
+                    <div class="input-group mb-3">
+                      <input type="email" class="form-control" placeholder="Email">
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-envelope"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="input-group mb-3">
+                      <input type="password" class="form-control" placeholder="Password">
+                      <div class="input-group-append">
+                        <div class="input-group-text">
+                          <span class="fas fa-lock"></span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="input-group mb-3">
+                      <button (click)="onLogin()" class="btn btn--primary btn-block">Se connecter</button>
+                    </div>
+                    <div class="input-group mb-3">
+                      <p class="mb-1">
+                        <a routerLink="/auth/forgot-password" style="color:#18254a">j'ai oublié mon mot de passe</a>
+                      </p>
+                    </div>
+                  </div>
               </div>
-            </div>
           </div>
-          <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-lock"></span>
-              </div>
-            </div>
+      </div>
+  </div>
+  <div class="account-footer">
+      <div class="account-footer-left">
+          <div class="account-footer-item">
+              <span class="account-footer-item-link"> © BMR-AFRICA 2023</span>
           </div>
-          <div class="row">
-            <div class="col-7">
-              <div class="icheck-primary">
-                <input type="checkbox" id="remember">
-                <label for="remember">
-                  Se souvenir de moi
-                </label>
-              </div>
-            </div>
-            <div class="col-5">
-              <button (click)="onLogin()" class="btn btn--primary btn-block">Se connecter</button>
-            </div>
+      </div> 
+      <div  class="account-footer-right">
+          <div class="account-footer-item">
+            <a href="https://bmr-africa.com/privacy-policy" target="_blank" rel="noopener noreferrer" class="account-footer-item-link"> Privacy policy </a>
+          </div> 
+          <div class="account-footer-item">
+              <a href="https://bmr-africa.com/terms" target="_blank" rel="noopener noreferrer" class="account-footer-item-link"> Terms and conditions </a>
           </div>
-        <div class="social-auth-links text-center mt-2 mb-3">
-          <button (click)="loginWithGoogle()" class="btn btn-block btn-danger">
-            <i class="fab fa-google-plus mr-2"></i> Se connecter avec Google
-          </button>
-          <asl-google-signin-button with="100" type='icon' size='medium' class="btn btn-block btn-danger">
-            <mat-icon>send</mat-icon>
-            <i class="fab fa-google-plus mr-2"></i> Se connecter avec Google
-          </asl-google-signin-button>
-        </div>
-        <p class="mb-1">
-          <a href="forgot-password.html">j'ai oublié mon mot de passe</a>
-        </p>
-        <p class="mb-0">
-          <a href="register.html" class="text-center">Créez votre compte</a>
-        </p>
       </div>
     </div>
-  </div>
 </div>

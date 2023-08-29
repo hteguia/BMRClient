@@ -120,7 +120,6 @@ export class ServiceRequestListComponent implements OnInit {
   }
 
   onRowClick(event: any){
-    console.log("ok");
     this.router.navigateByUrl(`service-request/consult/${event.id}`);
   }
 }

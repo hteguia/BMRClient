@@ -30,6 +30,24 @@
 <body class="sidebar-mini layout-fixed mat-typography">
   <app-root></app-root>
 
+  <script type="text/javascript" src="//www.privacypolicies.com/public/cookie-consent/4.0.0/cookie-consent.js"
+    charset="UTF-8"></script>
+  <script type="text/javascript" charset="UTF-8">
+    document.addEventListener('DOMContentLoaded', function () {
+      cookieconsent.run({ "notice_banner_type": "simple", "consent_type": "express", "palette": "light", "language": "fr", "page_load_consent_levels": ["strictly-necessary", "functionality", "tracking", "targeting"], "notice_banner_reject_button_hide": false, "preferences_center_close_button_hide": false, "website_name": "app.bmr-africa.com", "website_privacy_policy_url": "https://app.bmr-africa.com.tech/terms_of_use.html", "open_preferences_center_selector": "#open_preferences_center" });
+
+      const cookieText = document.getElementById('cc-nb-text');
+      if (cookieText) cookieText.textContent = "Salut c'est nous...🍪 les Cookies! Nous sommes là pour améliorer votre expérience de navigation sur notre site, on aimerait bien vous accompagner pendant votre visite... C'est OK pour vous ?";
+      const agreeBtn = document.querySelector('.cc-nb-okagree');
+      if (agreeBtn) agreeBtn.textContent = 'Ok pour moi';
+      const changePrefBtn = document.querySelector('.cc-nb-changep');
+      if (changePrefBtn) changePrefBtn.textContent = 'Je choisis';
+    });
+  </script>
+
+  <noscript>Cookie Consent by <a href="https://www.privacypolicies.com/privacy-policy-generator/"
+      rel="nofollow noopener">Privacy Policies Generator website</a></noscript>
+
   <!-- jQuery -->
 <script src="assets/plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

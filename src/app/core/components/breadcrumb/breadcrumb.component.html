@@ -3,12 +3,14 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">Dashboard</h1>
+          <h1 class="m-0">{{title}}</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Dashboard v1</li>
+            <ng-container *ngFor="let item of links; let i = index">
+              <li *ngIf="!isLaskLink(i)" class="breadcrumb-item"><a routerLink={{item.link}} >{{item.title}}</a></li>
+              <li *ngIf="isLaskLink(i)" class="breadcrumb-item active">{{item.title}}</li>
+            </ng-container>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->

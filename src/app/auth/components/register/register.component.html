@@ -1,0 +1,344 @@
+<div class="account-layout">
+  <div class="account-header">
+      <a href="/" class="account-layout-header-item">
+          <img src="../../../../assets/img/logo_bmr.png" width="150px"/>
+      </a> 
+      <div class="account-layout__header__item">
+          <a routerLink="/auth/login" class="btn btn--primary">J'ai déjà un compte? Connexion</a>
+      </div>
+  </div>
+  <div class="account-body">
+      <div class="account-body-flex">
+          <div class="account-container">
+              <div class="account">
+                  <div class="account-form" [@formTrigger]="triggerState">
+                    <ng-container *ngIf="isVertical">
+                      <mat-vertical-stepper [linear]="false" #stepper >
+                          <mat-step [stepControl]="credentialsForm">
+                              <form [formGroup]="credentialsForm">
+                                <ng-template matStepLabel>Identifiants</ng-template>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Adresse Email</label>
+                                    <mat-form-field appearance="outline">                          
+                                        <input matInput placeholder="Votre adresse email" formControlName="email" required>
+                                      </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Mot de passe</label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput placeholder="Votre de passe" [formControl]="passwordCtrl" required>
+                                      </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Confirmer le mot de passe</label>
+                                    <mat-form-field appearance="outline">
+                                        <input matInput placeholder="Confimer votre mot de passe" [formControl]="confirmPasswordCtrl" required>
+                                      </mat-form-field>
+                                </div>
+                                
+                               
+                                 
+                                <div>
+                                  <button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
+                                </div>
+                            </form>
+                            </mat-step>
+                            <mat-step [stepControl]="personalInformationForm" label="Informations personnelles">
+                                <form [formGroup]="personalInformationForm">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Prénoms</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="firstName" placeholder="Renseigner votre prénoms"
+                                                   required>
+                                          </mat-form-field>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Noms</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="lastName" placeholder="Renseigner votre noms de famille"
+                                                   required>
+                                          </mat-form-field>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Téléphone</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="phoneNumber" placeholder="Renseigner votre téléphone mobile"
+                                                   required>
+                                          </mat-form-field>
+                                    </div>
+                                  
+                                  <div>
+                                    <button class="btn btn--default" mat-flat-button matStepperPrevious>Précédent</button>
+                                    <button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
+                                  </div>
+                                </form>
+                              </mat-step>
+                            <mat-step [stepControl]="schoolInformationForm" label="Etablissement">
+                                <form [formGroup]="schoolInformationForm">
+                                    <mat-form-field appearance="outline">
+                                        <mat-select formControlName="category" placeholder="Quel est votre status" >
+                                            <mat-option  *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
+                                        </mat-select>
+                                        <mat-error>Ce champs est obligatoire</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline">
+                                        <mat-select formControlName="schoolName" placeholder="Quel est votre établissement" >
+                                            <mat-option  *ngFor="let option of school" [value]="option">{{ option }}</mat-option>
+                                        </mat-select>
+                                        <mat-error>Ce champs est obligatoire</mat-error>
+                                    </mat-form-field>
+                                  
+                                  <div>
+                                    <button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
+                                    <button class="btn btn--primary" mat-button matStepperNext>Suivant</button>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              
+                           
+                            <mat-step>
+                              <ng-template matStepLabel>Vérifier et créer</ng-template>
+                              <h2>Information de connexion</h2>
+                              <mat-divider></mat-divider>
+                
+                              <div class="table-responsive"  style="width: 90%; border:0px">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Noms</th>
+                                            <td>bmr admin</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="width: 30%;">Prénoms</th>
+                                            <td>24 Aug 2023 12:33</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>72 Heure(s)</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Téléphone</th>
+                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Catégorie</th>
+                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Etablissement</th>
+                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                              <mat-divider></mat-divider>
+                              <div>
+                                <button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
+                                <button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
+                                <button class="btn btn--primary" mat-button >Enregistrer</button>
+                              </div>
+                            </mat-step>
+                        </mat-vertical-stepper>
+                    </ng-container>
+                    <ng-container *ngIf="!isVertical">
+                        <mat-stepper [linear]="false" #stepper >
+                            <mat-step [stepControl]="credentialsForm">
+                              <form [formGroup]="credentialsForm">
+                                <ng-template matStepLabel>Identifiants</ng-template>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Adresse Email</label>
+                                    <mat-form-field appearance="outline">                          
+                                        <input matInput placeholder="Votre adresse email" formControlName="email" required>
+                                      </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Mot de passe</label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="password"  matInput placeholder="Votre de passe" [formControl]="passwordCtrl" required>
+                                      </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Confirmer le mot de passe</label>
+                                    <mat-form-field appearance="outline">
+                                        <input type="password" matInput placeholder="Confimer votre mot de passe" [formControl]="confirmPasswordCtrl" required>
+                                      </mat-form-field>
+                                </div>
+                                
+                              
+                                
+                                <div>
+                                  <button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
+                                </div>
+                            </form>
+                            </mat-step>
+                            <mat-step [stepControl]="personalInformationForm" label="Informations personnelles">
+                                <form [formGroup]="personalInformationForm">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Prénoms</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="firstName" placeholder="Renseigner votre prénoms"
+                                                  required>
+                                          </mat-form-field>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Noms</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="lastName" placeholder="Renseigner votre noms de famille"
+                                                  required>
+                                          </mat-form-field>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Téléphone</label>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput formControlName="phoneNumber" placeholder="Renseigner votre téléphone mobile"
+                                                  required>
+                                          </mat-form-field>
+                                    </div>
+                                  
+                                  <div>
+                                    <button class="btn btn--default" mat-flat-button matStepperPrevious>Précédent</button>
+                                    <button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
+                                  </div>
+                                </form>
+                              </mat-step>
+                            <mat-step [stepControl]="schoolInformationForm" label="Etablissement">
+                                <form [formGroup]="schoolInformationForm">
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Catégorie</label>
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="category" placeholder="Quel est votre status" >
+                                                <mat-option  *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
+                                            </mat-select>
+                                            <mat-error>Ce champs est obligatoire</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Ecole</label>
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="schoolName" placeholder="Quel est votre établissement" >
+                                                <mat-option  *ngFor="let option of school" [value]="option">{{ option }}</mat-option>
+                                            </mat-select>
+                                            <mat-error>Ce champs est obligatoire</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                    
+                                  
+                                  <div>
+                                    <button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
+                                    <button class="btn btn--primary" mat-button matStepperNext>Suivant</button>
+                                  </div>
+                                </form>
+                              </mat-step>
+                              
+                          
+                            <mat-step>
+                              <ng-template matStepLabel>Vérifier et créer</ng-template>
+                              <h2>Information de connexion</h2>
+                              <mat-divider></mat-divider>
+                
+                              <div class="table-responsive"  style="width: 90%; border:0px">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Noms</th>
+                                            <td>{{firstNameValue}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th style="width: 30%;">Prénoms</th>
+                                            <td>{{lastNameValue}}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Email</th>
+                                            <td>{{emailValue}}</td>
+                                        </tr>
+                                        
+                                        <tr>
+                                            <th>Téléphone</th>
+                                            <td>{{phoneNumberValue}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Catégorie</th>
+                                            <td>{{categoryValue}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Etablissement</th>
+                                            <td>{{schoolNameValue}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                              <mat-divider class="divider"></mat-divider>
+                              <div>
+                                <button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
+                                <button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
+                                <button class="btn btn--primary" mat-button >Enregistrer</button>
+                              </div>
+                            </mat-step>
+                          </mat-stepper>
+                    </ng-container>
+                  </div>
+                  <div class="register-steps" @descriptionTrigger>
+                    <div class="register-steps-item">
+                        <div class="register-steps-item-left">
+                            <svg data-v-47470f1a="" data-v-6b5b01e9="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-47470f1a="" data-v-6b5b01e9="" d="M12 23.0705C18.1141 23.0705 23.0705 18.1141 23.0705 12C23.0705 5.88598 18.1141 0.929565 12 0.929565C5.88598 0.929565 0.929565 5.88598 0.929565 12C0.929565 18.1141 5.88598 23.0705 12 23.0705Z" fill="#CAEDD9"></path> <path data-v-47470f1a="" data-v-6b5b01e9="" d="M12 24C5.38373 24 0 18.6172 0 12C0 5.38373 5.38373 0 12 0C18.6172 0 24 5.38373 24 12C24 18.6172 18.6172 24 12 24ZM12 1.85902C6.40805 1.85902 1.85902 6.40805 1.85902 12C1.85902 17.592 6.40805 22.141 12 22.141C17.592 22.141 22.141 17.591 22.141 12C22.141 6.40805 17.592 1.85902 12 1.85902Z" fill="white"></path> <path data-v-47470f1a="" data-v-6b5b01e9="" d="M10.55 16.4152C10.3009 16.4152 10.0629 16.3157 9.88725 16.1373L6.45736 12.6516C6.09764 12.2854 6.10228 11.698 6.46852 11.3373C6.83475 10.9785 7.42313 10.9822 7.78284 11.3485L10.5231 14.1332L16.1922 7.88974C16.5389 7.50959 17.1263 7.48264 17.5046 7.82656C17.8848 8.17142 17.9127 8.75885 17.5678 9.13995L11.2379 16.1112C11.0659 16.3008 10.8242 16.4105 10.5686 16.4161C10.5621 16.4152 10.5565 16.4152 10.55 16.4152Z" fill="#297A4A"></path></svg>
+                        </div>
+                        <div class="register-steps-item-right">
+                            <div class="register-steps-item-title">
+                                Créer et activer votre compte
+                            </div>
+                            <div class="register-steps-item-caption">
+                                With Flutterwave, you can setup an online store, create payment and donation links, receive payments on your website or get our POS device.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="register-steps-item">
+                        <div class="register-steps-item-left">
+                            <svg data-v-47470f1a="" data-v-6b5b01e9="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-47470f1a="" data-v-6b5b01e9="" d="M12 23.0705C18.1141 23.0705 23.0705 18.1141 23.0705 12C23.0705 5.88598 18.1141 0.929565 12 0.929565C5.88598 0.929565 0.929565 5.88598 0.929565 12C0.929565 18.1141 5.88598 23.0705 12 23.0705Z" fill="#CAEDD9"></path> <path data-v-47470f1a="" data-v-6b5b01e9="" d="M12 24C5.38373 24 0 18.6172 0 12C0 5.38373 5.38373 0 12 0C18.6172 0 24 5.38373 24 12C24 18.6172 18.6172 24 12 24ZM12 1.85902C6.40805 1.85902 1.85902 6.40805 1.85902 12C1.85902 17.592 6.40805 22.141 12 22.141C17.592 22.141 22.141 17.591 22.141 12C22.141 6.40805 17.592 1.85902 12 1.85902Z" fill="white"></path> <path data-v-47470f1a="" data-v-6b5b01e9="" d="M10.55 16.4152C10.3009 16.4152 10.0629 16.3157 9.88725 16.1373L6.45736 12.6516C6.09764 12.2854 6.10228 11.698 6.46852 11.3373C6.83475 10.9785 7.42313 10.9822 7.78284 11.3485L10.5231 14.1332L16.1922 7.88974C16.5389 7.50959 17.1263 7.48264 17.5046 7.82656C17.8848 8.17142 17.9127 8.75885 17.5678 9.13995L11.2379 16.1112C11.0659 16.3008 10.8242 16.4105 10.5686 16.4161C10.5621 16.4152 10.5565 16.4152 10.55 16.4152Z" fill="#297A4A"></path></svg>
+                        </div>
+                        <div class="register-steps-item-right">
+                            <div class="register-steps-item-title">
+                                Faite une demande de service
+                            </div>
+                            <div class="register-steps-item-caption">
+                                With Flutterwave, you can setup an online store, create payment and donation links, receive payments on your website or get our POS device.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="register-steps-item">
+                        <div class="register-steps-item-left">
+                            <svg data-v-47470f1a="" data-v-6b5b01e9="" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path data-v-47470f1a="" data-v-6b5b01e9="" d="M12 23.0705C18.1141 23.0705 23.0705 18.1141 23.0705 12C23.0705 5.88598 18.1141 0.929565 12 0.929565C5.88598 0.929565 0.929565 5.88598 0.929565 12C0.929565 18.1141 5.88598 23.0705 12 23.0705Z" fill="#CAEDD9"></path> <path data-v-47470f1a="" data-v-6b5b01e9="" d="M12 24C5.38373 24 0 18.6172 0 12C0 5.38373 5.38373 0 12 0C18.6172 0 24 5.38373 24 12C24 18.6172 18.6172 24 12 24ZM12 1.85902C6.40805 1.85902 1.85902 6.40805 1.85902 12C1.85902 17.592 6.40805 22.141 12 22.141C17.592 22.141 22.141 17.591 22.141 12C22.141 6.40805 17.592 1.85902 12 1.85902Z" fill="white"></path> <path data-v-47470f1a="" data-v-6b5b01e9="" d="M10.55 16.4152C10.3009 16.4152 10.0629 16.3157 9.88725 16.1373L6.45736 12.6516C6.09764 12.2854 6.10228 11.698 6.46852 11.3373C6.83475 10.9785 7.42313 10.9822 7.78284 11.3485L10.5231 14.1332L16.1922 7.88974C16.5389 7.50959 17.1263 7.48264 17.5046 7.82656C17.8848 8.17142 17.9127 8.75885 17.5678 9.13995L11.2379 16.1112C11.0659 16.3008 10.8242 16.4105 10.5686 16.4161C10.5621 16.4152 10.5565 16.4152 10.55 16.4152Z" fill="#297A4A"></path></svg>
+                        </div>
+                        <div class="register-steps-item-right">
+                            <div class="register-steps-item-title">
+                                Recevez le traitement de votre demande
+                            </div>
+                            <div class="register-steps-item-caption">
+                                With Flutterwave, you can setup an online store, create payment and donation links, receive payments on your website or get our POS device.
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="account-footer">
+      <div class="account-footer-left">
+          <div class="account-footer-item">
+              <span class="account-footer-item-link"> © BMR-AFRICA 2023</span>
+          </div>
+      </div> 
+      <div  class="account-footer-right">
+          <div class="account-footer-item">
+            <a href="https://bmr-africa.com/privacy-policy" target="_blank" rel="noopener noreferrer" class="account-footer-item-link"> Privacy policy </a>
+          </div> 
+          <div class="account-footer-item">
+              <a href="https://bmr-africa.com/terms" target="_blank" rel="noopener noreferrer" class="account-footer-item-link"> Terms and conditions </a>
+          </div>
+      </div>
+    </div>
+</div>

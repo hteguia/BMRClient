@@ -15,6 +15,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({  
     exports:[
@@ -34,6 +35,7 @@ import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
         MatNativeDateModule,
         MatChipsModule,
         MatTooltipModule,
+        MatStepperModule,
     ]
 })
 

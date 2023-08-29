@@ -1,0 +1,140 @@
+.account-layout {
+  min-height: 100vh;
+  background-image: url("../../../../assets/img/bg.svg");
+}
+
+.account-header {
+  padding: 32px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.account-body  {
+  min-height: calc(100vh - 180px);
+  padding: 100px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.account-container {
+  margin-top: -5%;
+}
+
+.account {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.account-form {
+  padding: 32px 30px;
+  background-color: #fff;
+  border-radius: 8x;
+  width: 880px;
+}
+
+.account-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.account-footer-item {
+  padding: 32px 25px;
+}
+
+.account-footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.account-footer-item-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.register-steps {
+  margin-left: 68px;
+  padding-top: 80px;
+}
+
+.register-steps-item {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+.register-steps-item-left{
+  margin-right: 11px;
+}
+
+.register-steps-item-right {
+  max-width: 340px;
+}
+
+.register-steps-item-title{
+  font-size: 18px;
+  line-height: 22px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.register-steps-item-caption{
+  font-size: 12px;
+  line-height: 15px;
+}
+
+
+mat-form-field {
+  width: 100%;
+  &.full-width {
+      width: 100%;
+      margin-left: 10%;
+  }
+ 
+} 
+
+@media (max-width: 1300px) {
+  .account {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 920px) {
+    .account-form {
+      padding: 32px 30px;
+      background-color: #fff;
+      border-radius: 8x;
+      width: 100%;
+    }
+}
+
+  
+
+@media screen and (max-width: 1000px){
+  .account-body {
+    padding: 100px 5px;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.table th, .table td {
+    border-top: 0px;
+}
+
+.btn{
+  margin-right: 10px;
+}
+
+.divider{
+  margin-bottom: 20px;;
+}
+
+.mat-step-icon-selected{
+  background-color: var(--primary) !important;;
+}
+

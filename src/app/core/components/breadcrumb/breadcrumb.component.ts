@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class BreadcrumbComponent {
 
+  @Input() title: string = "Titre de la page";
+  @Input() links = [
+      { title:"Home", link:"/" },
+      { title:"Dashboard", link:"/dashboard" },
+  ];
+
+  isLaskLink(index:number): boolean {
+    return index == this.links.length - 1;
+  }
 }

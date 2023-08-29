@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
+import { Component } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.css'],
   animations: [
     trigger('formTrigger', [
       state('default', style({
@@ -43,24 +39,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ])
   ]
 })
-export class LoginComponent implements OnInit {
+export class ForgotPasswordComponent {
 
- 
-
-  constructor(private auth: AuthService,
-    private router: Router, private socialAuthService: SocialAuthService) { }
   triggerState = 'default'
-  ngOnInit(): void {
-  }
-
-  onLogin() {
-    this.auth.login()
-    this.router.navigateByUrl('/');
-    
-  }
-
-  loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
-
 }
