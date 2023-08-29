@@ -7,22 +7,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./forgot-password.component.css'],
   animations: [
     trigger('formTrigger', [
-      state('default', style({
-        transform: 'scale(1)',
-        'background-color': 'white',
-        'z-index': 1
-      })),
-      state('active', style({
-        transform: 'scale(1.05)',
-        'background-color': 'rgb(255, 255, 255)',
-        'z-index': 2
-      })),
-      transition('default => active', [
-        animate('100ms ease-in-out')
-      ]),
-      transition('active => default', [
-        animate('500ms ease-in-out')
-      ]),
       transition('void => *',
       [
         style({

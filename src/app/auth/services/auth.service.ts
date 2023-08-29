@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Observable, of } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -6,8 +7,9 @@ import { Injectable } from "@angular/core";
 export class AuthService{
     private token!: string;
 
-    login() {
+    login(data: {email: string, password: string}): Observable<boolean> {
       this.token = 'MyFakeToken';
+      return of(true);
     }
   
     getToken(): string {

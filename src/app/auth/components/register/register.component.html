@@ -11,7 +11,7 @@
       <div class="account-body-flex">
           <div class="account-container">
               <div class="account">
-                  <div class="account-form" [@formTrigger]="triggerState">
+                  <div class="account-form" @formTrigger>
                     <ng-container *ngIf="isVertical">
                       <mat-vertical-stepper [linear]="false" #stepper >
                           <mat-step [stepControl]="credentialsForm">

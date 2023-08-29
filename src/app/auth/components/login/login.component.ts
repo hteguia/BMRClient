@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { delay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,22 +12,6 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./login.component.css'],
   animations: [
     trigger('formTrigger', [
-      state('default', style({
-        transform: 'scale(1)',
-        'background-color': 'white',
-        'z-index': 1
-      })),
-      state('active', style({
-        transform: 'scale(1.05)',
-        'background-color': 'rgb(255, 255, 255)',
-        'z-index': 2
-      })),
-      transition('default => active', [
-        animate('100ms ease-in-out')
-      ]),
-      transition('active => default', [
-        animate('500ms ease-in-out')
-      ]),
       transition('void => *',
       [
         style({
@@ -48,19 +33,56 @@ export class LoginComponent implements OnInit {
  
 
   constructor(private auth: AuthService,
-    private router: Router, private socialAuthService: SocialAuthService) { }
-  triggerState = 'default'
+              private router: Router, 
+              private socialAuthService: SocialAuthService,
+              private formBuilder: FormBuilder) { }
+
+  mainForm!: FormGroup;
+  loading = false;
+
   ngOnInit(): void {
+    this.initMainForm();
+    console.log(this.mainForm.valid);
+    this.mainForm.get('email')?.valueChanges.subscribe(
+      (value) => {
+        console.log(this.mainForm.valid);
+      }
+    );
+  }
+  
+  ngAfterViewInit(): void {
+    console.log("view init")
+  
+  }
+
+  private initMainForm(): void {
+    this.mainForm = this.formBuilder.group({
+      email: ['', [
+                    Validators.required, 
+                    Validators.email
+                  ]
+            ],
+      password: ['', Validators.required],
+    });
   }
 
   onLogin() {
-    this.auth.login()
-    this.router.navigateByUrl('/');
-    
+    this.loading = true;
+    this.auth.login(this.mainForm.value).pipe(
+      delay(2000),
+      tap(logggedIn => {
+        this.loading = false;
+        if(logggedIn){
+          this.router.navigateByUrl('/');
+        }
+        else{
+          console.error('Echec de l\'enregistrement');
+        }
+      })
+    ).subscribe();
   }
 
   loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-
 }
