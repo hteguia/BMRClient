@@ -12,6 +12,7 @@ import { FileUploadComponent } from "./components/file-upload/file-upload.compon
 import { FileInputComponent } from "./components/file-input/file-input.component";
 import { DataGridFilterComponent } from "./components/data-grid-filter/data-grid-filter.component";
 import { AmountPipe } from "./pipes/amount.pipe";
+import { ButtonCloseCardComponent } from "./components/button-close-card/button-close-card.component";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { AmountPipe } from "./pipes/amount.pipe";
         FileInputComponent,
         DataGridFilterComponent,
         AmountPipe,
+        ButtonCloseCardComponent,
     ],
     imports: [
         CommonModule,
@@ -45,6 +47,7 @@ import { AmountPipe } from "./pipes/amount.pipe";
         FileInputComponent,
         DataGridFilterComponent,
         AmountPipe,
+        ButtonCloseCardComponent,
     ]
 })
 

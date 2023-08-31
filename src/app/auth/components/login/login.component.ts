@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { delay, tap } from 'rxjs';
+import { delay, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -30,8 +30,6 @@ import { delay, tap } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
- 
-
   constructor(private auth: AuthService,
               private router: Router, 
               private socialAuthService: SocialAuthService,
@@ -39,6 +37,7 @@ export class LoginComponent implements OnInit {
 
   mainForm!: FormGroup;
   loading = false;
+  showErrorMessage = false;
 
   ngOnInit(): void {
     this.initMainForm();
@@ -49,19 +48,10 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  
-  ngAfterViewInit(): void {
-    console.log("view init")
-  
-  }
 
   private initMainForm(): void {
     this.mainForm = this.formBuilder.group({
-      email: ['', [
-                    Validators.required, 
-                    Validators.email
-                  ]
-            ],
+      email: ['', [Validators.required, Validators.email] ],
       password: ['', Validators.required],
     });
   }
@@ -70,13 +60,14 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.auth.login(this.mainForm.value).pipe(
       delay(2000),
+      take(1),
       tap(logggedIn => {
         this.loading = false;
         if(logggedIn){
           this.router.navigateByUrl('/');
         }
         else{
-          console.error('Echec de l\'enregistrement');
+          this.showErrorMessage = true;
         }
       })
     ).subscribe();

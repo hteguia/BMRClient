@@ -6,6 +6,7 @@ import { Observable, map } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-service-request-list',
@@ -94,7 +95,8 @@ export class ServiceRequestListComponent implements OnInit {
   constructor(private route: ActivatedRoute, 
               private serviceRequestsService: ServiceRequestsService,  
               private router: Router, 
-              private datepipe: DatePipe){  
+              private datepipe: DatePipe,
+              private authService: AuthService){  
   }
 
   ngOnInit(): void {

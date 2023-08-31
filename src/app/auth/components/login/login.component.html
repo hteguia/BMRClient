@@ -4,7 +4,7 @@
           <img src="../../../../assets/img/logo_bmr.png" width="150px"/>
       </a> 
       <div class="account-layout__header__item">
-          <a routerLink="/auth/register" class="btn btn--primary">Créer un compte</a>
+          <a routerLink="/auth/register" mat-raised-button class="btn btn--primary">Créer un compte</a>
       </div>
   </div>
   <div class="account-body">
@@ -29,9 +29,12 @@
                         </div>
                       </div>
                     </div>
+                    <div class="input-group" *ngIf="showErrorMessage">
+                      <p class="text-danger">Login ou mot de passe incorrect</p>
+                    </div>
                     <div class="input-group mb-3">
                       
-                      <button mat-raised-button (click)="onLogin()"[class.spinner]="loading" [disabled]="loading" class="btn btn--primary btn-block">Se connecter</button>
+                      <button mat-raised-button (click)="onLogin()" [class.spinner]="loading" [disabled]="loading" class="btn btn--primary btn-block">Se connecter</button>
                     </div>
                     <div class="input-group mb-3">
                       <p class="mb-1">

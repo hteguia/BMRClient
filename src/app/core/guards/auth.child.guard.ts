@@ -12,7 +12,7 @@ export class AuthChildGuard implements CanLoad{
                     
                 }
     canLoad(route: Route, segments: UrlSegment[]): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if(this.auth.getToken()){
+        if(this.auth.token){
             return true;
         }else{
             this.router.navigateByUrl('/auth/login');

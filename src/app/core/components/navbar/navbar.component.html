@@ -20,27 +20,26 @@
       <li class="nav-item dropdown">
         <a class="nav-link right-user-panel" data-toggle="dropdown" href="#">
           <div class="info">
-            <span class="user-info">kteguiaherve@gmail.com</span>
-            <span class="role-info">Moniteur</span>
+            <span class="user-info">{{currentUser.email}}</span>
+            <span class="role-info">{{currentUser.role}}</span>
           </div>
           <div class="image">
-            <img src="../assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src={{currentUser.imageUrl}} class="img-circle elevation-2" alt="User Image">
           </div>
           
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">
-            <img class="rounded" src="../assets/img/default-profile.png" alt="User" width="90" height="90" style="width: 90px; height: 90px;">
+            <img class="rounded" src={{currentUser.imageUrl}} alt="User" width="100" height="100" style="width: 100px; height: 100px;">
+            <p>kteguiaherve@gmail.com
+              <small>Membre depuis le {{currentUser.createAt | date:'mediumDate'}}</small>
+            </p>
           </span>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> Mon Profils
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> Se déconnecter
-          </a>
-          
+          <div class="btn-action">
+            <button mat-raised-button class="btn  mr-2">Profils</button>
+            <button class="btn float-right" (click)="logout()" mat-raised-button >Sign out</button>
+          </div>
         </div>
       </li>
       

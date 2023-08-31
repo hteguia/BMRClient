@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map } from 'rxjs';
-import { Role } from '../../models/role.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RolesService } from '../../services/roles.service';
+import { Observable, map } from 'rxjs';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
+import { RolesService } from '../../services/role.service';
+import { Role } from '../../models/role.model';
 
 @Component({
   selector: 'app-role',
@@ -11,7 +11,6 @@ import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
   styleUrls: ['./role.component.css']
 })
 export class RoleComponent implements OnInit {
-
   columns: DataGridColumn[] = [
     { dataField: "name",caption:"Libelle", dataType:"string", visible:true},
     { dataField: "numberOfUsers",caption:"Nombre d'utilisateur", dataType:"string", visible:true },
@@ -36,18 +35,18 @@ export class RoleComponent implements OnInit {
   }
 
   onAddNewRole(){
-    this.router.navigateByUrl('/service-request/add-service-request');
+    this.router.navigateByUrl('/roles/add');
   }
 
   onSelectRow(rows: []){
-    //this.selectedRows = rows;
+    
   }
 
   onFilterDataGrid(){
-   // this.showFilterModel = !this.showFilterModel;
+   
   }
 
   onRowClick(event: any){
-    this.router.navigateByUrl(`users/roles/${event.id}`);
+    this.router.navigateByUrl(`roles/${event.id}`);
   }
 }
