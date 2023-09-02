@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
+## Dependencies
+* [AdminLTE](https://adminlte.io/) version 3.2.0
+* [DevExtreme](https://js.devexpress.com/Documentation/) version 23.1.4
+
 ## Setup and Install dependencies
 
 Run the following in a terminal
