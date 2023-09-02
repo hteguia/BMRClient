@@ -1,19 +1,20 @@
-import { Component, Input } from '@angular/core';
+import { state } from '@angular/animations';
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.css']
 })
-export class BreadcrumbComponent {
+export class BreadcrumbComponent implements OnInit {
 
-  @Input() title: string = "Titre de la page";
-  @Input() links = [
-      { title:"Home", link:"/" },
-      { title:"Dashboard", link:"/dashboard" },
-  ];
 
-  isLaskLink(index:number): boolean {
-    return index == this.links.length - 1;
+  breadcrumb$!: Observable<any>;
+
+  constructor(private store: Store){}
+  ngOnInit(): void {
+    this.breadcrumb$ = this.store.select((state:any)=>state.root);
   }
 }

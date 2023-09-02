@@ -4,6 +4,8 @@ import { Observable, map } from 'rxjs';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { RolesService } from '../../services/role.service';
 import { Role } from '../../models/role.model';
+import { Store } from '@ngrx/store';
+import { changeBreadcrump } from 'src/app/state/root-action';
 
 @Component({
   selector: 'app-role',
@@ -16,7 +18,7 @@ export class RoleComponent implements OnInit {
     { dataField: "numberOfUsers",caption:"Nombre d'utilisateur", dataType:"string", visible:true },
   ];
   
-  roles!: Observable<Role[]>;
+  roles$!: Observable<Role[]>;
   selectedRows = [];
   listItemAnimateState = 'default';
 
@@ -25,11 +27,13 @@ export class RoleComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
               private rolesService: RolesService,  
-              private router: Router){  
+              private router: Router,
+              private store: Store){  
   }
 
   ngOnInit(): void {
-    this.roles = this.route.data.pipe(
+    this.setBreadcrump();
+    this.roles$ = this.route.data.pipe(
       map(data => data['roles'])
     );   
   }
@@ -48,5 +52,16 @@ export class RoleComponent implements OnInit {
 
   onRowClick(event: any){
     this.router.navigateByUrl(`roles/${event.id}`);
+  }
+
+  private setBreadcrump():void{
+    this.store.dispatch(changeBreadcrump(
+      {
+        title: "Rôles", 
+        links:[
+          { title:"Home", link:"/" }, 
+          { title:"Rôles", link:"/" }
+        ]
+      }));
   }
 }

@@ -1,0 +1,10 @@
+<button 
+    matTooltip={{toolTip}} 
+    mat-raised-button 
+    class="btn" ngClass={{sclass}}
+    color={{color}}
+    (click)="onClick($event)"
+    [disabled]="disabled">
+    <mat-icon *ngIf="icon">{{icon}}</mat-icon>                 
+    {{label}}
+</button>

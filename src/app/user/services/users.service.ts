@@ -12,4 +12,8 @@ export class UsersService{
     getUsersRole(): Observable<User[]> {
         return this.http.get<User[]>(`${environment.apiUrl}/usersByRole`);
     }
+
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
 }

@@ -6,11 +6,13 @@ import { SharedModule } from '../shared/shared.module';
 import { UsersService } from './services/users.service';
 import { UsersResolver } from './resolvers/users.resolver';
 import { UserComponent } from './components/user/user.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 
 @NgModule({
   declarations: [
-    UserComponent
+    UserComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,

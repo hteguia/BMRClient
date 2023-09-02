@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthModule } from './auth/auth.module';
 import { GoogleLoginProvider, SocialLoginModule , SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 import { environment } from 'src/environments/environment';
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from './state/root-reducer';
 
 
 @NgModule({
@@ -20,6 +22,9 @@ import { environment } from 'src/environments/environment';
     BrowserAnimationsModule,
     AuthModule,
     SocialLoginModule,
+    StoreModule.forRoot({
+      root: rootReducer
+    }, {}),
   ],
   providers: [
     {

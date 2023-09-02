@@ -7,6 +7,8 @@ import { DatePipe } from '@angular/common';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Store } from '@ngrx/store';
+import { changeBreadcrump } from 'src/app/state/root-action';
 
 @Component({
   selector: 'app-service-request-list',
@@ -96,10 +98,13 @@ export class ServiceRequestListComponent implements OnInit {
               private serviceRequestsService: ServiceRequestsService,  
               private router: Router, 
               private datepipe: DatePipe,
-              private authService: AuthService){  
+              private authService: AuthService,
+              private store: Store){  
   }
 
   ngOnInit(): void {
+    this.setBreadcrump();
+
     this.customers = this.route.data.pipe(
       map(data => data['serviceResquests'])
     );   
@@ -123,5 +128,16 @@ export class ServiceRequestListComponent implements OnInit {
 
   onRowClick(event: any){
     this.router.navigateByUrl(`service-request/consult/${event.id}`);
+  }
+
+  private setBreadcrump():void{
+    this.store.dispatch(changeBreadcrump(
+      {
+        title: "Demande de service", 
+        links:[
+          { title:"Home", link:"/" }, 
+          { title:"Demande de service", link:"/" }
+        ]
+      }));
   }
 }

@@ -11,7 +11,7 @@ export class UsersResolver implements Resolve<User[]>{
     constructor(private usersService: UsersService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<User[]> {
-        return this.usersService.getUsersRole();
+        return this.usersService.getUsers();
     }
 
 }

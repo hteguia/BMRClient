@@ -2,38 +2,61 @@
     <div class="card-body">
         <div class="margin">
             <div class="form-row">
-                <h3>Rôle: Moniteur</h3>
-                <h3>Nombre d'utilisateur: 10000</h3>
-                
+                <h3>Rôle: {{role.name }}</h3>
+                <h3>Nombre d'utilisateur: {{role.numberOfUsers | decimalSeparator }}</h3> 
             </div>
             <div class="btn-group">
-                <button matTooltip="Attribuer le rôle a un utilisateur" 
-                        mat-flat-button 
-                        class="btn btn--primary" 
-                        color="primary">
-                    <mat-icon>add</mat-icon>                 
-                    Attribuer
-                  </button>
+                <app-button label="Attribuer" icon="add" color="primary" sclass="btn--primary"></app-button>  
+                <app-button label="Enlever" icon="delete" color="primary" sclass="btn--primary"  [disabled]="showDelete"></app-button>  
+                <app-button label="Supprimer le rôle" icon="delete" color="primary" class="menu" sclass="float-right btn--primary"></app-button>           
             </div>
             <div class="btn-group" >
-                <button 
-                    mat-flat-button 
-                    class="btn btn--primary" 
-                    [disabled]="showDelete">
-                    <mat-icon>delete</mat-icon>
-                    Enlever
-                  </button>
+                
             </div>
             <div class="btn-group float-right" >
-                <button 
-                    mat-flat-button matTooltip="Supprimer le rôle" 
-                    class="btn btn--primary" 
-                    >
-                    <mat-icon>delete</mat-icon>
-                    Supprimer le rôle
-                  </button>
-            </div>
-            
+               
+            </div>           
         </div> 
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
+        <div class="card" >
+            <div class="card-body">
+                <app-data-grid 
+    [columns]="columns" 
+    [dataSource]="users$ | async"
+    (selectedRow)="onSelectRow($event)">
+</app-data-grid>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-md-5">
+        <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Liste des autorisations pour ce rôles</h3>
+            </div>
+           
+            <div class="card-body p-0">
+              <table class="table table-sm">
+                <thead>
+                  <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Libelle</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>                        
+                  <tr *ngFor="let col of permissions$ | async; let i = index">
+                    <td>{{i+1}}.</td>
+                    <td>{{col.name}}</td>                            
+                  </tr>                         
+                </tbody>
+              </table>
+            </div>
+          
+          </div>
     </div>
 </div>

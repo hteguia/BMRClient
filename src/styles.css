@@ -50,7 +50,12 @@ body {
 }
 
 .btn-group {
-    margin: 2px 8px;
+    display: flex;
+    > * {
+    &:not(:last-child) {
+        margin-right: 10px;
+      }
+    }
 }
 
 .form-row {

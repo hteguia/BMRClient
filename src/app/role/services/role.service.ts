@@ -1,9 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, map, mapTo, of } from "rxjs";
+import { Observable, catchError, delay, map, mapTo, of, tap } from "rxjs";
 import { Role } from "../models/role.model";
 import { environment } from "src/environments/environment";
 import { User } from "src/app/user/models/user.model";
+import { Permission } from "src/app/permission/models/permission.model";
 
 @Injectable()
 export class RolesService {
@@ -38,5 +39,22 @@ export class RolesService {
             delay(1000)
             ))
         );
+    }
+
+    getPermissionInRole(): Observable<Permission[]> {
+        return of([
+            { id:1, name: "Créer une demande de service" },
+            { id:1, name: "Créer un utilisateur" },
+            { id:1, name: "Créer une role" },
+            { id:1, name: "Attribuer un rôle a un utiisateur" },
+            { id:1, name: "Créer un modèle de document" },
+            { id:1, name: "Créer un type de document" },
+        ])
+    }
+
+    getLastRole(): Observable<Role|undefined>{
+        return  this.getRoles().pipe(
+            map(data => data.pop())
+        )
     }
 }
