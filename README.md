@@ -2,9 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
 
-## Development server
+## Dependencies
+* [AdminLTE](https://adminlte.io/) version 3.2.0
+* [DevExtreme](https://js.devexpress.com/Documentation/) version 23.1.4
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Setup and Install dependencies
+
+Run the following in a terminal
+
+```
+$ git clone https://github.com/hteguia/BMRClient.git
+$ cd BMRClient
+$ npm install
+```
+
+Run `ng serve` for a client-side.
+
+## Run Development JSON  server
+
+```
+$ npm run json:server
+```
+Navigate to `http://localhost:3000` and consult the server resources
 
 ## Code scaffolding
 
