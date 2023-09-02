@@ -16,11 +16,14 @@ $ cd BMRClient
 $ npm install
 ```
 
+Run `ng serve` for a client-side.
+
 ## Run Development JSON  server
 
 ```
 $ npm run json:server
 ```
+Navigate to `http://localhost:3000` and consult the server resources
 
 ## Code scaffolding
 
