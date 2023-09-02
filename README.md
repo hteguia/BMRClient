@@ -16,9 +16,11 @@ $ cd BMRClient
 $ npm install
 ```
 
-## Run Development server
+## Run Development JSON  server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+$ npm run json:server
+```
 
 ## Code scaffolding
 
