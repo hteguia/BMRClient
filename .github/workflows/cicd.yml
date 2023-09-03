@@ -31,11 +31,10 @@ jobs:
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        server: ${{ secrets.SERVER_FTP_HOST }}
+        server: sftp://${{ secrets.SERVER_FTP_HOST }}
         username: ${{ secrets.SERVER_FTP_USERNAME }}
         password: ${{ secrets.SERVER_FTP_PASSWORD }}
         port: 22
-        protocol: sftp
         local-dir: ./dist/
         server-dir: ${{ secrets.SERVER_FTP_DIR }}
         dangerous-clean-slate: true
