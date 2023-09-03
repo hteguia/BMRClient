@@ -29,7 +29,7 @@ jobs:
       run: npm run build
     
     - name: Sync Files
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
         server: ${{ secrets.SERVER_FTP_HOST }}
         username: ${{ secrets.SERVER_FTP_USERNAME }}
