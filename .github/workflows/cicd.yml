@@ -29,14 +29,13 @@ jobs:
       run: npm run build
     
     - name: Sync Files
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: SamKirkland/FTP-Deploy-Action@3.1.1
       with:
-        server: ${{ secrets.SERVER_FTP_HOST }}
-        username: ${{ secrets.SERVER_FTP_USERNAME }}
-        password: ${{ secrets.SERVER_FTP_PASSWORD }}
+        ftp-server: ${{ secrets.SERVER_FTP_HOST }}
+        ftp-username: ${{ secrets.SERVER_FTP_USERNAME }}
+        ftp-password: ${{ secrets.SERVER_FTP_PASSWORD }}
         local-dir: ./dist/
-        server-dir: ${{ secrets.SERVER_FTP_DIR }}
-        dangerous-clean-slate: true
+        git-ftp-args: --insecure
 
     - name: Get commit author email
       if: ${{ failure() }}
