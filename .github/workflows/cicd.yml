@@ -14,15 +14,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Send email
+    - name: Send email on sucess
       uses: dawidd6/action-send-mail@v2.5.0
       with:
           server_address: smtp.ionos.com
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "Deployment effectuer avec success"
+          subject: "deployment completed successfully"
           body: |
             Deplyment
           from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
           to: kteguiaherve@gmail.com
+      if: ${{ failure() }}
