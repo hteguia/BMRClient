@@ -35,7 +35,7 @@ jobs:
         ftp-username: ${{ secrets.SERVER_FTP_USERNAME }}
         ftp-password: ${{ secrets.SERVER_FTP_PASSWORD }}
         local-dir: ./dist/
-        git-ftp-args: --dry-run --insecure
+        git-ftp-args: --insecure
 
     - name: Get commit author email
       if: ${{ failure() }}
