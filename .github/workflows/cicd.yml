@@ -38,6 +38,7 @@ jobs:
         local-dir: ./dist/
         server-dir: ${{ secrets.SERVER_FTP_DIR }}
         dangerous-clean-slate: true
+        git-ftp-args: --insecure
 
     - name: Get commit author email
       if: ${{ failure() }}
