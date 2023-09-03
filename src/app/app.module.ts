@@ -10,6 +10,10 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './state/root-reducer';
 
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr, 'fr');
+
 
 @NgModule({
   declarations: [
