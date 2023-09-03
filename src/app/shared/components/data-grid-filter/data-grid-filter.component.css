@@ -1,7 +1,7 @@
 .grid-filter{
     position: absolute;
     top: 40px;
-    left: -100px;
+    left: -110px;
     border-radius: 4px;
     width: 550px;
     box-shadow: 1px 1px 3px 0 rgba(50, 50, 54, 0.13), 0 0 3px 1px rgba(63, 63, 68, 0.05);

@@ -1,21 +1,16 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService{
-    
-    login(data: {email: string, password: string}): Observable<boolean> {
-      this.setUserData({ email:"kteguiaherve@gmail.com", 
-                         firstName:"Hervé", 
-                         lastName:"TEGUIA", 
-                         role:"ADMINISTRATEUR",
-                         createAt:"2020-07-28T14:30:56Z",
-                         imageUrl:"https://i.pravatar.cc/100?img=2" 
-                        });
-      this.setToken('eyJhbGciOiJIUzUxMiJ9');
-      return of(true);
+  constructor(private http: HttpClient) {}
+  
+    login(data: {email: string, password: string}): Observable<any> {
+      return this.http.get<any>(`${environment.apiUrl}/login/1`);
     }
   
     setToken(token: string){

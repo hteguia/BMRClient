@@ -34,4 +34,8 @@
         <div *dxTemplate="let options of 'amountTemplate'">
             {{options.value | amount}}
         </div>
+
+        <div *dxTemplate="let options of 'dateTemplate'">
+            {{options.value | date:'dd MMM yyyy':undefined:'fr'}}
+        </div>
 </dx-data-grid>

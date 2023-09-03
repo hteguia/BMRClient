@@ -49,11 +49,7 @@
         </div>                     -->
     </div>
     <div class="card-footer">
-        <button mat-flat-button class="btn btn--primary" (click)="onApplyFilter()">
-            Filter
-          </button>
-          <button mat-flat-button class="btn btn--default float-right" (click)="onCancelFilter()">
-            Annuler
-          </button>
+      <app-button  label="Filter" color="primary" sclass="btn--primary" (click)="onApplyFilter()"></app-button>
+      <app-button  label="Annuler" color="primary" sclass="btn--default float-right" (click)="onCancelFilter()"></app-button>      
     </div>
   </div>

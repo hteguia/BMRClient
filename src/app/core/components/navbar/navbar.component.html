@@ -28,19 +28,20 @@
           </div>
           
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"  >
           <span class="dropdown-item dropdown-header">
             <img class="rounded" src={{currentUser.imageUrl}} alt="User" width="100" height="100" style="width: 100px; height: 100px;">
-            <p>kteguiaherve@gmail.com
-              <small>Membre depuis le {{currentUser.createAt | date:'mediumDate'}}</small>
+            <p>{{currentUser.email}}
+              <small>Membre depuis le {{currentUser.createAt | date:'dd MMM yyyy':undefined:'fr'}}</small>
             </p>
           </span>
           <div class="dropdown-divider"></div>
           <div class="btn-action">
-            <button mat-raised-button class="btn  mr-2">Profils</button>
-            <button class="btn float-right" (click)="logout()" mat-raised-button >Sign out</button>
+            <app-button  label="Profils" color="primary" sclass="btn--default mr-2"></app-button>
+            <app-button  label="Sign out" color="primary" sclass="btn--default float-right" (click)="logout()"></app-button>
           </div>
         </div>
+        
       </li>
       
     </ul>

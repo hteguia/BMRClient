@@ -78,10 +78,10 @@ import { changeBreadcrump } from 'src/app/state/root-action';
 export class ServiceRequestListComponent implements OnInit {
   
   columns: DataGridColumn[] = [
-    { dataField: "createAt",caption:"Date de la demande", dataType:"date", visible:true },
+    { dataField: "createAt",caption:"Date de la demande", dataType:"date",template:'dateTemplate', visible:true },
     { dataField: "serviceType",caption:"Type de service", dataType:"string", visible:true },
     { dataField: "returnDeadline",caption:"Delai de traitement", dataType:"string", visible:true },
-    { dataField: "amount",caption:"Montant", dataType:"string", template:'amountTemplate', visible:true },
+    { dataField: "amount",caption:"Montant (FCFA)", dataType:"string", template:'amountTemplate', visible:true },
     { dataField: "status",caption:"Status de la demande", dataType:"string", template:'statusTemplate', visible:true}
   ];
 

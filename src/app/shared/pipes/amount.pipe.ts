@@ -24,7 +24,7 @@ export class AmountPipe implements PipeTransform {
 
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.THOUSANDS_SEPARATOR);
 
-    return integer + fraction + ' FCFA';
+    return integer + fraction;
   }
 
   parse(value: string, fractionSize: number = 2): string {

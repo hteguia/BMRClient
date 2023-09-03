@@ -4,7 +4,7 @@ export class DataGridColumn
     caption!: string;
     dataType!: string;
     visible?: boolean = true;
-    template?: '' | 'statusTemplate' | 'amountTemplate' = ''; 
+    template?: '' | 'statusTemplate' | 'amountTemplate' | 'dateTemplate' = ''; 
     calculateCellValue?:  '' | 'concatValue' = ''
 }
 
