@@ -38,6 +38,12 @@ jobs:
         server-dir: ${{ secrets.SERVER_FTP_DIR }}
         dangerous-clean-slate: true
 
+    - name: Get commit author email
+      if: ${{ failure() }}
+      run: |
+        COMMIT_AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+        echo "COMMIT_AUTHOR_EMAIL=$COMMIT_AUTHOR_EMAIL" >> $GITHUB_ENV
+        
     - name: Send email on failed
       uses: dawidd6/action-send-mail@v2.5.0
       with:
@@ -49,7 +55,7 @@ jobs:
           body: |
             Workflow failed on ${{ github.repository }}/${{ github.head_ref }} (commit ${{ github.sha }}). \nSee the workflow run log for more details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
-          to: kteguiaherve@gmail.com
+          to: ${{ env.COMMIT_AUTHOR_EMAIL }}
       if: ${{ failure() }}
       
     - name: Send email on sucess
