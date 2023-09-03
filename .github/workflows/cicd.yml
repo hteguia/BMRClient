@@ -26,4 +26,4 @@ jobs:
             Deplyment
           from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
           to: kteguiaherve@gmail.com
-      if: ${{ failure() }}
+      if: ${{ success() }}
