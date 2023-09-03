@@ -1,4 +1,4 @@
-name: Deploy prod site on push
+name: Angular CI/CD Pipeline
 
 on: 
   push:
@@ -17,7 +17,7 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v2.3.2
 
-    - name: Use Node.js 14 LTS
+    - name: Use Node.js 18.17.1 LTS
       uses: actions/setup-node@v2
       with:
         node-version: '18.17.1'
@@ -29,13 +29,14 @@ jobs:
       run: npm run build
     
     - name: Sync Files
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
       with:
-        ftp-server: ${{ secrets.SERVER_FTP_HOST }}
-        ftp-username: ${{ secrets.SERVER_FTP_USERNAME }}
-        ftp-password: ${{ secrets.SERVER_FTP_PASSWORD }}
+        server: ${{ secrets.SERVER_FTP_HOST }}
+        username: ${{ secrets.SERVER_FTP_USERNAME }}
+        password: ${{ secrets.SERVER_FTP_PASSWORD }}
         local-dir: ./dist/
-        git-ftp-args: --insecure
+        server-dir: ${{ secrets.SERVER_FTP_DIR }}
+        dangerous-clean-slate: true
 
     - name: Get commit author email
       if: ${{ failure() }}
@@ -66,7 +67,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "deployment completed successfully"
           body: |
-            Success
+            deployment completed successfully ${{ github.repository }}/${{ github.head_ref }} (last commit ${{ github.sha }}).
           from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
-          to: kteguiaherve@gmail.com
+          to: ${{ secrets.EMAIL_DEPLOYMENT_TEAM }}
       if: ${{ success() }}
