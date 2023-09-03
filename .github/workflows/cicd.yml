@@ -34,10 +34,7 @@ jobs:
         ftp-server: ${{ secrets.SERVER_FTP_HOST }}
         ftp-username: ${{ secrets.SERVER_FTP_USERNAME }}
         ftp-password: ${{ secrets.SERVER_FTP_PASSWORD }}
-        port: 22
         local-dir: ./dist/
-        server-dir: ${{ secrets.SERVER_FTP_DIR }}
-        dangerous-clean-slate: true
         git-ftp-args: --dry-run --insecure
 
     - name: Get commit author email
