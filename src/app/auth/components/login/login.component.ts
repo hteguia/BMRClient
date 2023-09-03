@@ -61,9 +61,11 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.mainForm.value).pipe(
       delay(2000),
       take(1),
-      tap(logggedIn => {
+      tap(currentUser => {
         this.loading = false;
-        if(logggedIn){
+        if(currentUser){
+          this.auth.setUserData(currentUser);
+          this.auth.setToken('eyJhbGciOiJIUzUxMiJ9');
           this.router.navigateByUrl('/');
         }
         else{
