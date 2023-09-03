@@ -14,6 +14,44 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Get latest code
+      uses: actions/checkout@v2.3.2
+
+    - name: Use Node.js 14 LTS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+      
+    - name: Install NPM Modules
+      run: npm install
+
+    - name: Build Project
+      run: npm run build
+    
+    - name: Sync Files
+      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      with:
+        server: ${{ secrets.SERVER_FTP_HOST }}
+        username: ${{ secrets.SERVER_FTP_USERNAME }}
+        password: ${{ secrets.SERVER_FTP_PASSWORD }}
+        local-dir: ./dist/
+        server-dir: ${{ secrets.SERVER_FTP_DIR }}
+        dangerous-clean-slate: true
+
+    - name: Send email on failed
+      uses: dawidd6/action-send-mail@v2.5.0
+      with:
+          server_address: smtp.ionos.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "deployment failed"
+          body: |
+            Failed
+          from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
+          to: kteguiaherve@gmail.com
+      if: ${{ failure() }}
+      
     - name: Send email on sucess
       uses: dawidd6/action-send-mail@v2.5.0
       with:
@@ -23,7 +61,7 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "deployment completed successfully"
           body: |
-            Deplyment
+            Success
           from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
           to: kteguiaherve@gmail.com
       if: ${{ success() }}
