@@ -20,7 +20,7 @@ jobs:
     - name: Use Node.js 14 LTS
       uses: actions/setup-node@v2
       with:
-        node-version: '14'
+        node-version: '18.17.1'
       
     - name: Install NPM Modules
       run: npm install
