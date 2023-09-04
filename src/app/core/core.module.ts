@@ -42,6 +42,7 @@ import { LayoutComponent } from "./components/layout/layout.component";
     providers: [
       AuthGuard
     ]
+    
 })
 
 export class CoreModule { }
