@@ -34,9 +34,11 @@ jobs:
         ftp_server: ${{ secrets.SERVER_FTP_HOST }}
         ftp_username: ${{ secrets.SERVER_FTP_USERNAME }}
         ftp_password: ${{ secrets.SERVER_FTP_PASSWORD }}
-        port: 21
+        port: 22
+        METHOD: sftp
         local_dir: ./dist/
         remote_dir: ${{ secrets.SERVER_FTP_DIR }}
+        ARGS: --verbose
 
     - name: Get commit author email
       if: ${{ failure() }}
