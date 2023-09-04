@@ -30,14 +30,14 @@ jobs:
     
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
-      with:
-        ftp_server: ${{ secrets.SERVER_FTP_HOST }}
-        ftp_username: ${{ secrets.SERVER_FTP_USERNAME }}
-        ftp_password: ${{ secrets.SERVER_FTP_PASSWORD }}
-        port: 22
+      env:
+        FTP_SERVER: ${{ secrets.SERVER_FTP_HOST }}
+        FTP_USERNAME: ${{ secrets.SERVER_FTP_USERNAME }}
+        FTP_PASSWORD: ${{ secrets.SERVER_FTP_PASSWORD }}
+        PORT: 22
         METHOD: sftp
-        local_dir: ./dist/
-        remote_dir: ${{ secrets.SERVER_FTP_DIR }}
+        LOCAL_DIR: ./dist/
+        REMOTE_DIR: ${{ secrets.SERVER_FTP_DIR }}
         ARGS: --verbose
 
     - name: Get commit author email
