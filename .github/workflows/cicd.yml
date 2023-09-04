@@ -31,12 +31,11 @@ jobs:
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
       with:
-        server: ${{ secrets.SERVER_FTP_HOST }}
-        username: ${{ secrets.SERVER_FTP_USERNAME }}
-        password: ${{ secrets.SERVER_FTP_PASSWORD }}
-        local-dir: ./dist/
-        server-dir: ${{ secrets.SERVER_FTP_DIR }}
-        dangerous-clean-slate: true
+        ftp_server: ${{ secrets.SERVER_FTP_HOST }}
+        ftp_username: ${{ secrets.SERVER_FTP_USERNAME }}
+        ftp_password: ${{ secrets.SERVER_FTP_PASSWORD }}
+        local_dir: ./dist/
+        remote_dir: ${{ secrets.SERVER_FTP_DIR }}
 
     - name: Get commit author email
       if: ${{ failure() }}
