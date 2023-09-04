@@ -10,7 +10,7 @@ on:
       
 jobs:
   web-deploy:
-    name: Deploy Angular App
+    name: Build and Deploy Angular App
     runs-on: ubuntu-latest
 
     steps:
