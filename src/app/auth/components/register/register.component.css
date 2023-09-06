@@ -1,57 +1,38 @@
-.account-layout {
-  min-height: 100vh;
-  background-image: url("../../../../assets/img/bg.svg");
-}
-
-.account-header {
-  padding: 32px 30px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.account-body  {
-  min-height: calc(100vh - 180px);
-  padding: 100px;
-  display: flex;
-  align-items: flex-start;
-}
-
-.account-container {
-  margin-top: -5%;
+::ng-deep body {
+  background-image: url("../../../../assets/img/bg.svg")!important;
 }
 
 .account {
-  display: flex;
-  align-items: flex-start;
   flex-direction: row;
 }
 
 .account-form {
-  padding: 32px 30px;
-  background-color: #fff;
-  border-radius: 8x;
   width: 880px;
 }
 
-.account-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5px;
+@media (max-width: 1300px) {
+  .account {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .account-form {
+    width: 100%;
+  }
+
 }
 
-.account-footer-item {
-  padding: 32px 25px;
-}
+@media (max-width: 1000px) {
+  .account-body {
+    padding: 100px 5px;
+    display: flex;
+    justify-content: center;
+  }
 
-.account-footer-right {
-  display: flex;
-  align-items: center;
-}
-
-.account-footer-item-link {
-  text-decoration: none;
-  color: inherit;
+  .account-form {
+    width: 100%;
+  }
 }
 
 
@@ -85,17 +66,7 @@
   line-height: 15px;
 }
 
-
-mat-form-field {
-  width: 100%;
-  &.full-width {
-      width: 100%;
-      margin-left: 10%;
-  }
- 
-} 
-
-@media (max-width: 1300px) {
+/* @media (max-width: 1300px) {
   .account {
     display: flex;
     align-items: flex-start;
@@ -112,7 +83,6 @@ mat-form-field {
     }
 }
 
-  
 
 @media screen and (max-width: 1000px){
   .account-body {
@@ -120,7 +90,7 @@ mat-form-field {
     display: flex;
     justify-content: center;
   }
-}
+} */
 
 .table th, .table td {
     border-top: 0px;

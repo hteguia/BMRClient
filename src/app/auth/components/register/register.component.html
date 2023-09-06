@@ -39,6 +39,7 @@
                                
                                  
                                 <div>
+                                    
                                   <button mat-raised-button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
                                 </div>
                             </form>
@@ -106,34 +107,34 @@
                                     <tbody>
                                         <tr>
                                             <th>Noms</th>
-                                            <td>bmr admin</td>
+                                            <td>{{firstNameValue}}</td>
                                         </tr>
                                         <tr>
                                             <th style="width: 30%;">Prénoms</th>
-                                            <td>24 Aug 2023 12:33</td>
+                                            <td>{{lastNameValue}}</td>
                                         </tr>
                                         
                                         <tr>
                                             <th>Email</th>
-                                            <td>72 Heure(s)</td>
+                                            <td>{{emailValue}}</td>
                                         </tr>
                                         
                                         <tr>
                                             <th>Téléphone</th>
-                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                            <td>{{phoneNumberValue}}</td>
                                         </tr>
                                         <tr>
                                             <th>Catégorie</th>
-                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                            <td>{{categoryValue}}</td>
                                         </tr>
                                         <tr>
                                             <th>Etablissement</th>
-                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                            <td>{{schoolNameValue}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                              <mat-divider></mat-divider>
+                              <mat-divider class="divider"></mat-divider>
                               <div>
                                 <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
                                 <button mat-raised-button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
