@@ -1,8 +1,7 @@
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { state } from 'src/app/state/root-reducer';
 
 @Component({
   selector: 'app-breadcrumb',

@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthRoutingModule } from './auth/auth-routing.module';
-import { ShellComponent } from './core/components/shell/shell.component';
 import { AuthGuard } from './core/guards/auth.guard';
-import { AuthService } from './auth/services/auth.service';
-import { AuthChildGuard } from './core/guards/auth.child.guard';
 import { PageNotFoundComponent } from './page.not.found.component';
 import { LayoutComponent } from './core/components/layout/layout.component';
 

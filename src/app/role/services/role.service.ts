@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, catchError, delay, map, mapTo, of, tap } from "rxjs";
+import { Observable, catchError, delay, map, mapTo, of } from "rxjs";
 import { Role } from "../models/role.model";
 import { environment } from "src/environments/environment";
 import { User } from "src/app/user/models/user.model";

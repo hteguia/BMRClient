@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function confirmEqualValidator(main: string, confirm: string): ValidatorFn{
-    return (ctrl: AbstractControl) : null | ValidationErrors => {
+export function confirmEqualValidator(main: string, confirm: string): null | ValidatorFn{
+    return (ctrl: AbstractControl) : ValidationErrors | null  => {
         if(!ctrl.get(main) || !ctrl.get(confirm)){
             return {
                 confirmEqual: 'Invalid controle names'
@@ -17,5 +17,6 @@ export function confirmEqualValidator(main: string, confirm: string): ValidatorF
                 confirm: confirmalue
             }
         };
+        
     };
 }
