@@ -17,6 +17,17 @@ jobs:
     - name: Get latest code
       uses: actions/checkout@v2.3.2
 
+    - name: SonarCloud Analysis
+      uses: sonarsource/sonarcloud-github-action@v1.8
+      with:
+        args: >
+          -Dsonar.organization=hteguia
+          -Dsonar.projectKey=hteguia
+      env:
+        GITHUB_TOKEN: ${{ secrets.SERVER_FTP_HOST }}
+        SONAR_TOKEN: ${{ secrets.SERVER_FTP_HOST }}
+      
+    
     - name: Use Node.js 18.17.1 LTS
       uses: actions/setup-node@v2
       with:
