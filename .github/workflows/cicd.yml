@@ -25,7 +25,7 @@ jobs:
           -Dsonar.projectKey=hteguia
       env:
         GITHUB_TOKEN: ${{ secrets.SERVER_FTP_HOST }}
-        SONAR_TOKEN: ${{ secrets.SERVER_FTP_HOST }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
     
     - name: Use Node.js 18.17.1 LTS
