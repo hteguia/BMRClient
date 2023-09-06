@@ -9,7 +9,7 @@ on:
       
 jobs:
   web-deploy:
-    if: github.event.review.state == 'approved'
+    if: github.event.pull_request.merged == true
     name: Build and Deploy Angular App
     runs-on: ubuntu-latest
 
