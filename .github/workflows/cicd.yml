@@ -1,9 +1,11 @@
 name: Angular CI/CD Pipeline
 
 on: 
-  pull_request_review:
+  pull_request:
+    branches:
+      - master
     types:
-      - submitted
+      - closed
       
 jobs:
   web-deploy:
