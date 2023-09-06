@@ -24,7 +24,7 @@ jobs:
           -Dsonar.organization=hteguia
           -Dsonar.projectKey=hteguia
       env:
-        GITHUB_TOKEN: ${{ secrets.SERVER_FTP_HOST }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
     
