@@ -155,6 +155,113 @@ body {
 }
 
 
+/* custom angular material */
+mat-form-field {
+    width: 100%;
+    &.full-width {
+        width: 100%;
+        margin-left: 10%;
+    }
+   
+  } 
+  /* custom angular material */
+
+/* Login and register page */
+.account-layout {
+    min-height: 100vh;
+    background-image: url("./assets/img/bg.svg");
+} 
+
+.account-header {
+    padding: 32px 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-body  {
+    min-height: calc(100vh - 180px);
+    padding: 100px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.account-container {
+    margin-top: -5%;
+}
+
+.account {
+    display: flex;
+    align-items: flex-start;
+}
+
+.account-form {
+    padding: 32px 30px;
+    background-color: #fff;
+    border-radius: 8x;
+    width: 400px;
+}
+
+
+.account-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+  }
+
+  .account-footer-item {
+    padding: 32px 25px;
+  }
+  
+  .account-footer-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .account-footer-item-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  @media screen and (max-width: 600px){
+    .account-body {
+      padding: 100px 0;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 400px){
+    .account-form {
+      padding: 32px 18px;
+      background-color: #fff;
+      border-radius: 8x;
+      width: 375px;
+    }
+  }
+/* Login and register page */
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+   
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }
+
+
   /* #privacypolicies-com---nb {
     height: auto;
     width: 100vw;

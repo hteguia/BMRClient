@@ -1,7 +1,7 @@
 <div class="account-layout">
   <div class="account-header">
       <a href="/" class="account-layout-header-item">
-          <img src="../../../../assets/img/logo_bmr.png" width="150px"/>
+          <img src="../../../../assets/img/logo_bmr.png" alt="logo bmr-africa" width="150px"/>
       </a> 
       <div class="account-layout__header__item">
           <a routerLink="/auth/login" mat-raised-button class="btn btn--primary">J'ai déjà un compte? Connexion</a>
@@ -39,6 +39,7 @@
                                
                                  
                                 <div>
+                                    
                                   <button mat-raised-button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
                                 </div>
                             </form>
@@ -102,38 +103,38 @@
                               <mat-divider></mat-divider>
                 
                               <div class="table-responsive"  style="width: 90%; border:0px">
-                                <table class="table">
+                                <table class="table" aria-describedby="Recapitulatif">
                                     <tbody>
                                         <tr>
                                             <th>Noms</th>
-                                            <td>bmr admin</td>
+                                            <td>{{firstNameValue}}</td>
                                         </tr>
                                         <tr>
                                             <th style="width: 30%;">Prénoms</th>
-                                            <td>24 Aug 2023 12:33</td>
+                                            <td>{{lastNameValue}}</td>
                                         </tr>
                                         
                                         <tr>
                                             <th>Email</th>
-                                            <td>72 Heure(s)</td>
+                                            <td>{{emailValue}}</td>
                                         </tr>
                                         
                                         <tr>
                                             <th>Téléphone</th>
-                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                            <td>{{phoneNumberValue}}</td>
                                         </tr>
                                         <tr>
                                             <th>Catégorie</th>
-                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                            <td>{{categoryValue}}</td>
                                         </tr>
                                         <tr>
                                             <th>Etablissement</th>
-                                            <td><span class="badge bg-success">FIN DE TRAITEMENT</span></td>
+                                            <td>{{schoolNameValue}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
-                              <mat-divider></mat-divider>
+                              <mat-divider class="divider"></mat-divider>
                               <div>
                                 <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
                                 <button mat-raised-button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
@@ -240,7 +241,7 @@
                               <mat-divider></mat-divider>
                 
                               <div class="table-responsive"  style="width: 90%; border:0px">
-                                <table class="table">
+                                <table class="table" aria-describedby="Recapitulatif">
                                     <tbody>
                                         <tr>
                                             <th>Noms</th>
