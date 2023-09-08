@@ -2,9 +2,9 @@
     <div class="card-header">
         <div class="margin">
             <div class="btn-group">
-                <app-button label="Nouvelle demande de service" icon="add" color="primary" sclass="btn--primary" (click)="onAddNewServiceRequest()"></app-button>
+                <app-button label="Nouvelle demande de service" icon="add" color="primary" cssClass="btn--primary" (click)="onAddNewServiceRequest()"></app-button>
                 <app-button  *ngIf="selectedRows.length" label="Modifier" icon="edit" color="primary" sclass="btn--primary" ></app-button>
-                <app-button  label="Filtrer" icon="filter_list" color="primary" sclass="btn--default" (click)="onFilterDataGrid()"></app-button>
+                <app-button  label="Filtrer" icon="filter_list" color="primary" cssClass="btn--default" (click)="onFilterDataGrid()"></app-button>
                 <app-data-grid-filter 
                 [@gridFilter]="listItemAnimateState" 
                 *ngIf="showFilterModel"

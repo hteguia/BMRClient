@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { ShellComponent } from './components/shell/shell.component';
 import { AuthGuard } from "./guards/auth.guard";
 import { LayoutComponent } from "./components/layout/layout.component";
 
@@ -20,7 +19,6 @@ import { LayoutComponent } from "./components/layout/layout.component";
      NavbarComponent,
      MenuComponent,
      BreadcrumbComponent,
-     ShellComponent,
      LayoutComponent,
     ],
     imports: [
@@ -36,7 +34,6 @@ import { LayoutComponent } from "./components/layout/layout.component";
       NavbarComponent,
       MenuComponent,
       BreadcrumbComponent,
-      ShellComponent,
       LayoutComponent,
     ],
     providers: [

@@ -16,9 +16,6 @@ const routes: Routes = [
       {path: 'service-request-processing', loadChildren: ()=>import('./service-request-processing/service-request-processing.module').then(m=>m.ServiceRequestProcessingModule)},
       {path: 'permissions', loadChildren: ()=>import('./permission/permission.module').then(m=>m.PermissionModule)},
       {path: 'roles', loadChildren: ()=>import('./role/role.module').then(m=>m.RoleModule)},
-      {path: 'complex-form', loadChildren: ()=>import('./complex-form/complex-form.module').then(m=>m.ComplexFormModule)},
-      {path: 'social-media', loadChildren: ()=>import('./social-media/social-media.module').then(m=>m.SocialMediaModule)},
-      {path: 'reactive-state', loadChildren: ()=>import('./reactive-state/reactive-state.module').then(m=>m.ReactiveStateModule)},
       {
         path: '**',
         redirectTo: 'dashboard',

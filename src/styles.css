@@ -197,7 +197,7 @@ mat-form-field {
 .account-form {
     padding: 32px 30px;
     background-color: #fff;
-    border-radius: 8x;
+    border-radius: 8px;
     width: 400px;
 }
 
@@ -235,7 +235,7 @@ mat-form-field {
     .account-form {
       padding: 32px 18px;
       background-color: #fff;
-      border-radius: 8x;
+      border-radius: 8px;
       width: 375px;
     }
   }
