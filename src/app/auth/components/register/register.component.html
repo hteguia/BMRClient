@@ -17,6 +17,7 @@
                           <mat-step [stepControl]="credentialsForm">
                               <form [formGroup]="credentialsForm">
                                 <ng-template matStepLabel>Identifiants</ng-template>
+                               
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Adresse Email</label>
                                     <mat-form-field appearance="outline">                          
@@ -76,18 +77,26 @@
                               </mat-step>
                             <mat-step [stepControl]="schoolInformationForm" label="Etablissement">
                                 <form [formGroup]="schoolInformationForm">
-                                    <mat-form-field appearance="outline">
-                                        <mat-select formControlName="category" placeholder="Quel est votre status" >
-                                            <mat-option  *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
-                                        </mat-select>
-                                        <mat-error>Ce champs est obligatoire</mat-error>
-                                    </mat-form-field>
-                                    <mat-form-field appearance="outline">
-                                        <mat-select formControlName="schoolName" placeholder="Quel est votre établissement" >
-                                            <mat-option  *ngFor="let option of school" [value]="option">{{ option }}</mat-option>
-                                        </mat-select>
-                                        <mat-error>Ce champs est obligatoire</mat-error>
-                                    </mat-form-field>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Catégorie</label>
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="category" placeholder="Quel est votre status" >
+                                                <mat-option  *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
+                                            </mat-select>
+                                            <mat-error>Ce champs est obligatoire</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputPassword1">Ecole</label>
+                                        <mat-form-field appearance="outline">
+                                            <mat-select formControlName="schoolName" placeholder="Quel est votre établissement" >
+                                                <mat-option  *ngFor="let option of school" [value]="option">{{ option }}</mat-option>
+                                            </mat-select>
+                                            <mat-error>Ce champs est obligatoire</mat-error>
+                                        </mat-form-field>
+                                    </div>
+                                    
+                                   
                                   
                                   <div>
                                     <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
@@ -151,7 +160,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Adresse Email</label>
                                     <mat-form-field appearance="outline">                          
-                                        <input matInput placeholder="Votre adresse email" formControlName="email" required>
+                                        <input matInput autocomplete="off" placeholder="Votre adresse email" formControlName="email" required>
                                       </mat-form-field>
                                 </div>
                                 <div class="form-group">
@@ -293,7 +302,7 @@
                                 Créer et activer votre compte
                             </div>
                             <div class="register-steps-item-caption">
-                                With Flutterwave, you can setup an online store, create payment and donation links, receive payments on your website or get our POS device.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                             </div>
                         </div>
                     </div>
@@ -306,7 +315,7 @@
                                 Faite une demande de service
                             </div>
                             <div class="register-steps-item-caption">
-                                With Flutterwave, you can setup an online store, create payment and donation links, receive payments on your website or get our POS device.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                             </div>
                         </div>
                     </div>
@@ -319,7 +328,7 @@
                                 Recevez le traitement de votre demande
                             </div>
                             <div class="register-steps-item-caption">
-                                With Flutterwave, you can setup an online store, create payment and donation links, receive payments on your website or get our POS device.
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                             </div>
                         </div>
                     </div>
@@ -344,3 +353,7 @@
       </div>
     </div>
 </div>
+
+<ng-template #reuse >
+
+</ng-template>

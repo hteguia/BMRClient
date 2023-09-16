@@ -14,6 +14,7 @@ import { AmountPipe } from "./pipes/amount.pipe";
 import { ButtonCloseCardComponent } from "./components/button-close-card/button-close-card.component";
 import { DecimalSeparatorPipe } from "./pipes/decimal.separator.pipe";
 import { ButtonComponent } from "./components/button/button.component";
+import { InputComponent } from "./components/input/input.component";
 
 
 
@@ -29,7 +30,8 @@ import { ButtonComponent } from "./components/button/button.component";
         AmountPipe,
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
-        ButtonComponent
+        ButtonComponent,
+        InputComponent
     ],
     imports: [
         CommonModule,
@@ -52,6 +54,7 @@ import { ButtonComponent } from "./components/button/button.component";
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
         ButtonComponent,
+        InputComponent,
     ]
 })
 

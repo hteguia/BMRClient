@@ -26,6 +26,7 @@ export class SingleRoleComponent implements OnInit{
   users$!: Observable<User[]>;
   permissions$!: Observable<Permission[]>;
   showDelete = true;
+  
 
   constructor(private roleService: RolesService,
               private route: ActivatedRoute){}
