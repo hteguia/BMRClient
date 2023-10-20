@@ -10,7 +10,7 @@ export class AuthService{
   constructor(private http: HttpClient) {}
   
     login(data: {email: string, password: string}): Observable<any> {
-      return this.http.get<any>(`${environment.apiUrl}/login/1`);
+      return this.http.post<any>(`${environment.apiUrl}/auth/login`,data);
     }
   
     setToken(token: string){

@@ -6,11 +6,33 @@ import { RolesService } from '../../services/role.service';
 import { Role } from '../../models/role.model';
 import { Store } from '@ngrx/store';
 import { changeBreadcrump } from 'src/app/state/root-action';
+import { animate, state, style, transition, trigger, useAnimation } from '@angular/animations';
+import { flashAnimation } from 'src/app/shared/animations/flash.animation';
 
 @Component({
   selector: 'app-role',
   templateUrl: './role.component.html',
-  styleUrls: ['./role.component.css']
+  styleUrls: ['./role.component.css'],
+  animations:[
+    trigger('listItem', [
+      state('default', style({
+        transform: 'scale(1)',
+        'background-color': 'white',
+        'z-index': 1
+      })),
+      transition('void => *',
+      [
+        useAnimation(flashAnimation, {
+          params: {
+            height: 0,
+            opacity: 0,
+            backgroundColor: 'red',
+            time: '1s'
+          }
+        })
+      ])
+    ]),
+  ]
 })
 export class RoleComponent implements OnInit {
   columns: DataGridColumn[] = [
@@ -43,7 +65,7 @@ export class RoleComponent implements OnInit {
   }
 
   onSelectRow(rows: []){
-    
+    this.selectedRows = rows;
   }
 
   onFilterDataGrid(){
@@ -56,12 +78,12 @@ export class RoleComponent implements OnInit {
 
   private setBreadcrump():void{
     this.store.dispatch(changeBreadcrump(
-      {
-        title: "Rôles", 
-        links:[
-          { title:"Home", link:"/" }, 
-          { title:"Rôles", link:"/" }
-        ]
-      }));
+    {
+      title: "Rôles", 
+      links:[
+        { title:"Home", link:"/" }, 
+        { title:"Rôles", link:"/" }
+      ]
+    }));
   }
 }

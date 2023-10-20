@@ -150,12 +150,33 @@ body {
     flex: 1 1 0%;
 } 
 
+
+
+
+/* custom angular material */
 .mat-stepper-vertical, .mat-stepper-horizontal, .mat-step-label .mat-step-text-label {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif!important;
 }
 
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 10px; 
+    padding-bottom: 10px; 
+}
 
-/* custom angular material */
+.mat-mdc-form-field-infix {
+    min-height: 30px;
+}
+
+.mat-step-icon-selected {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+}
+
+.mat-step-icon-state-edit {
+    background-color: var(--primary) !important;
+    color: #fff !important;
+}
+
 mat-form-field {
     width: 100%;
     &.full-width {
@@ -164,7 +185,7 @@ mat-form-field {
     }
    
   } 
-  /* custom angular material */
+/* custom angular material */
 
 /* Login and register page */
 .account-layout {
@@ -197,7 +218,7 @@ mat-form-field {
 .account-form {
     padding: 32px 30px;
     background-color: #fff;
-    border-radius: 8x;
+    border-radius: 8px;
     width: 400px;
 }
 
@@ -235,7 +256,7 @@ mat-form-field {
     .account-form {
       padding: 32px 18px;
       background-color: #fff;
-      border-radius: 8x;
+      border-radius: 8px;
       width: 375px;
     }
   }
@@ -261,6 +282,7 @@ mat-form-field {
     animation: spinner .8s linear infinite;
   }
 
+  
 
   /* #privacypolicies-com---nb {
     height: auto;

@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { CommentsComponent } from './components/comments/comments.component';
 import { MaterialModule } from "./material.module";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ShorthenPipe } from "./pipes/shorten.pipe";
@@ -15,11 +14,12 @@ import { AmountPipe } from "./pipes/amount.pipe";
 import { ButtonCloseCardComponent } from "./components/button-close-card/button-close-card.component";
 import { DecimalSeparatorPipe } from "./pipes/decimal.separator.pipe";
 import { ButtonComponent } from "./components/button/button.component";
+import { InputComponent } from "./components/input/input.component";
+
 
 
 @NgModule({
     declarations: [
-        CommentsComponent,
         ShorthenPipe,
         TimeAgoPipe,
         HighlightDirective,
@@ -30,16 +30,16 @@ import { ButtonComponent } from "./components/button/button.component";
         AmountPipe,
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
-        ButtonComponent
+        ButtonComponent,
+        InputComponent
     ],
     imports: [
         CommonModule,
         MaterialModule,
         ReactiveFormsModule,
-        DxDataGridModule
+        DxDataGridModule,
     ],
     exports:[
-        CommentsComponent,
         MaterialModule,
         ReactiveFormsModule,
         ShorthenPipe,
@@ -53,7 +53,8 @@ import { ButtonComponent } from "./components/button/button.component";
         AmountPipe,
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
-        ButtonComponent
+        ButtonComponent,
+        InputComponent,
     ]
 })
 

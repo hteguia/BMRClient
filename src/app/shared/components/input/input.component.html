@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label for={{label}} *ngIf="label">{{label}}</label>
+    <mat-form-field  appearance="outline" >
+        <input matInput [formControl]="inputCtrl" placeholder={{placeholder}} required="required">
+        <mat-error>Ce champs est obligatoire</mat-error>
+    </mat-form-field>
+</div>

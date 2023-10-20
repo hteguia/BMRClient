@@ -66,31 +66,6 @@
   line-height: 15px;
 }
 
-/* @media (max-width: 1300px) {
-  .account {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 920px) {
-    .account-form {
-      padding: 32px 30px;
-      background-color: #fff;
-      border-radius: 8x;
-      width: 100%;
-    }
-}
-
-
-@media screen and (max-width: 1000px){
-  .account-body {
-    padding: 100px 5px;
-    display: flex;
-    justify-content: center;
-  }
-} */
 
 .table th, .table td {
     border-top: 0px;

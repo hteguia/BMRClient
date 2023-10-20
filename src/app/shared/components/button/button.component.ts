@@ -11,7 +11,7 @@ export class ButtonComponent {
   @Input() icon: string = "";
   @Input() toolTip: string = "";
   @Input() color: string = "";
-  @Input() sclass: string = "";
+  @Input() cssClass: string = "";
   @Input() disabled: boolean = false;
 
   @Output() click = new EventEmitter();

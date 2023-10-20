@@ -33,8 +33,7 @@
                       <p class="text-danger">Login ou mot de passe incorrect</p>
                     </div>
                     <div class="input-group mb-3">
-                      
-                      <button mat-raised-button (click)="onLogin()" [class.spinner]="loading" [disabled]="loading" class="btn btn--primary btn-block">Se connecter</button>
+                      <app-button style="width:100%"  label="Se connecter" color="primary" cssClass="btn btn--primary btn-block" (click)="onLogin()"></app-button>
                     </div>
                     <div class="input-group mb-3">
                       <p class="mb-1">

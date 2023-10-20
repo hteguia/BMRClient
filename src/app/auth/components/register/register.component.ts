@@ -1,8 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, map } from 'rxjs';
-import { confirmEqualValidator } from 'src/app/complex-form/validators/confirm-equal.validator';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { confirmEqualValidator } from 'src/app/shared/validators/confirm-equal.validator';
 
 @Component({
   selector: 'app-register',
