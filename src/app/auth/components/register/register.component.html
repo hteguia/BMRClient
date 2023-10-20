@@ -154,141 +154,143 @@
                     </ng-container>
                     <ng-container *ngIf="!isVertical">
                         <mat-stepper [linear]="false" #stepper >
+                            
                             <mat-step [stepControl]="credentialsForm">
-                              <form [formGroup]="credentialsForm">
-                                <ng-template matStepLabel>Identifiants</ng-template>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Adresse Email</label>
-                                    <mat-form-field appearance="outline">                          
-                                        <input matInput autocomplete="off" placeholder="Votre adresse email" formControlName="email" required>
-                                      </mat-form-field>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Mot de passe</label>
-                                    <mat-form-field appearance="outline">
-                                        <input type="password"  matInput placeholder="Votre de passe" [formControl]="passwordCtrl" required>
-                                      </mat-form-field>
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputPassword1">Confirmer le mot de passe</label>
-                                    <mat-form-field appearance="outline">
-                                        <input type="password" matInput placeholder="Confimer votre mot de passe" [formControl]="confirmPasswordCtrl" required>
-                                      </mat-form-field>
-                                </div>
+                                <form [formGroup]="credentialsForm">
+                                  <ng-template matStepLabel>Identifiants</ng-template>
+                                  <div class="form-group">
+                                      <label for="exampleInputPassword1">Adresse Email</label>
+                                      <mat-form-field appearance="outline">                          
+                                          <input matInput autocomplete="off" placeholder="Votre adresse email" formControlName="email" required>
+                                        </mat-form-field>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="exampleInputPassword1">Mot de passe</label>
+                                      <mat-form-field appearance="outline">
+                                          <input type="password"  matInput placeholder="Votre de passe" [formControl]="passwordCtrl" required>
+                                        </mat-form-field>
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="exampleInputPassword1">Confirmer le mot de passe</label>
+                                      <mat-form-field appearance="outline">
+                                          <input type="password" matInput placeholder="Confimer votre mot de passe" [formControl]="confirmPasswordCtrl" required>
+                                        </mat-form-field>
+                                  </div>
+                                  
                                 
-                              
-                                
-                                <div>
-                                  <button mat-raised-button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
-                                </div>
-                            </form>
-                            </mat-step>
-                            <mat-step [stepControl]="personalInformationForm" label="Informations personnelles">
-                                <form [formGroup]="personalInformationForm">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Prénoms</label>
-                                        <mat-form-field appearance="outline">
-                                            <input matInput formControlName="firstName" placeholder="Renseigner votre prénoms"
-                                                  required>
-                                          </mat-form-field>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Noms</label>
-                                        <mat-form-field appearance="outline">
-                                            <input matInput formControlName="lastName" placeholder="Renseigner votre noms de famille"
-                                                  required>
-                                          </mat-form-field>
-                                    </div>
-                                    <div class="form-group">
-                                        
-                                        <label for="exampleInputPassword1">Téléphone</label>
-                                        <mat-form-field appearance="outline">
-                                            <input matInput formControlName="phoneNumber" placeholder="Renseigner votre téléphone mobile"
-                                                  required>
-                                          </mat-form-field>
-                                    </div>
                                   
                                   <div>
-                                    <button mat-raised-button class="btn btn--default" mat-flat-button matStepperPrevious>Précédent</button>
                                     <button mat-raised-button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
                                   </div>
-                                </form>
+                              </form>
                               </mat-step>
-                            <mat-step [stepControl]="schoolInformationForm" label="Etablissement">
-                                <form [formGroup]="schoolInformationForm">
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Catégorie</label>
-                                        <mat-form-field appearance="outline">
-                                            <mat-select formControlName="category" placeholder="Quel est votre status" >
-                                                <mat-option  *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
-                                            </mat-select>
-                                            <mat-error>Ce champs est obligatoire</mat-error>
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputPassword1">Ecole</label>
-                                        <mat-form-field appearance="outline">
-                                            <mat-select formControlName="schoolName" placeholder="Quel est votre établissement" >
-                                                <mat-option  *ngFor="let option of school" [value]="option">{{ option }}</mat-option>
-                                            </mat-select>
-                                            <mat-error>Ce champs est obligatoire</mat-error>
-                                        </mat-form-field>
-                                    </div>
+                              <mat-step [stepControl]="personalInformationForm" label="Informations personnelles">
+                                  <form [formGroup]="personalInformationForm">
+                                      <div class="form-group">
+                                          <label for="exampleInputPassword1">Prénoms</label>
+                                          <mat-form-field appearance="outline">
+                                              <input matInput formControlName="firstName" placeholder="Renseigner votre prénoms"
+                                                    required>
+                                            </mat-form-field>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="exampleInputPassword1">Noms</label>
+                                          <mat-form-field appearance="outline">
+                                              <input matInput formControlName="lastName" placeholder="Renseigner votre noms de famille"
+                                                    required>
+                                            </mat-form-field>
+                                      </div>
+                                      <div class="form-group">
+                                          
+                                          <label for="exampleInputPassword1">Téléphone</label>
+                                          <mat-form-field appearance="outline">
+                                              <input matInput formControlName="phoneNumber" placeholder="Renseigner votre téléphone mobile"
+                                                    required>
+                                            </mat-form-field>
+                                      </div>
                                     
+                                    <div>
+                                      <button mat-raised-button class="btn btn--default" mat-flat-button matStepperPrevious>Précédent</button>
+                                      <button mat-raised-button class="btn btn--primary" mat-flat-button matStepperNext>Suivant</button>
+                                    </div>
+                                  </form>
+                                </mat-step>
+                              <mat-step [stepControl]="schoolInformationForm" label="Etablissement">
+                                  <form [formGroup]="schoolInformationForm">
+                                      <div class="form-group">
+                                          <label for="exampleInputPassword1">Catégorie</label>
+                                          <mat-form-field appearance="outline">
+                                              <mat-select formControlName="category" placeholder="Quel est votre status" >
+                                                  <mat-option  *ngFor="let option of status" [value]="option">{{ option }}</mat-option>
+                                              </mat-select>
+                                              <mat-error>Ce champs est obligatoire</mat-error>
+                                          </mat-form-field>
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="exampleInputPassword1">Ecole</label>
+                                          <mat-form-field appearance="outline">
+                                              <mat-select formControlName="schoolName" placeholder="Quel est votre établissement" >
+                                                  <mat-option  *ngFor="let option of school" [value]="option">{{ option }}</mat-option>
+                                              </mat-select>
+                                              <mat-error>Ce champs est obligatoire</mat-error>
+                                          </mat-form-field>
+                                      </div>
+                                      
+                                      
                                     
-                                  
-                                  <div>
-                                    <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
-                                    <button mat-raised-button class="btn btn--primary" mat-button matStepperNext>Suivant</button>
-                                  </div>
-                                </form>
-                              </mat-step>
-                              
-                          
-                            <mat-step>
-                              <ng-template matStepLabel>Vérifier et créer</ng-template>
-                              <h2>Information de connexion</h2>
-                              <mat-divider></mat-divider>
-                
-                              <div class="table-responsive"  style="width: 90%; border:0px">
-                                <table class="table" aria-describedby="Recapitulatif">
-                                    <tbody>
-                                        <tr>
-                                            <th>Noms</th>
-                                            <td>{{firstNameValue}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th style="width: 30%;">Prénoms</th>
-                                            <td>{{lastNameValue}}</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th>Email</th>
-                                            <td>{{emailValue}}</td>
-                                        </tr>
-                                        
-                                        <tr>
-                                            <th>Téléphone</th>
-                                            <td>{{phoneNumberValue}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Catégorie</th>
-                                            <td>{{categoryValue}}</td>
-                                        </tr>
-                                        <tr>
-                                            <th>Etablissement</th>
-                                            <td>{{schoolNameValue}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                              <mat-divider class="divider"></mat-divider>
-                              <div>
-                                <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
-                                <button mat-raised-button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
-                                <button mat-raised-button class="btn btn--primary" mat-button >Enregistrer</button>
+                                    <div>
+                                      <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
+                                      <button mat-raised-button class="btn btn--primary" mat-button matStepperNext>Suivant</button>
+                                    </div>
+                                  </form>
+                                </mat-step>
+                                
+                            
+                              <mat-step>
+                                <ng-template matStepLabel>Vérifier et créer</ng-template>
+                                <h2>Information de connexion</h2>
+                                <mat-divider></mat-divider>
+                        
+                                <div class="table-responsive"  style="width: 90%; border:0px">
+                                  <table class="table" aria-describedby="Recapitulatif">
+                                      <tbody>
+                                          <tr>
+                                              <th>Noms</th>
+                                              <td>{{firstNameValue}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th style="width: 30%;">Prénoms</th>
+                                              <td>{{lastNameValue}}</td>
+                                          </tr>
+                                          
+                                          <tr>
+                                              <th>Email</th>
+                                              <td>{{emailValue}}</td>
+                                          </tr>
+                                          
+                                          <tr>
+                                              <th>Téléphone</th>
+                                              <td>{{phoneNumberValue}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Catégorie</th>
+                                              <td>{{categoryValue}}</td>
+                                          </tr>
+                                          <tr>
+                                              <th>Etablissement</th>
+                                              <td>{{schoolNameValue}}</td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
                               </div>
-                            </mat-step>
+                                <mat-divider class="divider"></mat-divider>
+                                <div>
+                                  <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
+                                  <button mat-raised-button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
+                                  <button mat-raised-button class="btn btn--primary" mat-button >Enregistrer</button>
+                                </div>
+                              </mat-step>
+                        
                           </mat-stepper>
                     </ng-container>
                   </div>
@@ -353,7 +355,3 @@
       </div>
     </div>
 </div>
-
-<ng-template #reuse >
-
-</ng-template>
