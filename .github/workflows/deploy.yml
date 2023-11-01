@@ -30,6 +30,8 @@ jobs:
     - name: Zip Folder
       run: zip -r release.zip ./dist
 
+    - name: Zip Folder
+      run: ls
 
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
