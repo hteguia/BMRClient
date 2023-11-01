@@ -31,7 +31,13 @@ jobs:
       run: zip -r release.zip ./dist
 
     - name: Zip Folder
-      run: ls
+      run: mkdir upload
+
+    - name: Zip Folder
+      run: cp release.zip upload
+
+    - name: Zip Folder
+      run: ls upload
 
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
@@ -41,7 +47,7 @@ jobs:
         FTP_PASSWORD: ${{ secrets.SERVER_FTP_PASSWORD }}
         PORT: 22
         METHOD: sftp
-        LOCAL_DIR: ./release.zip
+        LOCAL_DIR: ./upload/
         REMOTE_DIR: ${{ secrets.SERVER_FTP_DIR }}
         ARGS: --verbose
     
