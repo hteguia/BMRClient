@@ -12,6 +12,8 @@ import { rootReducer } from './state/root-reducer';
 
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -45,6 +47,11 @@ registerLocaleData(localeFr, 'fr');
           console.log(error);
         }
       } as SocialAuthServiceConfig
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]
