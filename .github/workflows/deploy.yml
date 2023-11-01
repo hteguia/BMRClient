@@ -27,7 +27,10 @@ jobs:
 
     - name: Build Project
       run: npm run build
-
+      
+    - name: Zip Folder
+      run: zip -r release.zip ./dist
+      
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@2.0.0
       env:
@@ -36,7 +39,7 @@ jobs:
         FTP_PASSWORD: ${{ secrets.SERVER_FTP_PASSWORD }}
         PORT: 22
         METHOD: sftp
-        LOCAL_DIR: ./dist/
+        LOCAL_DIR: ./release.zip
         REMOTE_DIR: ${{ secrets.SERVER_FTP_DIR }}
         ARGS: --verbose
     
