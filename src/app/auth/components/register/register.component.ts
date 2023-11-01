@@ -1,8 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, map } from 'rxjs';
+import { Observable, delay, map, take, tap } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { confirmEqualValidator } from 'src/app/shared/validators/confirm-equal.validator';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -34,6 +36,9 @@ import { confirmEqualValidator } from 'src/app/shared/validators/confirm-equal.v
 })
 export class RegisterComponent implements OnInit {
 
+  auth = inject(AuthService);
+  router = inject(Router); 
+  
   mainForm!: FormGroup;
   credentialsForm!: FormGroup;
   personalInformationForm!: FormGroup;
@@ -53,6 +58,8 @@ export class RegisterComponent implements OnInit {
   isLinear = false;
 
   isVertical = false;
+
+  loading = false;
 
   
   status = ["Etudiant", "Généraliste", "Résident", "Spécialiste", "Autres"];
@@ -142,5 +149,26 @@ export class RegisterComponent implements OnInit {
     this.schoolInformationForm.get('category')!.valueChanges.subscribe(data => this.categoryValue = data);
     this.schoolInformationForm.get('schoolName')!.valueChanges.subscribe(data => this.schoolNameValue = data);
   }
+
+  onRegister() {
+    this.loading = true;
+    console.log(this.mainForm.get('personalInformationForm.firstName')?.value);
+    this.auth.register({firstName:"dfdgddddd", lastName:"dmddddddfg", userName:"dfdfhfdklldddg", password:"Password@123", email:"telkldddtegjgjgt@hdhdh.com"}).pipe(
+      delay(2000),
+      take(1),
+      tap(currentUser => {
+        this.loading = false;
+        if(currentUser){
+          this.auth.setUserData(currentUser);
+          this.auth.setToken(currentUser.data.jwToken);
+          this.router.navigateByUrl('/');
+        }
+        else{
+          //this.showErrorMessage = true;
+        }
+      })
+    ).subscribe();
+  }
+
   
 }

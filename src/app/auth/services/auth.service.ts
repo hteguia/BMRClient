@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { AnyFn } from "@ngrx/store/src/selector";
 import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
@@ -10,7 +11,11 @@ export class AuthService{
   constructor(private http: HttpClient) {}
   
     login(data: {email: string, password: string}): Observable<any> {
-      return this.http.post<any>(`${environment.apiUrl}/auth/login`,data);
+      return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data);
+    }
+
+    register(data: any): Observable<any> {
+      return this.http.post<any>(`${environment.apiUrl}/Account/register`,data);
     }
   
     setToken(token: string){
@@ -18,7 +23,7 @@ export class AuthService{
     }
 
     get token(){
-      return localStorage.getItem('user_data')
+      return localStorage.getItem('access_token')
     }
 
     setUserData(user: {email:string, firstName:string, lastName:string, role:string, createAt: string, imageUrl:string}){

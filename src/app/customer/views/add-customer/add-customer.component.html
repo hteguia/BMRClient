@@ -1,0 +1,54 @@
+<div class="card" [formGroup]="mainForm">
+    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-th mr-1"></i>
+            Nouveau client
+        </h3>
+        <div class="card-tools">        
+          <button type="button" class="btn btn--close btn-sm" data-card-widget="remove" (click)="onClose()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+               <div class="form-group">
+                    <label for="exampleInputPassword1">Nom du client</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput  placeholder="Renseigner le nom du client" formControlName="name" />
+                        <mat-error>Ce champs est obligatoire</mat-error>
+                    </mat-form-field>
+               </div>
+               <div class="form-group">
+                <label for="exampleInputPassword1">Téléphone</label>
+                <mat-form-field appearance="outline">
+                    <input matInput  placeholder="Renseigner le téléphone" formControlName="phoneNumber" />
+                    <mat-error>Ce champs est obligatoire</mat-error>
+                </mat-form-field>               
+               </div> 
+               <div class="form-group">
+                    <label for="exampleInputPassword1">Email</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput  placeholder="Renseigner l'email" formControlName="email"/>
+                        <mat-error>Ce champs est obligatoire</mat-error>
+                    </mat-form-field>
+               </div>   
+               <div class="form-group">
+                <label for="exampleInputPassword1">Site Web</label>
+                <mat-form-field appearance="outline">
+                    <input matInput  placeholder="Renseigner l'url site Web" formControlName="webSite"/>
+                </mat-form-field>   
+                </div>      
+              
+            </div>
+           
+        </div>       
+    </div>
+    <div class="card-footer">
+        <mat-card-actions >
+            <button mat-flat-button class="btn--primary" (click)="onSubmitForm()" [disabled]="!mainForm.valid" >Enregistrer</button>
+        </mat-card-actions>
+    </div>
+</div>
+

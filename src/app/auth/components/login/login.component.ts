@@ -64,8 +64,8 @@ export class LoginComponent implements OnInit {
       tap(currentUser => {
         this.loading = false;
         if(currentUser){
-          this.auth.setUserData(currentUser);
-          this.auth.setToken('eyJhbGciOiJIUzUxMiJ9');
+          this.auth.setUserData(currentUser.data);
+          this.auth.setToken(currentUser.data.jwToken);
           this.router.navigateByUrl('/');
         }
         else{
