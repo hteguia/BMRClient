@@ -26,9 +26,12 @@ jobs:
 
     - name: Build Project
       run: npm run build
+
+    - name: Build Project
+      run: mv ./dist ./website
       
     - name: Zip Folder
-      run: zip -r release.zip ./dist/*
+      run: zip -r release.zip ./website/*
 
     - name: Zip Folder
       run: mkdir upload
