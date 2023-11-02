@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AnyFn } from "@ngrx/store/src/selector";
-import { Observable } from "rxjs";
+import { Observable, catchError, of } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -11,12 +11,24 @@ export class AuthService{
   constructor(private http: HttpClient) {}
   
     login(data: {email: string, password: string}): Observable<any> {
-      return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data);
+      return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data).pipe(
+        catchError(error => {
+          return of(false);
+        })
+      );
     }
 
     register(data: any): Observable<any> {
       return this.http.post<any>(`${environment.apiUrl}/Account/register`,data);
     }
+
+    confirmRegister(userId:string, token:string): Observable<boolean> {
+      return this.http.get<boolean>(`${environment.apiUrl}/Account/confirm-email?userId=${userId}&token=${token}`).pipe(
+        catchError(error => {
+          return of(false);
+        })
+      );
+  }
   
     setToken(token: string){
       localStorage.setItem('access_token', token);

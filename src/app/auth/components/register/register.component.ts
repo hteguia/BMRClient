@@ -124,14 +124,14 @@ export class RegisterComponent implements OnInit {
     });
 
     this.personalInformationForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      firstName: [''],
+      lastName: [''],
+      phoneNumber: [''],
     });
 
     this.schoolInformationForm = this.formBuilder.group({
-      category: ['', Validators.required],
-      schoolName: ['', Validators.required],
+      category: [''],
+      schoolName: [''],
     });
   }
 
@@ -153,7 +153,7 @@ export class RegisterComponent implements OnInit {
   onRegister() {
     this.loading = true;
     console.log(this.mainForm.get('personalInformationForm.firstName')?.value);
-    this.auth.register({firstName:"dfdgddddd", lastName:"dmddddddfg", userName:"dfdfhfdklldddg", password:"Password@123", email:"telkldddtegjgjgt@hdhdh.com"}).pipe(
+    this.auth.register({firstName:"Hervé", lastName:"TEGUIA", userName:this.mainForm.get('credentialsForm.email')?.value, password:this.mainForm.get('credentialsForm.password')?.value, email:this.mainForm.get('credentialsForm.email')?.value}).pipe(
       delay(2000),
       take(1),
       tap(currentUser => {

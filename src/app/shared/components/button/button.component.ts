@@ -13,6 +13,7 @@ export class ButtonComponent {
   @Input() color: string = "";
   @Input() cssClass: string = "";
   @Input() disabled: boolean = false;
+  @Input() loading: boolean = false;
 
   @Output() click = new EventEmitter();
 

@@ -14,7 +14,7 @@
                   <div class="account-form" [formGroup]="mainForm" @formTrigger>
                     <p class="login-box-msg">Connectez-vous pour démarrer votre session</p>
                     <div class="input-group mb-3">
-                      <input type="email" class="form-control" placeholder="Email" formControlName="email">
+                      <input type="email" class="form-control" placeholder="Email" formControlName="email" >
                       <div class="input-group-append">
                         <div class="input-group-text">
                           <span class="fas fa-envelope"></span>
@@ -22,7 +22,7 @@
                       </div>
                     </div>
                     <div class="input-group mb-3">
-                      <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                      <input type="password" class="form-control" placeholder="Password" formControlName="password" >
                       <div class="input-group-append">
                         <div class="input-group-text">
                           <span class="fas fa-lock"></span>
@@ -33,7 +33,7 @@
                       <p class="text-danger">Login ou mot de passe incorrect</p>
                     </div>
                     <div class="input-group mb-3">
-                      <app-button style="width:100%"  label="Se connecter" color="primary" cssClass="btn btn--primary btn-block" (click)="onLogin()"></app-button>
+                      <app-button style="width:100%" [disabled]="loading" [loading]="loading" label="Se connecter" color="primary" cssClass="btn btn--primary btn-block" (click)="onLogin()"></app-button>
                     </div>
                     <div class="input-group mb-3">
                       <p class="mb-1">

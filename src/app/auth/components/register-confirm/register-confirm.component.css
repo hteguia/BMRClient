@@ -1,0 +1,71 @@
+/*::ng-deep body  {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("../../../../assets/img/bg.svg")!important;
+}*/
+
+.account-body  {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    background-image: url("../../../../assets/img/bg.svg")!important;
+}
+
+.container-loading {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #F28E0B;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+p {
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.title{
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    line-height: 1.2em;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    max-width: 55em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    align-items: left;
+}
+

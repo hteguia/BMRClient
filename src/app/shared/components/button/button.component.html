@@ -4,7 +4,9 @@
     class="btn" 
     ngClass={{cssClass}}
     (click)="onClick($event)"
-    [disabled]="disabled">
-    <mat-icon *ngIf="icon">{{icon}}</mat-icon>                 
+    [disabled]="disabled" 
+    [class.spinner]="loading">
+    <mat-icon *ngIf="icon">{{icon}}</mat-icon>               
     {{label}}
+    
 </button>

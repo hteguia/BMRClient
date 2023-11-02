@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     this.loading = true;
+    this.showErrorMessage = false;
     this.auth.login(this.mainForm.value).pipe(
-      delay(2000),
       take(1),
       tap(currentUser => {
         this.loading = false;

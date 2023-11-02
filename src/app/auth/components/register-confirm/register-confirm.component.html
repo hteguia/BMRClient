@@ -1,0 +1,18 @@
+<div class="account-layout">
+    <div class="account-body">
+        <div class="container-loading" *ngIf="loading">          
+            <div class="loader"></div>
+            <p>Votre compte est en cours d'activation.</p>
+            <p>Veuillez patienter...</p>
+        </div>
+        <div class="container" *ngIf="!loading">
+            <img src="../../../../assets/img/logo_bmr.png" alt="Image" height="200px" width="200px">
+            <p class="title">Félicitations, votre compte a été confirmé ! Cliquez sur le bouton ci-dessous pour vous rendre à la page de connexion.</p>
+            <div style="width:200px">
+                <app-button  label="Se connecter" color="primary" cssClass="btn btn--primary btn-block" (click)="OnLogin()"></app-button>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
