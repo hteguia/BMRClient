@@ -28,7 +28,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), AuthRoutingModule],
+  imports: [RouterModule.forRoot(routes, {useHash: true}), AuthRoutingModule],
   exports: [RouterModule],
   providers:[AuthGuard]
 })

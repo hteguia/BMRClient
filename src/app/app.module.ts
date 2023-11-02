@@ -10,10 +10,11 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './state/root-reducer';
 
-import { registerLocaleData } from '@angular/common';
+import { LocationStrategy, registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
+import { HashLocationStrategy } from '@angular/common';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -33,6 +34,7 @@ registerLocaleData(localeFr, 'fr');
     }, {}),
   ],
   providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
