@@ -28,7 +28,7 @@ jobs:
       run: npm run build
       
     - name: Zip Folder
-      run: zip -r release.zip ./dist/
+      run: zip -r release.zip ./dist/*
 
     - name: Zip Folder
       run: mkdir upload
