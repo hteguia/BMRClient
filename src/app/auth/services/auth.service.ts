@@ -41,6 +41,7 @@ export class AuthService{
     setUserData(user: {email:string, firstName:string, lastName:string, role:string, createAt: string, imageUrl:string}){
       localStorage.setItem('user_data', JSON.stringify(user));
     }
+    
 
     get currentUser(){
       return JSON.parse(this.userData)

@@ -10,13 +10,8 @@ const routes: Routes = [
   {
       path: '', component:LayoutComponent, canActivate:[AuthGuard],
       children:[
-      {path: 'users', loadChildren: ()=>import('./user/user.module').then(m=>m.UserModule)},
-      {path: 'dashboard', loadChildren: ()=>import('./dashboard/dashboard.module').then(m=>m.DashboardModule)},
-      {path: 'service-request', loadChildren: ()=>import('./service-request/service-request.module').then(m=>m.ServiceRequestModule)},
-      {path: 'service-request-processing', loadChildren: ()=>import('./service-request-processing/service-request-processing.module').then(m=>m.ServiceRequestProcessingModule)},
-      {path: 'permissions', loadChildren: ()=>import('./permission/permission.module').then(m=>m.PermissionModule)},
-      {path: 'roles', loadChildren: ()=>import('./role/role.module').then(m=>m.RoleModule)},
-      {path: 'customers', loadChildren: ()=>import('./customer/customer.module').then(m=>m.CustomerModule)},
+      { path: 'dashboard', loadChildren: ()=>import('./dashboard/dashboard.module').then(m=>m.DashboardModule) },
+      { path: 'sms', loadChildren:()=>import('./sms/sms.module').then(m=>m.SmsModule) },
       {
         path: '**',
         redirectTo: 'dashboard',
@@ -28,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true}), AuthRoutingModule],
+  imports: [RouterModule.forRoot(routes), AuthRoutingModule],
   exports: [RouterModule],
   providers:[AuthGuard]
 })

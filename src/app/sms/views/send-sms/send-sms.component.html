@@ -1,0 +1,92 @@
+<div class="row" [formGroup]="mainForm">
+    <div class="col-md-8">
+        <div class="card" >
+            <div class="card-header"><span class="card-title">Envoyer un message</span></div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                       <div class="form-group">
+                            <label for="exampleInputPassword1">Titre de la campagne</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Libelle..." formControlName="campagneTitle"  />
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>
+                       </div>
+                       <div class="form-group">
+                        <label for="exampleInputPassword1">Nom de l'expéditeur</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select  placeholder="Choisir un delai de rendu souhaité" formControlName="senderName">
+                                <mat-option *ngFor="let option of senderNames" [value]="option.code">{{ option.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>               
+                       </div> 
+                       <div class="form-group">
+                            <label for="exampleInputPassword1">Message</label>
+                            <mat-form-field appearance="outline">
+                                <textarea rows="15" matInput  placeholder="Contenu de message..." [formControl]="messageCtrl"  ></textarea>
+                                <div class="count-character">
+                                    <small>{{characterCounter$ | async}} Caractères / {{messageCounter$ | async }} SMS</small>
+                                </div>
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>
+                           
+                       </div>   
+                       <div class="form-group">
+                        <label for="exampleInputPassword1">Date d'envoi (Optionnel)</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput [matDatepicker]="picker" placeholder="DD/MM/YYYY" formControlName="sendDate" >
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>   
+                        </div>      
+                      
+                    </div>
+                   
+                </div> 
+            </div>
+            <div class="card-footer">
+                <mat-card-actions >
+                    <button mat-flat-button class="btn--primary" (click)="onSubmitForm()" [disabled]="!mainForm.valid"  >Envoyer</button>
+                </mat-card-actions>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <app-balance-sms></app-balance-sms>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Saisir/Importer les contacts <br/><small>NB: Placer une virgule entre deux numéros</small></span></div>
+            <div class="card-body">
+                <mat-form-field appearance="outline">
+                    <textarea rows="5" matInput  placeholder="679799697,693930762..." [formControl]="numbersCtrl"></textarea>
+                </mat-form-field>
+                <app-file-input [formControl]="contentFileCtrl" [upload]="true" (onUploadFinished)="calculateCost($event)"></app-file-input> 
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header"><span class="card-title">Détails des contacts</span></div>
+            <div class="card-body">
+                <div class="loader" *ngIf="costLoading"></div>
+                <mat-list>
+                    <mat-list-item>
+                        Total numéros <span class="badge badge-dark badge-pill" id="total_mdn">{{(smsCost$ | async)?.totalNumber || 0}}</span>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        Numéros valide <span class="badge badge-secondary badge-pill" id="total_mdn">{{(smsCost$ | async)?.validNumber || 0}}</span>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        Numéro invalide <span class="badge badge-danger badge-pill" id="total_mdn">{{(smsCost$ | async)?.invalidNumber || 0}}</span>
+                    </mat-list-item>                   
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        Cout de la campagne <span class="badge badge-primary badge-pill" id="total_mdn">{{(smsCost$ | async)?.cost || 12000}}</span>
+                    </mat-list-item>
+                  </mat-list>
+
+            </div>
+        </div>
+        
+    </div>
+</div>

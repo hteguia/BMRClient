@@ -16,6 +16,8 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatChipsModule} from '@angular/material/chips';
 import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({  
     exports:[
@@ -36,6 +38,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatChipsModule,
         MatTooltipModule,
         MatStepperModule,
+        MatTableModule,
+        MatButtonToggleModule,
     ]
 })
 

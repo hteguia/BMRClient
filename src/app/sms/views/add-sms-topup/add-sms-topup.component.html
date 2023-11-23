@@ -1,0 +1,141 @@
+<div class="card" [formGroup]="mainForm">
+    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-th mr-1"></i>
+            Nouvelle recharge
+        </h3>
+        <div class="card-tools">        
+          <button type="button" class="btn btn--close btn-sm" data-card-widget="remove">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-7">
+              <div class="card">
+                <div class="card-body">
+                    <input formControlName="billingId" hidden [ngModel]="(billings$ | async)!.length == 0 ?  0 : (billings$ | async)![0].id"/>
+                    <div class="form-group mb-2">
+                        <label for="exampleInputPassword1">Montant</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Renseigner le montant de votre recharge (en dollar)" formControlName="amount" />
+                            <mat-error>{{ getFormControlErrorText(amountCtrl) }}</mat-error>
+                        </mat-form-field>               
+                    </div> 
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Choisir un mode de paiement</label>
+                        <mat-radio-group class="example-radio-group" [formControl]="meanPaymentCtrl">
+                            <mat-label>
+                                <mat-radio-button class="female-radio" value="M" >
+                                    <div class="img-list">
+                                        <img  alt="" src="https://ik.imagekit.io/sql4gb61z/momo-round.png?updatedAt=1700291949756" class="drinkcard-cc"/>
+                                        <img  alt="" src="https://ik.imagekit.io/sql4gb61z/om-round.png?updatedAt=1700291950058" class="drinkcard-cc"/>
+                                        <img  alt="" src="https://ik.imagekit.io/sql4gb61z/eu-round.png?updatedAt=1700291950092" class="drinkcard-cc"/>
+                                    </div>                                  
+                                </mat-radio-button>
+                            </mat-label>
+                            <mat-label >
+                                <mat-radio-button class="female-radio" value="F" >
+                                    <div class="img-list">
+                                        <img  alt="" src="https://ik.imagekit.io/sql4gb61z/momo-round.png?updatedAt=1700291949756" class="drinkcard-cc">
+                                        <img  alt="" src="https://ik.imagekit.io/sql4gb61z/momo-round.png?updatedAt=1700291949756" class="drinkcard-cc">
+                                    </div>                                 
+                                </mat-radio-button>
+                            </mat-label>
+                        </mat-radio-group>
+                    </div>
+                    <div class="form-group mb-2" @fade *ngIf="momoCheck$ | async">
+                        <label for="exampleInputPassword1">Montant</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput  placeholder="Renseigner le numéro de téléphone" formControlName="number" />
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>               
+                    </div> 
+                </div>
+              </div>            
+             </div>
+            <div class="col-md-5">
+                <div class="card" *ngIf="!(billings$ | async)!.length">
+                    <div class="card-header">adresse de facturation</div>
+                    <div class="card-body form-row" [formGroup]="billingGroup">
+                        <div class="form-group  col-md-6">
+                            <label for="exampleInputPassword1">Noms</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Noms de facturation" formControlName="lastName"/>
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>               
+                        </div>
+                        <div class="form-group  col-md-6">
+                            <label for="exampleInputPassword1">Prenoms</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Prénoms de facturation" formControlName="firstName" />
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>               
+                        </div>                      
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputPassword1">Compagnie</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Compagnie" formControlName="compagny"/>
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>               
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputPassword1">Adresse</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Adresse" formControlName="address" />
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>               
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1">Ville</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Ville" formControlName="city" />
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>               
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1">Pays</label>
+                            <mat-form-field appearance="outline">
+                                <input matInput  placeholder="Pays" formControlName="country" />
+                                <mat-error>Ce champs est obligatoire</mat-error>
+                            </mat-form-field>               
+                        </div>
+                    </div>
+                </div> 
+                <div class=" d-flex align-items-stretch flex-column" *ngIf="(billings$ | async)!.length">
+                    <div class="card bg-light d-flex flex-fill" *ngFor="let billing of billings$ | async, let index">
+                        <div class="card-header text-muted border-bottom-0">
+                            Adresse de facturation
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="lead"><b>{{billing.firstName}} {{billing.lastName}}</b></h2>
+                                    <p class="text-muted text-sm"><b>{{billing.compagny}} </b></p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{billing.address}} {{billing.city}} {{billing.country}}</li>
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone: + 800 - 12 12 23 52</li>
+                                    </ul>
+                                </div>                   
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                                <a href="#" class="btn btn-sm ">
+                                    <i class="fas fa-edit"></i>
+                                </a>                   
+                            </div>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+        </div>       
+    </div>
+    <div class="card-footer">
+        <mat-card-actions >
+            <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
+        </mat-card-actions>
+    </div>
+</div>
+

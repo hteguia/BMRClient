@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
 import { DxDataGridComponent } from "devextreme-angular";
 import { Observable } from "rxjs";
-import { ServiceRequest } from "src/app/service-request/models/service-request.model";
 import { DxiDataGridColumn } from "devextreme-angular/ui/nested/base/data-grid-column-dxi";
 import { DataGridColumn } from "../../models/data-grid-column.model";
 
@@ -30,8 +29,7 @@ export class DataGridComponent implements OnInit {
     showPageSizeSelector = true;
     showInfo = true;
     showNavButtons = true;
-    
-    customers!: Observable<ServiceRequest[]>;
+
     dataGridColumns: Array<any> = [];
 
     ngOnInit(): void {

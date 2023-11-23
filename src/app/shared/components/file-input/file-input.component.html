@@ -3,24 +3,10 @@
   <span class="file-msg">{{file ? file.name : 'or drag and drop file here' }}</span>
   <input class="file-input" type="file">
 </div>
+<app-progress [progress]="progress"></app-progress>
+<small *ngIf="uploaded && message.length" class="label-sucess">{{message}}</small>
+<small *ngIf="!uploaded && message.length" class="label-error">{{message}}</small>
 
 
 
-<!-- <div >
-    <mat-toolbar >
-      <input matInput [value]="fileName"/>
 
-      <button
-        mat-flat-button
-        color="primary">
-        Charger le fichier
-      </button>
-    </mat-toolbar>
-
-    <input class="col-md-12"
-      type="file"
-      id="fileInput"
-      (change)="selectFile($event)"
-      name="fileInput"
-    />
-  </div> -->

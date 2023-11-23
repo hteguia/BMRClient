@@ -51,3 +51,25 @@
 .file-input:focus {
   outline: none;
 }
+
+.mat-toolbar-single-row {
+  height: auto !important;
+  background: transparent;
+  padding: 0;
+}
+
+.progress-bar {
+  padding: 0;
+}
+
+.progress {
+  width: 50px;
+}
+
+.label-sucess{
+  color: #1e7e34 !important;
+}
+
+.label-error{
+  color: #dc3545;
+}

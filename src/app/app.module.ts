@@ -34,7 +34,6 @@ registerLocaleData(localeFr, 'fr');
     }, {}),
   ],
   providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy},
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
