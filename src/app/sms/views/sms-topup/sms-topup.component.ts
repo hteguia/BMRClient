@@ -5,44 +5,12 @@ import { Observable, map } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { Topup } from '../../models/topup.model';
+import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 
 @Component({
   selector: 'app-sms-topup',
   templateUrl: './sms-topup.component.html',
-  styleUrls: ['./sms-topup.component.css'],
-  animations:[
-    trigger('gridFilter', [
-      transition('void => *',
-      [
-        style({
-          transform: 'scale(1)',
-          'background-color': 'white',
-          'z-index': 1
-        }),
-        animate('300ms ease-out', style({
-          transform: 'translateY(-20)',
-          opacity: 1,
-          'background-color': 'white',
-          'z-index': 1
-        }))
-      ]),
-      transition('* => void',
-      [
-        style({
-          transform: 'translateY(0)',
-          opacity: 1,
-          'background-color': 'rgb(201, 157, 242)',
-          'z-index': 1
-        }),
-        animate('300ms ease-out', style({
-          transform: 'translateY(-20%)',
-          opacity: 0,
-          'background-color': 'white',
-          'z-index': 1
-        }))
-      ])
-    ])
-  ]
+  styleUrls: ['./sms-topup.component.css']
 })
 export class SmsTopupComponent {
   columns: DataGridColumn[] = [
@@ -59,13 +27,18 @@ export class SmsTopupComponent {
   topups$!: Observable<Topup[]>;
 
   constructor(private route: ActivatedRoute,  
-    private router: Router){  
+    private router: Router, private breadcrumpService: BreadcrumpService){  
 }
 
 ngOnInit(): void {
   this.topups$ = this.route.data.pipe(
     map(data => data['topups'])
   );  
+
+  this.breadcrumpService.setBreadcrump("Liste des recharges", [
+    { title:"Home", link:"/" }, 
+    { title:"Recharge", link:"/" }
+  ]);
 }
 
 onFilterDataGrid(){
@@ -73,7 +46,7 @@ onFilterDataGrid(){
 }
 
 onAddNewCustomer(){
-  this.router.navigateByUrl('/sms/add-topup');
+  this.router.navigateByUrl('/sms/topup/add');
 }
 
 onRowClick(event: any){

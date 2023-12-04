@@ -3,14 +3,6 @@
         <div class="margin">
             <div class="btn-group">
                 <app-button label="Nouvelle recharge" icon="add" color="primary" cssClass="btn--primary" (click)="onAddNewCustomer()"></app-button>
-                <app-button  label="Filtrer" icon="filter_list" color="primary" cssClass="btn--default" (click)="onFilterDataGrid()"></app-button>
-                <app-data-grid-filter 
-                @gridFilter
-                *ngIf="showFilterModel"
-                (applyFilter)="onFilterDataGrid()"
-                (cancelFilter)="onFilterDataGrid()"
-                >
-            </app-data-grid-filter>   
             </div>
                                            
         </div> 

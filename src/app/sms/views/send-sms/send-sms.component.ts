@@ -1,4 +1,3 @@
-import { HttpClient, HttpEvent, HttpEventType, HttpResponse} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,8 +7,7 @@ import { requiredFileTypeValidator } from 'src/app/shared/validators/required-fi
 import { SmsService } from '../../services/sms.service';
 import { SmsCostModel } from '../../models/sms-cost.model';
 import { numbersValidator } from '../../validators/numbers.validator';
-import { Store } from '@ngrx/store';
-import { changeBreadcrump } from 'src/app/state/root-action';
+import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 
 
 export interface PeriodicElement {
@@ -18,21 +16,6 @@ export interface PeriodicElement {
   weight: number;
   symbol: string;
 }
-
-
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-send-sms',
@@ -62,7 +45,9 @@ export class SendSmsComponent implements OnInit{
 
   constructor(private route: ActivatedRoute, 
     private formBuilder: FormBuilder,
-    private router: Router, private smsService: SmsService, private store: Store){
+    private router: Router, 
+    private smsService: SmsService, 
+    private breadcrumpService: BreadcrumpService){
 
     }
 
@@ -70,7 +55,11 @@ export class SendSmsComponent implements OnInit{
       this.initFormControls();
       this.initMainForm();
       this.initFormObservables();
-      this.setBreadcrump();
+      this.breadcrumpService.setBreadcrump("Envoyer SMS", [
+        { title:"Home", link:"/" }, 
+        { title:"Envoyer SMS", link:"/" }
+      ]);
+  
     }
  
     initMainForm(){
@@ -133,15 +122,5 @@ export class SendSmsComponent implements OnInit{
         map(c=> c),
         tap(()=>this.costLoading = false)
       )
-    }
-    private setBreadcrump():void{
-      this.store.dispatch(changeBreadcrump(
-        {
-          title: "Envoyer SMS", 
-          links:[
-            { title:"Home", link:"/" }, 
-            { title:"Envoyer SMS", link:"/" }
-          ]
-        }));
     }
 }

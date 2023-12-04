@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  Event,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router
+} from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
 
@@ -10,9 +18,28 @@ import { environment } from 'src/environments/environment';
 export class MenuComponent implements OnInit {
   title = 'angular-client';
   appName = environment.appName;
-
+  loading = false;
   currentUser: any;
- constructor(private authService: AuthService){}
+ constructor(private authService: AuthService, private router: Router){
+  this.router.events.subscribe((event: Event) => {
+    switch (true) {
+      case event instanceof NavigationStart: {
+        this.loading = true;
+        break;
+      }
+
+      case event instanceof NavigationEnd:
+      case event instanceof NavigationCancel:
+      case event instanceof NavigationError: {
+        this.loading = false;
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+  });
+ }
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
   }

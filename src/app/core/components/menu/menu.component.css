@@ -1,3 +1,8 @@
 a.nav-link.active{
     background-color: var(--primary) !important;
 }
+
+.mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-color: #fd7e14;
+    --mdc-linear-progress-track-color: rgba(63, 81, 181, 0.25);
+}

@@ -10,7 +10,7 @@ import { TopupResolver } from './resolvers/topup.resolver';
 const routes: Routes = [
   { path: 'send', component: SendSmsComponent },
   { path: 'topup', component: SmsTopupComponent, resolve: { topups: TopupResolver } },
-  { path: 'add-topup', component: AddSmsTopupComponent, resolve: { billings: UserBillingsResolver }  },
+  { path: 'topup/add', component: AddSmsTopupComponent, resolve: { billings: UserBillingsResolver }  },
 ];
   
 @NgModule({

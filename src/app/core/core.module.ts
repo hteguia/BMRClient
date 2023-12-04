@@ -11,6 +11,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { AuthGuard } from "./guards/auth.guard";
 import { LayoutComponent } from "./components/layout/layout.component";
+import { BreadcrumpService } from "./services/breadcrump.service";
 
 @NgModule({
     declarations: [
@@ -37,7 +38,8 @@ import { LayoutComponent } from "./components/layout/layout.component";
       LayoutComponent,
     ],
     providers: [
-      AuthGuard
+      AuthGuard,
+      BreadcrumpService
     ]
     
 })

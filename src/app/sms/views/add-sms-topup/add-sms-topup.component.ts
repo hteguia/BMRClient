@@ -59,7 +59,6 @@ export class AddSmsTopupComponent implements OnInit {
   }
   
   onSubmitForm(){
-    console.log(this.mainForm.value);
     this.loading = true;
     this.smsService.saveTopup(this.mainForm.value).pipe(
       tap(saved => {
@@ -80,6 +79,7 @@ export class AddSmsTopupComponent implements OnInit {
       number: this.numberCtrl,
       billing: this.billingGroup,
       billingId: this.formBuilder.control(''),
+      meanPayment: this.meanPaymentCtrl,
     });
   }
 
