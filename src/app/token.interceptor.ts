@@ -3,14 +3,16 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpErrorResponse
 } from '@angular/common/http';
 import { AuthService } from './auth/services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-  constructor(public auth: AuthService) {}
+  constructor(public auth: AuthService, private router: Router) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
     request = request.clone({
@@ -19,5 +21,19 @@ export class TokenInterceptor implements HttpInterceptor {
       }
     });
     return next.handle(request);
+    /*
+    return next.handle(request).pipe(tap(()=>{ },
+        (err: any) => {
+          console.log("return intercep "+JSON.stringify(err));
+          if (err instanceof HttpErrorResponse) {
+            console.log("return intercep "+err);
+            if (err.status !== 401) {
+            return;
+            }
+            this.router.navigate(['auth/login']);
+          }
+        }
+      )
+    );*/
   }
 }

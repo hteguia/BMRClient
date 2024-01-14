@@ -18,6 +18,7 @@ import {TooltipPosition, MatTooltipModule} from '@angular/material/tooltip';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({  
     exports:[
@@ -40,6 +41,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
         MatStepperModule,
         MatTableModule,
         MatButtonToggleModule,
+        MatDialogModule,
     ]
 })
 

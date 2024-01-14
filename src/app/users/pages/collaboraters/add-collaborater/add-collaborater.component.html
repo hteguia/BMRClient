@@ -1,0 +1,57 @@
+<div class="card" [formGroup]="mainForm">
+    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-th mr-1"></i>
+            Nouveau collaborateur
+        </h3>
+        
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form-group mb-2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Rôle</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select  placeholder="Choisir le rôle du collaborateur" formControlName="role">
+                                <mat-option *ngFor="let option of listRoles$ | async" [value]="option.id">{{ option.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>               
+                       </div> 
+                    <label for="exampleInputPassword1">Noms</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner le noms du collaborateur" formControlName="lastName" />
+                        <mat-error></mat-error>
+                    </mat-form-field>               
+                </div>
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Prénoms</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner le prénoms du collaborateur" formControlName="firstName"  />
+                        <mat-error></mat-error>
+                    </mat-form-field>               
+                </div> 
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Téléphone</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner le numéro de téléphone" formControlName="phoneNumber"  />
+                        <mat-error></mat-error>
+                    </mat-form-field>               
+                </div>
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Email</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner l'adresse email du collaborateur" type="email" formControlName="email"  />
+                        <mat-error></mat-error>
+                    </mat-form-field>               
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <mat-card-actions >
+            <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
+        </mat-card-actions>
+    </div>
+</div>

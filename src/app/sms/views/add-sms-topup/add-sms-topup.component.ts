@@ -1,11 +1,12 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, startWith, tap } from 'rxjs';
 import { SmsService } from '../../services/sms.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Billing } from '../../models/billing.model';
+import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 
 @Component({
   selector: 'app-add-sms-topup',
@@ -25,6 +26,9 @@ import { Billing } from '../../models/billing.model';
 })
 export class AddSmsTopupComponent implements OnInit {
 
+
+
+  
   loading = false; 
   
   mainForm!: FormGroup;
@@ -40,7 +44,7 @@ export class AddSmsTopupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private smsService: SmsService,
-    private authservice: AuthService){
+    private authservice: AuthService, private breadcrumpService: BreadcrumpService){
   }
     
   ngOnInit(): void {
@@ -51,6 +55,11 @@ export class AddSmsTopupComponent implements OnInit {
       tap(data=>this.setBillingValidator(data['billings'].length === 0)),
       map(data => data['billings']),
     ); 
+
+    this.breadcrumpService.setBreadcrump("Recharge", [
+      { title:"Home", link:"/" }, 
+      { title:"Recharge", link:"/" }
+    ]);
     
   }
 
@@ -79,7 +88,7 @@ export class AddSmsTopupComponent implements OnInit {
       number: this.numberCtrl,
       billing: this.billingGroup,
       billingId: this.formBuilder.control(''),
-      meanPayment: this.meanPaymentCtrl,
+      meanOfPaid: this.meanPaymentCtrl,
     });
   }
 
@@ -101,7 +110,7 @@ export class AddSmsTopupComponent implements OnInit {
   private initFormObservables() {
     this.momoCheck$ = this.meanPaymentCtrl.valueChanges.pipe(
       startWith(this.meanPaymentCtrl.value), 
-      map((val:string)=>val === "M"),
+      map((val:string)=>val === "MOBILE_MONEY"),
       tap(showEmailCtrl => this.setNumbervalidators(showEmailCtrl)),
     )
   }
