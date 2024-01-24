@@ -12,6 +12,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { AuthGuard } from "./guards/auth.guard";
 import { LayoutComponent } from "./components/layout/layout.component";
 import { BreadcrumpService } from "./services/breadcrump.service";
+import { LogService } from "./services/log.service";
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import { BreadcrumpService } from "./services/breadcrump.service";
     ],
     providers: [
       AuthGuard,
-      BreadcrumpService
+      BreadcrumpService,
+      LogService
     ]
     
 })

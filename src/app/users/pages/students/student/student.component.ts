@@ -4,11 +4,28 @@ import { StudentModel } from '../../../models/student.model';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.css']
+  styleUrls: ['./student.component.css'],
+  animations: [
+    trigger('fade', [
+      state('hide', style({
+        opacity: 0,
+      })),
+      state('show', style({
+        opacity: 1,
+      })),
+      transition('hide => show', [
+        animate('0.5s')
+      ]),
+      transition('show => hide', [
+        animate('0.5s')
+      ])
+    ])
+  ]
 })
 export class StudentComponent {
   columns: DataGridColumn[] = [
@@ -22,6 +39,8 @@ export class StudentComponent {
   ];
   selectedRows = [];
   listItemAnimateState = 'default';
+  buttonItemAnimateState: 'hide' | 'show' = 'hide';
+  displayUpdateButton = false;
 
   showFilterModel = false;
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
@@ -6,6 +6,7 @@ import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CollaboraterModel } from 'src/app/users/models/collaborater.model';
 import { CollaboraterService } from 'src/app/users/services/collaborater.service';
+import { LogService } from 'src/app/core/services/log.service';
 
 @Component({
   selector: 'app-collaborater',
@@ -44,6 +45,8 @@ export class CollaboraterComponent {
 
   topups$!: Observable<CollaboraterModel[]>;
 
+  private logService = inject(LogService);
+
   constructor(private route: ActivatedRoute,  
     private router: Router, private breadcrumpService: BreadcrumpService,
     private collaboraterService: CollaboraterService){  
@@ -74,6 +77,7 @@ onUpdateItem(){
   if(this.selectedRows.length){
     console.log(this.selectedRows[0]);
     this.collaboraterService.getCollaborater(this.selectedRows[0]).subscribe(result=>{
+      this.logService.log(result);
       this.router.navigateByUrl('/users/collaborater/add', { state: result });
     });
   }

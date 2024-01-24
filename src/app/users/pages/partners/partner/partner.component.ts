@@ -34,7 +34,7 @@ import { AddPartnerComponent } from '../add-partner/add-partner.component';
 export class PartnerComponent {
   columns: DataGridColumn[] = [
     { dataField: "name",caption:"Libelle", dataType:"string", visible:true },
-    { dataField: "etudiant",caption:"Nombre d'étudiants", dataType:"string", visible:true },
+    { dataField: "numberOfStudents",caption:"Nombre d'étudiants", dataType:"string", visible:true },
   ];
   selectedRows = [];
   showFilterModel = false;
@@ -88,8 +88,7 @@ export class PartnerComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      //Reload data
-      console.log('The dialog was closed')
+      this.topups$ = this.partnerService.getAllPartner();
     });
   }
 

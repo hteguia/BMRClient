@@ -1,7 +1,8 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Inject, inject } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { Observable, tap } from 'rxjs';
+import { LogService } from 'src/app/core/services/log.service';
 import { PartnerModel } from 'src/app/users/models/partner.model';
 import { PartnerService } from 'src/app/users/services/partner.service';
 
@@ -17,10 +18,13 @@ export interface DialogData {
   styleUrls: ['./add-partner.component.css'],
 })
 export class AddPartnerComponent {
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, 
   public dialogRef: MatDialogRef<AddPartnerComponent>,
   private formBuilder: FormBuilder, private partnerService: PartnerService) {}
 
+  private logService = inject(LogService);
+  
   mainForm!: FormGroup;
   loading = false; 
   title!: string;
@@ -39,20 +43,41 @@ export class AddPartnerComponent {
   }
 
   onSubmitForm(){
-    console.log(this.mainForm.value);
     this.loading = true;
-    this.action$ = this.mainForm.value.id ? this.partnerService.addPartner(this.mainForm.value) :
+    this.action$ = this.mainForm.value.id === null ? this.partnerService.addPartner(this.mainForm.value) :
                                             this.partnerService.updatePartner(this.mainForm.value);
-    this.action$.subscribe(result=>{
-      this.loading = false;
-      if(result) {
-         this.resetForm();
-         this.dialogRef.close();
+    this.action$.subscribe(
+      (response) =>{
+        this.loading = false;
+        this.resetForm();
+        this.dialogRef.close();
+      },
+      (error) =>{
+        Object.keys(error.error).forEach(prop => {
+          const formControl = this.mainForm.get('name');
+          //this.logService.log(formControl)
+          if (formControl) {
+            // activate the error message
+            formControl.setErrors({
+              serverError: error.error[prop]
+            });
+          }
+        });
       }
-      else{
-        console.error('Echec de l\'enregistrement');
-      }
-    });
+    )
+  }
+
+  getFormControlErrorText(ctrl: AbstractControl){
+    if(ctrl.hasError('required')){
+      return 'Ce champs est obligatoire';
+    }
+    else if (ctrl.hasError('serverError')) {
+      return ctrl.errors?.['serverError'];
+    }
+    else
+    {
+      return 'Ce champs contient une erreur';
+    }
   }
 
   private resetForm(){

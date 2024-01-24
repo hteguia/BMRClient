@@ -13,13 +13,14 @@ export class DataGridComponent implements OnInit {
 
     @Input() columns!: DataGridColumn[];
     @Input() dataSource!: any;
+    @Input() showCheckBox: 'always' | 'never' = 'never';
     @Output() selectedRow = new EventEmitter<[]>();
     @Output() rowClick = new EventEmitter<any>();
 
     @ViewChild("gridContainer") gridContainer!: DxDataGridComponent;
 
     allMode = 'allPages';
-    checkBoxesMode = 'always';
+    //checkBoxesMode = 'never';
     allowedPageSizes = [5, 10, 'all'];
     displayModes = [
         { text: "Display Mode 'full'", value: 'full' }, 

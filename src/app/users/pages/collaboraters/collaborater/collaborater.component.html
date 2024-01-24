@@ -11,6 +11,7 @@
     <div class="card-body">
         <app-data-grid 
             [columns]="columns" 
+            showCheckBox="always"
             [dataSource]="topups$ | async"
             (selectedRow)="onSelectRow($event)"
             (rowClick)="onRowClick($event)">

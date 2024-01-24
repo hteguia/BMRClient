@@ -10,32 +10,6 @@ export class DocumentTypeService {
     constructor(private http: HttpClient) {}
 
     getAllDocumentType(): Observable<DocumentTypeModel[]> {
-        return of([
-            {
-                id: 1,
-                name:"ANALYSE STATISTIQUES DES DONNEES",
-                description:"Charger un fichier compressé contenant la base de données et le plan"
-            },
-            {
-                id: 2,
-                name:"COURS EN LIGNE/PRESENTIEL",
-                description:"Charger un fichier compressé contenant la base de données et le plan"
-            },
-            {
-                id: 3,
-                name:"DOCUMENT FINAL",
-                description:"Charger la dernière version du document final mémoire ou thèse en fic"
-            },
-            {
-                id: 4,
-                name:"MASQUE DE SAISIE",
-                description:"Charger la dernière version du questionnaire en fichier Word"
-            },
-            {
-                id: 5,
-                name:"PROTOCOLE DE RECHERCHE",
-                description:"Charger la dernière version du protocole en fichier Word"
-            }
-        ]);
+        return this.http.get<DocumentTypeModel[]>(`${environment.apiUrl}/v1/documenttype`);
     }
 }

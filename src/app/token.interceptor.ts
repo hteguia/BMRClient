@@ -7,7 +7,7 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 import { AuthService } from './auth/services/auth.service';
-import { Observable, tap } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -20,7 +20,29 @@ export class TokenInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.auth.token}`
       }
     });
-    return next.handle(request);
+    return next.handle(request).pipe(
+      catchError((error) => {
+        if (error instanceof HttpErrorResponse) {
+          if (error.error instanceof ErrorEvent) {
+              console.error("Error Event");
+          } else {
+              console.log(`error status : ${error.status} ${error.statusText}`);
+              switch (error.status) {
+                  case 401:      //login
+                      this.router.navigateByUrl("auth/login");
+                      break;
+                  case 403:     //forbidden
+                      this.router.navigateByUrl("/unauthorized");
+                      break;
+              }
+          } 
+      } else {
+          console.error("some thing else happened");
+      }
+      
+      return throwError(error);
+      })
+    );
     /*
     return next.handle(request).pipe(tap(()=>{ },
         (err: any) => {

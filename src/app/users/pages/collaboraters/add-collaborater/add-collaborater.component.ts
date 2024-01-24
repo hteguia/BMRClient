@@ -17,7 +17,6 @@ export class AddCollaboraterComponent {
   {
       if(this.router.getCurrentNavigation()){
         this.data = this.router.getCurrentNavigation()!.extras!.state;
-        console.log(this.data);
       }
   }
 
@@ -33,22 +32,18 @@ export class AddCollaboraterComponent {
   emailCtrl!: FormControl;
   roleCtrl!: FormControl;
 
+  action$!: Observable<any>;
+
   loading = false;
 
   ngOnInit(): void {
-    /*
-    this.route.data.subscribe(data => {
-      console.log("ssfsdfds "+data['firstName']);
-      this.data=data;
-    })
-    */
-  
     this.initFormControl();
     this.initMainForm();
 
     this.listRoles$ = this.route.data.pipe(
       map(data => data['data'])
     )
+    
     if(this.data){
       this.setFormData()
     }
@@ -57,6 +52,7 @@ export class AddCollaboraterComponent {
 
   private initMainForm(){
     this.mainForm = this.formBuilder.group({
+      id: this.idCtrl,
       firstName: this.firstNameCtrl,
       lastName: this.lastNameCtrl,
       phoneNumber: this.phoneNumberCtrl,
@@ -66,28 +62,45 @@ export class AddCollaboraterComponent {
   }
 
   private initFormControl(){
+    this.idCtrl = this.formBuilder.control(this.data?.id)
     this.firstNameCtrl = this.formBuilder.control(this.data?.firstName, Validators.required);
-    this.lastNameCtrl = this.formBuilder.control('', Validators.required);
-    this.phoneNumberCtrl = this.formBuilder.control('', Validators.required);
-    this.emailCtrl = this.formBuilder.control('', [Validators.required, Validators.email]);
-    this.roleCtrl = this.formBuilder.control('', Validators.required);
+    this.lastNameCtrl = this.formBuilder.control(this.data?.lastName, Validators.required);
+    this.phoneNumberCtrl = this.formBuilder.control(this.data?.phoneNumber, Validators.required);
+    this.emailCtrl = this.formBuilder.control(this.data?.email, [Validators.required, Validators.email]);
+    this.roleCtrl = this.formBuilder.control(this.data?.roleId, Validators.required);
   }
 
   onSubmitForm(){
-    console.log(this.mainForm.value);
-    this.collaboraterService.addCollaborater(this.mainForm.value).subscribe(result=>{
-      this.loading = false;
-      if(result) {
-         this.resetForm();
+    this.action$ = this.mainForm.value.id === null ? this.collaboraterService.addCollaborater(this.mainForm.value) :
+                                            this.collaboraterService.updateCollaborater(this.mainForm.value);
+
+    this.action$.subscribe(
+      (response) =>{
+        this.loading = false;
+        this.resetForm();
+      },
+      (error) =>{
+        Object.keys(error.error).forEach(prop => {
+          const formControl = this.mainForm.get('name');
+          //this.logService.log(formControl)
+          if (formControl) {
+            // activate the error message
+            formControl.setErrors({
+              serverError: error.error[prop]
+            });
+          }
+        });
       }
-      else{
-        console.error('Echec de l\'enregistrement');
-      }
-    });
+    )
   }
 
   private setFormData(){
-    this.firstNameCtrl.setValue('dsfsdf');
+    this.idCtrl.setValue(this.data?.id);
+    this.firstNameCtrl.setValue(this.data?.firstName);
+    this.lastNameCtrl.setValue(this.data?.lastName);
+    this.phoneNumberCtrl.setValue(this.data?.phoneNumber);
+    this.emailCtrl.setValue(this.data?.email);
+    this.roleCtrl.setValue(this.data?.roleId);
   }
 
   private resetForm(){

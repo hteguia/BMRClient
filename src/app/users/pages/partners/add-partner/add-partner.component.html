@@ -6,7 +6,8 @@
         <div class="form-group mb-2">
           <label for="exampleInputPassword1">Nom</label>
           <mat-form-field appearance="outline">
-              <input matInput placeholder="Renseigner le nom du partenaire" formControlName="name" />         
+              <input matInput placeholder="Renseigner le nom du partenaire" formControlName="name" />
+              <mat-error>{{ getFormControlErrorText(mainForm.get('name')!) }}</mat-error>
           </mat-form-field>               
       </div>  
       </div>

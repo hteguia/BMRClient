@@ -11,15 +11,6 @@ export class DocumentTemplateService {
     constructor(private http: HttpClient) {}
 
     getAllDocumentTemplate(): Observable<DocumentTemplateModel[]> {
-        return of([
-            {
-                id: 1,
-                name:"MODEL GRAPHIQUE.XLSX"
-            },
-            {
-                id: 2,
-                name:"NORMES BMR.DOCX"
-            }
-        ]);
+        return this.http.get<DocumentTemplateModel[]>(`${environment.apiUrl}/v1/documenttemplate`);
     }
 }

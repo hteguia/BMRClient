@@ -5,4 +5,5 @@ export interface CollaboraterModel{
     phoneNumber: string;
     email: string;
     role: string;
+    roleId: string;
 }
