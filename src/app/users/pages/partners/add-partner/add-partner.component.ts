@@ -9,7 +9,6 @@ import { PartnerService } from 'src/app/users/services/partner.service';
 export interface DialogData {
   data?: PartnerModel,
   title: string
-
 }
 
 @Component({
@@ -18,10 +17,11 @@ export interface DialogData {
   styleUrls: ['./add-partner.component.css'],
 })
 export class AddPartnerComponent {
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, 
   public dialogRef: MatDialogRef<AddPartnerComponent>,
-  private formBuilder: FormBuilder, private partnerService: PartnerService) {}
+  private formBuilder: FormBuilder, private partnerService: PartnerService) {
+
+  }
 
   private logService = inject(LogService);
   
@@ -44,20 +44,20 @@ export class AddPartnerComponent {
 
   onSubmitForm(){
     this.loading = true;
-    this.action$ = this.mainForm.value.id === null ? this.partnerService.addPartner(this.mainForm.value) :
-                                            this.partnerService.updatePartner(this.mainForm.value);
+    this.action$ = this.mainForm.value.id === null ? 
+                   this.partnerService.addPartner(this.mainForm.value) :
+                   this.partnerService.updatePartner(this.mainForm.value);
+                   
     this.action$.subscribe(
       (response) =>{
         this.loading = false;
         this.resetForm();
-        this.dialogRef.close();
+        this.dialogRef.close("RELOAD_GRID");
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get('name');
-          //this.logService.log(formControl)
           if (formControl) {
-            // activate the error message
             formControl.setErrors({
               serverError: error.error[prop]
             });

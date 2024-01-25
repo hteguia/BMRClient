@@ -14,7 +14,7 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Annuler</button>
+    <button mat-button mat-dialog-close="CLOSE_MODAL">Annuler</button>
     <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
   </mat-dialog-actions>
 </div>

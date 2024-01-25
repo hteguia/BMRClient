@@ -88,7 +88,9 @@ export class PartnerComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.topups$ = this.partnerService.getAllPartner();
+      if(result === "RELOAD_GRID"){
+        this.topups$ = this.partnerService.getAllPartner();
+      }
     });
   }
 

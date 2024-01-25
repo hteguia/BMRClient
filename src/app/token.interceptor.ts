@@ -22,10 +22,12 @@ export class TokenInterceptor implements HttpInterceptor {
     });
     return next.handle(request).pipe(
       catchError((error) => {
+        console.error("1 Error Event");
         if (error instanceof HttpErrorResponse) {
           if (error.error instanceof ErrorEvent) {
               console.error("Error Event");
           } else {
+            console.log(error);
               console.log(`error status : ${error.status} ${error.statusText}`);
               switch (error.status) {
                   case 401:      //login

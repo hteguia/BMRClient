@@ -2,8 +2,17 @@
     <div class="card-header">
         <div class="margin">
             <div class="btn-group">
-                <app-button label="Nouveau partenaire" icon="add" color="primary" cssClass="btn--primary" (click)="onAddPartner()"></app-button>
-                <app-button label="Modifier partenaire" [@fade]="displayUpdateButton ? 'show' : 'hide'" icon="add" color="primary" cssClass="btn--primary" (click)="onUpdatePartner()"></app-button>
+                <app-button label="Nouveau partenaire" 
+                            icon="add" color="primary" 
+                            cssClass="btn--primary" 
+                            (click)="onAddPartner()">
+                </app-button>
+                <app-button label="Modifier partenaire" 
+                            [@fade]="displayUpdateButton ? 'show' : 'hide'" 
+                            icon="add" 
+                            color="primary" 
+                            cssClass="btn--primary" 
+                            (click)="onUpdatePartner()"></app-button>
             </div>                                          
         </div> 
     </div>
