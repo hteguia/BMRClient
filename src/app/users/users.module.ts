@@ -16,6 +16,9 @@ import { RoleService } from './services/role.service';
 import { RoleResolver } from './resolvers/role.resolver';
 import { CollaboraterComponent } from './pages/collaboraters/collaborater/collaborater.component';
 import { UpdateCollaboraterComponent } from './pages/collaboraters/update-collaborater/update-collaborater.component';
+import { AddStudentComponent } from './pages/students/add-student/add-student.component';
+import { UserResolver } from './resolvers/user.resolver';
+import { UserService } from './services/user.service';
 
 
 
@@ -26,7 +29,8 @@ import { UpdateCollaboraterComponent } from './pages/collaboraters/update-collab
     CollaboraterComponent,
     AddCollaboraterComponent,
     AddPartnerComponent,
-    UpdateCollaboraterComponent
+    UpdateCollaboraterComponent,
+    AddStudentComponent
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,7 @@ import { UpdateCollaboraterComponent } from './pages/collaboraters/update-collab
       CollaboraterResolver,
       RoleService,
       RoleResolver
+
   ]
 })
 export class UsersModule { }

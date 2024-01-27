@@ -4,9 +4,9 @@
     <div class="row">
       <div class="col-md-12">
         <div class="form-group mb-2">
-          <label for="exampleInputPassword1">Nom</label>
+          <label for="exampleInputPassword1">Nom *</label>
           <mat-form-field appearance="outline">
-              <input matInput placeholder="Renseigner le nom du partenaire" formControlName="name" />
+              <input matInput placeholder="Renseigner le nom du partenaire" formControlName="name" autocomplete="off"/>
               <mat-error>{{ getFormControlErrorText(mainForm.get('name')!) }}</mat-error>
           </mat-form-field>               
       </div>  

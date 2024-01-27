@@ -1,0 +1,83 @@
+<div class="card" [formGroup]="mainForm">
+    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-th mr-1"></i>
+            Nouveau etudiant
+        </h3>       
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+               <div class="form-inline">
+                    <div class="form-group mb-2 col-md-6">
+                        <label for="exampleInputPassword1">Noms *</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Renseigner le noms de l'étudiant" formControlName="lastName" autocomplete="off"  />
+                            <mat-error></mat-error>
+                        </mat-form-field>               
+                    </div>
+                    <div class="form-group mb-2 col-md-6">
+                        <label for="exampleInputPassword1">Prénoms *</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Renseigner le prénoms de l'étudiant" formControlName="firstName" autocomplete="off"  />
+                            <mat-error></mat-error>
+                        </mat-form-field>               
+                    </div> 
+               </div>
+               <div class="form-inline">
+                    <div class="form-group mb-2 col-md-6">
+                        <label for="exampleInputPassword1">Téléphone *</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Renseigner le numéro de téléphone" formControlName="phoneNumber" autocomplete="off"  />
+                            <mat-error></mat-error>
+                        </mat-form-field>               
+                    </div>
+                    <div class="form-group mb-2 col-md-6">
+                        <label for="exampleInputPassword1">Email *</label>
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="Renseigner l'adresse email de l'étudiant" type="email" formControlName="email" autocomplete="off"  />
+                            <mat-error></mat-error>
+                        </mat-form-field>               
+                    </div>
+               </div>
+               <div class="form-inline">
+                    <div class="form-group mb-2 col-md-6">                 
+                        <label for="exampleInputPassword1">Faculté *</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select  placeholder="Choisir la faculté de l'étudiant" formControlName="faculty">
+                                <mat-option *ngFor="let option of listFaculty" [value]="option.id">{{ option.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>                            
+                    </div>
+                    <div class="form-group mb-2 col-md-6">                 
+                        <label for="exampleInputPassword1">Catégorie *</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select  placeholder="Choisir la catégorie de l'étudiant" formControlName="category">
+                                <mat-option *ngFor="let option of listCategory" [value]="option.id">{{ option.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>                             
+                    </div>
+               </div>
+               <div class="form-inline">
+                    <div class="form-group mb-2 col-md-6">                
+                        <label for="exampleInputPassword1">Partenaire</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select  placeholder="Choisir le partenaire de l'étudiant" formControlName="partnerId">
+                                <mat-option *ngFor="let option of listPartner$ | async" [value]="option.id">{{ option.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>                     
+                    </div>
+               </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <mat-card-actions >
+            <button mat-button >Annuler</button>
+            <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
+        </mat-card-actions>
+    </div>
+</div>

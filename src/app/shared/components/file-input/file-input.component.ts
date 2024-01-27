@@ -20,6 +20,7 @@ export class FileInputComponent implements ControlValueAccessor {
   file: File | null = null;
   @Input() progress = 0;
   @Input() upload = false;
+  
 
   message: string = '';
   uploaded = true;
@@ -30,14 +31,21 @@ export class FileInputComponent implements ControlValueAccessor {
     this.progress = 0;
     this.message = '';
     this.file = file;
+
+    this.onFileChange.emit(file);
+    //console.log(file)
     if(this.upload){
       this.onUpload();
     } 
   }
 
+  
  
 
   @Output() public onUploadFinished = new EventEmitter();
+  @Output() public onFileChange = new EventEmitter();
+
+
   
   constructor( private host: ElementRef<HTMLInputElement>, private http: HttpClient ) {
   }
@@ -56,6 +64,7 @@ export class FileInputComponent implements ControlValueAccessor {
   }
 
   onUpload(): void {
+  
     if (this.file == null) {
       return;
     }

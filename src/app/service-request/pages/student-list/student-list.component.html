@@ -1,0 +1,18 @@
+<div class="card" >
+    <div class="card-header">
+        <div class="margin">
+            <span>
+                <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
+                Cliquer sur une ligne pour consulter les demande de service de l'étudiant.
+            </span>
+        </div> 
+    </div>
+    <div class="card-body">
+        <app-data-grid 
+            [columns]="columns"
+            [dataSource]="listData$ | async"
+            (rowClick)="onRowClick($event)">
+        </app-data-grid>
+    </div>
+    
+</div>

@@ -66,7 +66,7 @@ onFilterDataGrid(){
 }
 
 onAddNewCustomer(){
-  this.router.navigateByUrl('/sms/topup/add');
+  this.router.navigateByUrl('/users/student/add');
 }
 
 onRowClick(event: any){

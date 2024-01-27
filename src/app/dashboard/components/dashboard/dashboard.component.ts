@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { changeBreadcrump } from '../../../state/root-action';
+import { Observable, map, tap } from 'rxjs';
+import { CollaboraterModel } from 'src/app/users/models/collaborater.model';
+import { ActivatedRoute } from '@angular/router';
+import { StorageService } from 'src/app/core/services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,8 +12,15 @@ import { changeBreadcrump } from '../../../state/root-action';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  constructor(private store: Store){}
+  constructor(private store: Store,private route: ActivatedRoute){}
+  topups$!: Observable<CollaboraterModel[]>;
+  private storageService = inject(StorageService)
   ngOnInit(): void {
+    this.route.data.pipe(
+      tap(data=>this.storageService.saveData("user_profils", data)),
+      map(data => data['data'])
+    ).subscribe();  
+
     this.setBreadcrump();
   }
 

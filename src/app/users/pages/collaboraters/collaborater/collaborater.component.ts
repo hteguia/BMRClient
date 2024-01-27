@@ -73,7 +73,6 @@ onAddNewItem(){
 }
 
 onUpdateItem(){
-  console.log(this.selectedRows)
   if(this.selectedRows.length){
     console.log(this.selectedRows[0]);
     this.collaboraterService.getCollaborater(this.selectedRows[0]).subscribe(result=>{

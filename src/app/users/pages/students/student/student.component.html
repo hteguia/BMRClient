@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
         <app-data-grid 
-            [columns]="columns" à _,,
+            [columns]="columns"
             [dataSource]="topups$ | async"
             (selectedRow)="onSelectRow($event)"
             (rowClick)="onRowClick($event)">

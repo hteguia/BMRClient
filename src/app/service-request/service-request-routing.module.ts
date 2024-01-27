@@ -4,9 +4,17 @@ import { DocumentTemplateComponent } from './pages/document-template/document-te
 import { DocumentTypeComponent } from './pages/document-type/document-type.component';
 import { DocumentTypeResolver } from './resolvers/document-type.resolver';
 import { DocumentTemplateResolver } from './resolvers/document-template.resolver';
+import { RequestTreatmentComponent } from './pages/request-treatment/request-treatment.component';
+import { AddRequestTreatmentComponent } from './pages/add-request-treatment/add-request-treatment.component';
+import { StudentListComponent } from './pages/student-list/student-list.component';
+import { StudentResolver } from '../users/resolvers/student.resolver';
+import { StudentListResolver } from './resolvers/student-list.resolver';
 
 
 const routes: Routes = [
+    { path: "student", component: StudentListComponent, resolve: { data: StudentListResolver } },
+    { path: "student/:id/request-treatment", component: RequestTreatmentComponent },
+    { path: "student/:id/request-treatment/add", component: AddRequestTreatmentComponent, resolve: { data: DocumentTypeResolver } },
     { path: "document-type", component: DocumentTypeComponent, resolve: { listDocumentType: DocumentTypeResolver } },
     { path: "document-template", component: DocumentTemplateComponent, resolve: { listDocumentTemplate: DocumentTemplateResolver }  },
 ];
