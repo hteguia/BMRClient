@@ -72,7 +72,7 @@ export class PartnerComponent {
     if(this.selectedRows.length){
       console.log(this.selectedRows[0]);
       this.partnerService.getPartner(this.selectedRows[0]).subscribe(result=>{
-        this.openPartnerForm('Modifier partenaire', result)
+        this.openPartnerForm('Modifier le partenaire', result)
       });
     }
   }
