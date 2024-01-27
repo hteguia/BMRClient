@@ -78,13 +78,12 @@ export class AddCollaboraterComponent {
       (response) =>{
         this.loading = false;
         this.resetForm();
+        this.router.navigateByUrl('/users/collaborater');
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get('name');
-          //this.logService.log(formControl)
           if (formControl) {
-            // activate the error message
             formControl.setErrors({
               serverError: error.error[prop]
             });
