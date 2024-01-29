@@ -21,7 +21,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item menu-open">
+          <li class="nav-item menu-open" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR', 'BASIC'])">
             <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -30,60 +30,60 @@
             </a>
             
           </li>
-          <li class="nav-header">Demande de service</li>
-          <li class="nav-item">
+          <li class="nav-header" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR', 'BASIC'])">Demande de service</li>
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
             <a  routerLink="/service-request/student"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fa fa-folder-open"></i>
               <p>
                 Demande des étudiants
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="hasRole(['BASIC'])">
             <a  routerLink="/service-request/request-treatment"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fa fa-folder-open"></i>
               <p>
                 Demande de service
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])">
             <a  routerLink="/service-request/document-type"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fa fa-folder"></i>
               <p>
                 Type de document
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])">
             <a  routerLink="/service-request/document-template"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fa fa-book"></i>
               <p>
                 Modéle de document
               </p>
             </a>
           </li>
 
-          <li class="nav-header">Utilisateurs</li>
+          <li class="nav-header" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">Utilisateurs</li>
           <li class="nav-item">
             <a  routerLink="/users/student"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fa fa-graduation-cap"></i>
               <p>
                 Etudiants
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
             <a  routerLink="/users/collaborater"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fa fa-users"></i>
               <p>
                 Collaborateur
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
             <a  routerLink="/users/partner"  routerLinkActive="active" class="nav-link">
-              <i class="nav-icon fas fa-money-bill"></i>
+              <i class="nav-icon fas fa-handshake"></i>
               <p>
                 Partenaire
               </p>

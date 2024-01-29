@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   Event,
   NavigationCancel,
@@ -9,6 +9,7 @@ import {
 } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,6 +21,8 @@ export class MenuComponent implements OnInit {
   appName = environment.appName;
   loading = false;
   currentUser: any;
+  private storageService = inject(StorageService);
+  
  constructor(private authService: AuthService, private router: Router){
   this.router.events.subscribe((event: Event) => {
     switch (true) {
@@ -42,5 +45,9 @@ export class MenuComponent implements OnInit {
  }
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
+  }
+
+  hasRole(roles: any):boolean{
+    return roles.includes(this.currentUser.roles)
   }
 }
