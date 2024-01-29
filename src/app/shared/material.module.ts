@@ -41,7 +41,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dia
         MatStepperModule,
         MatTableModule,
         MatButtonToggleModule,
-        MatDialogModule,
+        MatDialogModule
     ]
 })
 

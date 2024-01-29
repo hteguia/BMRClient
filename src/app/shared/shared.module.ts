@@ -16,6 +16,8 @@ import { DecimalSeparatorPipe } from "./pipes/decimal.separator.pipe";
 import { ButtonComponent } from "./components/button/button.component";
 import { InputComponent } from "./components/input/input.component";
 import { ProgressComponent } from "./components/progress/progress.component";
+import { TelInputComponent } from "./components/tel-input/tel-input.component";
+import { SpinnerComponent } from "./components/spinner/spinner.component";
 
 
 
@@ -34,6 +36,8 @@ import { ProgressComponent } from "./components/progress/progress.component";
         ButtonComponent,
         InputComponent,
         ProgressComponent,
+        TelInputComponent,
+        SpinnerComponent
     ],
     imports: [
         CommonModule,
@@ -58,6 +62,8 @@ import { ProgressComponent } from "./components/progress/progress.component";
         ButtonComponent,
         InputComponent,
         ProgressComponent,
+        TelInputComponent,
+        SpinnerComponent
     ]
 })
 

@@ -1,9 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { DocumentTemplateModel } from '../../models/document-template.model';
+import { DocumentTypeService } from '../../services/document-type.service';
+import { DocumentTemplateService } from '../../services/document-template.service';
+import { HttpResponse } from '@angular/common/http';
+import { LogService } from 'src/app/core/services/log.service';
+import { FileService } from 'src/app/core/services/file.service';
 
 @Component({
   selector: 'app-document-template',
@@ -25,6 +30,10 @@ export class DocumentTemplateComponent {
     private router: Router, private breadcrumpService: BreadcrumpService){  
 }
 
+  private documentTemplateService = inject(DocumentTemplateService);
+  private logService = inject(LogService);
+  private fileService = inject(FileService);
+
 ngOnInit(): void {
   this.topups$ = this.route.data.pipe(
     map(data => data['listDocumentTemplate'])
@@ -45,7 +54,16 @@ onAddNewCustomer(){
 }
 
 onRowClick(event: any){
- 
+  this.documentTemplateService.getDocumentTemplate(event.id).subscribe(
+    (response)=>{
+      this.documentTemplateService.downloadDocumentTemplate(event.id).subscribe(async (event) => {
+        this.fileService.download({event:event, name:response.name});
+      });
+    },
+    (error)=>{
+      
+    }
+  );
 }
 
 onSelectRow(rows: []){

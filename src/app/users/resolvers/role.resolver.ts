@@ -15,7 +15,7 @@ export class RoleResolver implements Resolve<RoleModel[]>{
     constructor(private authService: AuthService, private roleService: RoleService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RoleModel[]> {
-        return this.roleService.getAllRole();
+        return this.roleService.GetRoleForCreateUser();
     }
 
 }

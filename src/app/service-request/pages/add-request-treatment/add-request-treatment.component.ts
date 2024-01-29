@@ -121,6 +121,7 @@ export class AddRequestTreatmentComponent {
       (response) =>{
         this.loading = false;
         this.resetForm();
+        this.router.navigateByUrl(`/service-request/student/${this.id}/request-treatment`);
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {

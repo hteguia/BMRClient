@@ -12,6 +12,10 @@ export class UserService {
     constructor(private http: HttpClient) {}
 
     getUserProfil(): Observable<any> {
-        return this.http.get<any>(`${environment.apiUrl}//v1/user`);
+        return this.http.get<any>(`${environment.apiUrl}/v1/user`);
+    }
+
+    GetRoleForCreateUser(): Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/v1/user/GetRoleForCreateUser`);
     }
 }

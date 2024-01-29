@@ -22,14 +22,22 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob":"**/*",
+                "input": "./node_modules/intl-tel-input/build/js",
+                "output": "./assets/js/intl"
+              }
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
               "node_modules/devextreme/dist/css/dx.material.blue.light.css",
-              "src/styles.css"
+              "src/styles.css",
+              "./node_modules/intl-tel-input/build/css/intlTelInput.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/intl-tel-input/build/js/utils.js"
+            ]
           },
           "configurations": {
             "production": {

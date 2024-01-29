@@ -15,6 +15,7 @@ import localeFr from '@angular/common/locales/fr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './token.interceptor';
 import { HashLocationStrategy } from '@angular/common';
+import { LoaderInterceptor } from './loader.interceptor';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -52,6 +53,11 @@ registerLocaleData(localeFr, 'fr');
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptor,
       multi: true
     }
   ],

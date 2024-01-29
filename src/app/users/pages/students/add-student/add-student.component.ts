@@ -104,13 +104,12 @@ export class AddStudentComponent {
       (response) =>{
         this.loading = false;
         this.resetForm();
+        this.router.navigateByUrl('/users/student');
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get('name');
-          //this.logService.log(formControl)
           if (formControl) {
-            // activate the error message
             formControl.setErrors({
               serverError: error.error[prop]
             });
@@ -133,5 +132,22 @@ export class AddStudentComponent {
 
   private resetForm(){
     this.mainForm.reset();
+  }
+
+  public phoneNumberChange(data: {isInvalid: boolean, value: string}){
+    if(data.value === undefined){
+
+    }
+    else if(data.isInvalid){
+      
+    }
+    else{
+      this.phoneNumberCtrl.setValue(data.value);
+    }
+    //this.phoneNumberCtrl.setErrors({serverError:"true"});
+  }
+
+  hasError( field: string, error: string ) {
+    return this.phoneNumberCtrl.dirty && this.phoneNumberCtrl.hasError(error);
   }
 }

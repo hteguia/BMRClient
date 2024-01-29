@@ -1,0 +1,20 @@
+::ng-deep .iti{
+    position: relative!important;
+    display: inline!important;
+    height: auto!important;
+}
+
+::ng-deep .iti .form-control{
+    border:1px solid  rgba(0,0,0,0.3)!important;
+}
+
+.text-danger{
+    border:1px solid  red!important;
+}
+
+::ng-deep .iti input{
+    width:100%!important; 
+    padding-top:9px; 
+    padding-bottom:9px; 
+    height: auto!important
+}

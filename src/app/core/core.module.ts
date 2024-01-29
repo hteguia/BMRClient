@@ -14,6 +14,7 @@ import { LayoutComponent } from "./components/layout/layout.component";
 import { BreadcrumpService } from "./services/breadcrump.service";
 import { LogService } from "./services/log.service";
 import { StorageService } from "./services/storage.service";
+import { FileService } from "./services/file.service";
 
 @NgModule({
     declarations: [
@@ -37,12 +38,12 @@ import { StorageService } from "./services/storage.service";
       NavbarComponent,
       MenuComponent,
       BreadcrumbComponent,
-      LayoutComponent,
+      LayoutComponent
     ],
     providers: [
       AuthGuard,
       BreadcrumpService,
-      LogService,StorageService
+      LogService,StorageService, FileService
     ]
     
 })
