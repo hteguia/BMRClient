@@ -13,6 +13,7 @@ import { AddRequestTreatmentComponent } from './pages/add-request-treatment/add-
 import { RequestTreatmentService } from './services/request-treatment.service';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { StudentListResolver } from './resolvers/student-list.resolver';
+import { ConsultRequestTreatmentComponent } from './pages/consult-request-treatment/consult-request-treatment.component';
 
 
 
@@ -22,7 +23,8 @@ import { StudentListResolver } from './resolvers/student-list.resolver';
     DocumentTemplateComponent,
     RequestTreatmentComponent,
     AddRequestTreatmentComponent,
-    StudentListComponent
+    StudentListComponent,
+    ConsultRequestTreatmentComponent
   ],
   imports: [
     CommonModule,

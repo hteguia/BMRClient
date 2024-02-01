@@ -5,6 +5,7 @@
     [showBorders]="false"
     [hoverStateEnabled]="true"
     [rowAlternationEnabled]="true"
+    [columnHidingEnabled]="true"
     (onRowClick)="onRowClick($event)"
     (onSelectionChanged)="onSelectionChanged($event)">
         <dxo-selection
@@ -17,25 +18,26 @@
             [displayMode]="displayMode"
             [showPageSizeSelector]="showPageSizeSelector"
             [showInfo]="showInfo"
-            [showNavigationButtons]="showNavButtons">
-        </dxo-pager>
-        <dxi-column 
-            *ngFor="let col of columns"
-                dataField="{{col.dataField}}"
-                caption="{{col.caption}}"
-                dataType="{{col.dataType}}"
-                cellTemplate="{{col.template}}"
-                visible="{{col.visible}}"
-                [calculateCellValue]="calculateCellValue">  
-        </dxi-column>
+            [showNavigationButtons]="showNavButtons"/>
+        <dxi-column *ngFor="let col of columns"
+                    [dataField]="col.dataField"
+                    [caption]="col.caption"
+                    [dataType]="col.dataType"
+                    [cellTemplate]="col.template"
+                    [calculateCellValue]="customCellValue"
+                    [alignment]="col.alignment"/>       
         <div *dxTemplate="let options of 'statusTemplate'">
             <small class="badge badge-success">{{options.value}}</small>
         </div>
         <div *dxTemplate="let options of 'amountTemplate'">
             {{options.value | amount}}
         </div>
-
         <div *dxTemplate="let options of 'dateTemplate'">
             {{options.value | date:'dd MMM yyyy':undefined:'fr'}}
         </div>
 </dx-data-grid>
+<dx-context-menu *ngIf="contextMenu"
+    #myContextMenu
+    target="#gridContainer" 
+    [dataSource]="contextMenu" 
+    (onItemClick)="contextMenuItemClick($event)"/>

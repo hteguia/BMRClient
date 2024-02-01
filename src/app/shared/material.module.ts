@@ -19,6 +19,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({  
     exports:[
@@ -41,7 +42,8 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dia
         MatStepperModule,
         MatTableModule,
         MatButtonToggleModule,
-        MatDialogModule
+        MatDialogModule,
+        MatMenuModule
     ]
 })
 

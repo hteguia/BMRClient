@@ -13,11 +13,11 @@ import { StudentModel } from 'src/app/users/models/student.model';
 export class StudentListComponent {
   
   columns: DataGridColumn[] = [
-    { dataField: "concat:lastName:firstName",caption:"Noms & Prénoms", dataType:"string",  visible:true },
-    { dataField: "email",caption:"Email", dataType:"string", visible:true },
-    { dataField: "faculty",caption:"Faculté", dataType:"string", visible:true },
-    { dataField: "category",caption:"Catégorie", dataType:"string", visible:true },
-    { dataField: "partner",caption:"Partenaire", dataType:"string", visible:true },
+    { dataField: "concat:lastName:firstName",caption:"Noms & Prénoms", dataType:"string" },
+    { dataField: "email",caption:"Email", dataType:"string"},
+    { dataField: "faculty",caption:"Faculté", dataType:"string" },
+    { dataField: "category",caption:"Catégorie", dataType:"string"},
+    { dataField: "partner",caption:"Partenaire", dataType:"string" },
   ];
   selectedRows = [];
   

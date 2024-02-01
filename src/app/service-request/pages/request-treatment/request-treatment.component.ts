@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
-import { DocumentTypeModel } from '../../models/document-type.model';
 import { Observable } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,46 +13,46 @@ import { RequestTreatmentModel } from '../../models/request-treatment.model';
   styleUrls: ['./request-treatment.component.css'],
   animations: [
     trigger('fade', [
-      state('hide', style({
-        opacity: 0,
-      })),
-      state('show', style({
-        opacity: 1,
-      })),
-      transition('hide => show', [
-        animate('0.5s')
-      ]),
-      transition('show => hide', [
-        animate('0.5s')
-      ])
+      state('hide', style({ opacity: 0 })),
+      state('show', style({ opacity: 1 })),
+      transition('* <=> *',  animate('0.5s'))
     ])
   ]
 })
 export class RequestTreatmentComponent {
+  // ::Data grid properties
   columns: DataGridColumn[] = [
-    { dataField: "createAt",caption:"Date de demande", dataType:"date", template:'dateTemplate', visible:true },
-    { dataField: "serviceType",caption:"Type de service", dataType:"string", visible:true },
-    { dataField: "deadline",caption:"Delai de traitement souhaité", dataType:"string", visible:true },
-    { dataField: "treatmentStatus",caption:"Statut du traitement", dataType:"string", template:'statusTemplate', visible:true },
-    { dataField: "paymentStatus",caption:"Status du paiement", dataType:"string", template:'statusTemplate', visible:true }
+    { dataField: "createAt",caption:"Date de demande", dataType:"date", template:'dateTemplate'},
+    { dataField: "serviceType",caption:"Type de service", dataType:"string" },
+    { dataField: "deadline",caption:"Delai de traitement souhaité", dataType:"string" },
+    { dataField: "treatmentStatus",caption:"Statut du traitement", dataType:"string", template:'statusTemplate', alignment:'center' },
+    { dataField: "paymentStatus",caption:"Status du paiement", dataType:"string", template:'statusTemplate', alignment:'center' }
+  ];
+  contextMenuItems = [
+    { text: 'Consulter', code: 'CONSULT' },
+    { text: 'Télécharger', code:'DOWNLOAD' },
   ];
   selectedRows = [];
+
+  // ::properties
+  listData$!: Observable<RequestTreatmentModel[]>;
   listItemAnimateState = 'default';
   displayUpdateButton = false;
+  showFilterModel = false;
+  studentId!: string
 
+  // ::Service injection
+  private RrquestTreatmentService = inject(RequestTreatmentService);
+
+  // ::Constructor
   constructor(private route: ActivatedRoute,  
     private router: Router, private breadcrumpService: BreadcrumpService){  
   }
 
-  private RrquestTreatmentService = inject(RequestTreatmentService);
-
-  showFilterModel = false;
-  listData$!: Observable<RequestTreatmentModel[]>;
-  id!: string
-
+  // ::Methods
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')!
-    this.listData$ = this.RrquestTreatmentService.getAllRequestTreatmentByStudent(+this.id);
+    this.studentId = this.route.snapshot.paramMap.get('id')!
+    this.listData$ = this.RrquestTreatmentService.getAllRequestTreatmentByStudent(+this.studentId);
     this.breadcrumpService.setBreadcrump("Liste des demande de services", [
       { title:"Demande de service", link:"/" }, 
       { title:"Demande de service", link:"/" }
@@ -73,10 +72,14 @@ export class RequestTreatmentComponent {
   }
     
   onAddNewItem(){
-    this.router.navigateByUrl(`/service-request/student/${this.id}/request-treatment/add`);
+    this.router.navigateByUrl(`/service-request/student/${this.studentId}/request-treatment/add`);
   }
 
   onUpdateItem(){
+    
+  }
+
+  onContextMenuClick(event: any){
     
   }
 }

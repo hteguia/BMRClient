@@ -10,10 +10,12 @@
     </div>
     <div class="card-body">
         <app-data-grid 
-            [columns]="columns" 
+            [columns]="columns"
+            [contextMenu]="contextMenuItems" 
             [dataSource]="listData$ | async"
             (selectedRow)="onSelectRow($event)"
-            (rowClick)="onRowClick($event)">
+            (rowClick)="onRowClick($event)"
+            (contextMenuClick)="onContextMenuClick($event)">
         </app-data-grid>
     </div>
     

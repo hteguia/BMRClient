@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ShorthenPipe } from "./pipes/shorten.pipe";
 import { TimeAgoPipe } from "./pipes/time-ago.pipe";
 import { HighlightDirective } from "./directives/highlight.directive";
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxContextMenuModule, DxDataGridModule } from 'devextreme-angular';
 import { DataGridComponent } from "./components/data-grid/data-grid.component";
 import { FileUploadComponent } from "./components/file-upload/file-upload.component";
 import { FileInputComponent } from "./components/file-input/file-input.component";
@@ -44,6 +44,7 @@ import { SpinnerComponent } from "./components/spinner/spinner.component";
         MaterialModule,
         ReactiveFormsModule,
         DxDataGridModule,
+        DxContextMenuModule
     ],
     exports:[
         MaterialModule,

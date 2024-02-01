@@ -6,6 +6,5 @@ export class DataGridColumn
     visible?: boolean = true;
     template?: '' | 'statusTemplate' | 'amountTemplate' | 'dateTemplate' = ''; 
     calculateCellValue?:  '' | 'concatValue' = ''
+    alignment?: 'center' | 'left' | 'right' = 'left';
 }
-
-//'' | 'default' | 'active' | 'statusTemplate' = 'default';
