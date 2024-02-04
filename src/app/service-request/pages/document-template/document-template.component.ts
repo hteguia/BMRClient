@@ -4,9 +4,7 @@ import { Observable, map } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { DocumentTemplateModel } from '../../models/document-template.model';
-import { DocumentTypeService } from '../../services/document-type.service';
 import { DocumentTemplateService } from '../../services/document-template.service';
-import { HttpResponse } from '@angular/common/http';
 import { LogService } from 'src/app/core/services/log.service';
 import { FileService } from 'src/app/core/services/file.service';
 
@@ -18,6 +16,9 @@ import { FileService } from 'src/app/core/services/file.service';
 export class DocumentTemplateComponent {
   columns: DataGridColumn[] = [
     { dataField: "name",caption:"Libelle", dataType:"string", visible:true }
+  ];
+  contextMenuItems = [
+    { text: 'Télécharger', code:'DOWNLOAD' },
   ];
   selectedRows = [];
   listItemAnimateState = 'default';
@@ -53,17 +54,23 @@ onAddNewCustomer(){
   this.router.navigateByUrl('/sms/topup/add');
 }
 
+onContextMenuClick(event: any){
+  if(event.action.code === 'DOWNLOAD'){
+    this.documentTemplateService.getDocumentTemplate(event.id).subscribe(
+      (response: any) => {
+        this.documentTemplateService.downloadDocumentTemplate(event.id).subscribe(async (event) => {
+          this.fileService.download({event:event, name:response.name});
+       });
+      },
+      (error: any)=>{
+        console.log(error);
+      }
+    )
+  }
+}
+
 onRowClick(event: any){
-  this.documentTemplateService.getDocumentTemplate(event.id).subscribe(
-    (response)=>{
-      this.documentTemplateService.downloadDocumentTemplate(event.id).subscribe(async (event) => {
-        this.fileService.download({event:event, name:response.name});
-      });
-    },
-    (error)=>{
-      
-    }
-  );
+ 
 }
 
 onSelectRow(rows: []){

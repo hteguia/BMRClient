@@ -9,8 +9,6 @@ export class LoaderService {
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable();
 
-  constructor() { }
-
   showLoader() {
     if (this.apiCount === 0) {
       this.isLoadingSubject.next(true);

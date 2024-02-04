@@ -7,7 +7,8 @@
     [rowAlternationEnabled]="true"
     [columnHidingEnabled]="true"
     (onRowClick)="onRowClick($event)"
-    (onSelectionChanged)="onSelectionChanged($event)">
+    (onSelectionChanged)="onSelectionChanged($event)"
+    (onContextMenuPreparing)="onPreparingData($event)">
         <dxo-selection
             [selectAllMode]="allMode"
             [showCheckBoxesMode]="showCheckBox"
@@ -25,7 +26,8 @@
                     [dataType]="col.dataType"
                     [cellTemplate]="col.template"
                     [calculateCellValue]="customCellValue"
-                    [alignment]="col.alignment"/>       
+                    [alignment]="col.alignment"
+                    [width]="col.width"/>       
         <div *dxTemplate="let options of 'statusTemplate'">
             <small class="badge badge-success">{{options.value}}</small>
         </div>

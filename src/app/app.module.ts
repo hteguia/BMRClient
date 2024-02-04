@@ -10,12 +10,13 @@ import { environment } from 'src/environments/environment';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './state/root-reducer';
 
-import { LocationStrategy, registerLocaleData } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from './token.interceptor';
-import { HashLocationStrategy } from '@angular/common';
-import { LoaderInterceptor } from './loader.interceptor';
+
+import { LoaderInterceptor } from './core/services/interceptors/loader.interceptor';
+import { AuthInterceptor } from './core/services/interceptors/auth.interceptor';
+import { HttpErrorInterceptor } from './core/services/interceptors/http.error.interceptor';
 registerLocaleData(localeFr, 'fr');
 
 
@@ -52,7 +53,12 @@ registerLocaleData(localeFr, 'fr');
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
       multi: true
     },
     {
@@ -64,3 +70,5 @@ registerLocaleData(localeFr, 'fr');
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

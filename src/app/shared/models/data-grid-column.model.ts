@@ -7,4 +7,5 @@ export class DataGridColumn
     template?: '' | 'statusTemplate' | 'amountTemplate' | 'dateTemplate' = ''; 
     calculateCellValue?:  '' | 'concatValue' = ''
     alignment?: 'center' | 'left' | 'right' = 'left';
+    width?: number = 100;
 }

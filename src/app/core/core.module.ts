@@ -44,8 +44,7 @@ import { FileService } from "./services/file.service";
       AuthGuard,
       BreadcrumpService,
       LogService,StorageService, FileService
-    ]
-    
+    ] 
 })
 
 export class CoreModule { }

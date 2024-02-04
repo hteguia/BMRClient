@@ -14,24 +14,31 @@ export class RequestTreatmentService {
 
     private logService = inject(LogService);
     
-
     getAllRequestTreatment(): Observable<RequestTreatmentModel[]> {
         return this.http.get<RequestTreatmentModel[]>(`${environment.apiUrl}/v1/requestTreatment`);
     }
 
+    getAllRequestTreatmentById(id: any) : Observable<RequestTreatmentModel>{
+        return this.http.get<RequestTreatmentModel>(`${environment.apiUrl}/v1/requestTreatment/${id}`);
+    }
+
     getAllRequestTreatmentByStudent(id:number): Observable<RequestTreatmentModel[]> {
-        console.log("eeeeee")
         return this.http.get<RequestTreatmentModel[]>(`${environment.apiUrl}/v1/requestTreatment/GetByStudent/${id}`);
     }
 
     addRequestTreatment(formValue: any): Observable<any>  {
-        console.log(formValue)
-        const formData = new FormData();
-  
         return this.http.post(`${environment.apiUrl}/v1/requestTreatment`, formValue);
     }
 
     getAllStudent(): Observable<StudentModel[]> {
         return this.http.get<StudentModel[]>(`${environment.apiUrl}/v1/student`);
+    }
+
+    downloadRequestTreatment(id: number): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/v1/requestTreatment/DownloadRequestTreatment/${id}`, {
+            reportProgress: true,
+            observe: 'events',
+            responseType: 'blob'
+        })
     }
 }

@@ -10,6 +10,7 @@ import { environment } from "src/environments/environment";
 })
 export class AuthService {
   private logService = inject(LogService);
+
   constructor(private http: HttpClient) {}
     
   login(data: {email: string, password: string}): Observable<any> {
@@ -32,7 +33,8 @@ export class AuthService {
         return of(false);
       })
     );
-}
+  
+  }
 
   setToken(token: string){
     localStorage.setItem('access_token', token);

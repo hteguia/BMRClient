@@ -3,8 +3,10 @@
         <app-data-grid 
             [columns]="columns" 
             [dataSource]="topups$ | async"
+            [contextMenu]="contextMenuItems" 
             (selectedRow)="onSelectRow($event)"
-            (rowClick)="onRowClick($event)">
+            (rowClick)="onRowClick($event)"
+            (contextMenuClick)="onContextMenuClick($event)">
         </app-data-grid>
     </div>
     

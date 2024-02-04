@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { RequestTreatmentService } from '../../services/request-treatment.service';
 import { RequestTreatmentModel } from '../../models/request-treatment.model';
+import { FileService } from 'src/app/core/services/file.service';
 
 @Component({
   selector: 'app-request-treatment',
@@ -22,11 +23,11 @@ import { RequestTreatmentModel } from '../../models/request-treatment.model';
 export class RequestTreatmentComponent {
   // ::Data grid properties
   columns: DataGridColumn[] = [
-    { dataField: "createAt",caption:"Date de demande", dataType:"date", template:'dateTemplate'},
+    { dataField: "createAt",caption:"Date de demande", dataType:"date", template:'dateTemplate', width: 160},
     { dataField: "serviceType",caption:"Type de service", dataType:"string" },
     { dataField: "deadline",caption:"Delai de traitement souhaité", dataType:"string" },
-    { dataField: "treatmentStatus",caption:"Statut du traitement", dataType:"string", template:'statusTemplate', alignment:'center' },
-    { dataField: "paymentStatus",caption:"Status du paiement", dataType:"string", template:'statusTemplate', alignment:'center' }
+    { dataField: "treatmentStatus",caption:"Statut du traitement", dataType:"string", template:'statusTemplate', alignment:'center', width: 175 },
+    { dataField: "paymentStatus",caption:"Status du paiement", dataType:"string", template:'statusTemplate', alignment:'center', width: 175 }
   ];
   contextMenuItems = [
     { text: 'Consulter', code: 'CONSULT' },
@@ -43,6 +44,7 @@ export class RequestTreatmentComponent {
 
   // ::Service injection
   private RrquestTreatmentService = inject(RequestTreatmentService);
+  private fileService = inject(FileService);
 
   // ::Constructor
   constructor(private route: ActivatedRoute,  
@@ -54,13 +56,13 @@ export class RequestTreatmentComponent {
     this.studentId = this.route.snapshot.paramMap.get('id')!
     this.listData$ = this.RrquestTreatmentService.getAllRequestTreatmentByStudent(+this.studentId);
     this.breadcrumpService.setBreadcrump("Liste des demande de services", [
-      { title:"Demande de service", link:"/" }, 
+      { title:"Demande de service", link:"/" },
       { title:"Demande de service", link:"/" }
     ]);
   }
 
   onRowClick(event: any){
- 
+    
   }
   
   onSelectRow(rows: []){
@@ -80,6 +82,17 @@ export class RequestTreatmentComponent {
   }
 
   onContextMenuClick(event: any){
-    
+    if(event.action.code === 'DOWNLOAD'){
+      this.RrquestTreatmentService.getAllRequestTreatmentById(event.id).subscribe(
+        (response: any) => {
+          this.RrquestTreatmentService.downloadRequestTreatment(event.id).subscribe(async (event) => {
+            this.fileService.download({event:event, name:response.fileName});
+         });
+        },
+        (error: any)=>{
+          console.log(error);
+        }
+      )
+    }
   }
 }

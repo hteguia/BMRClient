@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -6,20 +6,16 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { AuthService } from './auth/services/auth.service';
+
 import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(public auth: AuthService, private router: Router) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
-    request = request.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.auth.token}`
-      }
-    });
     return next.handle(request).pipe(
       catchError((error) => {
         console.error("1 Error Event");
@@ -28,7 +24,7 @@ export class TokenInterceptor implements HttpInterceptor {
               console.error("Error Event");
           } else {
             console.log(error);
-              console.log(`error status : ${error.status} ${error.statusText} ${navigator.onLine}`);
+              console.log(`error status : ${error.status} ${error.statusText}`);
               switch (error.status) {
                   case 401:      //login
                       this.router.navigateByUrl("auth/login");

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from "@angular/core";
+import { Component, EventEmitter, Input, Output, ViewChild, inject } from "@angular/core";
 import { DxContextMenuComponent, DxDataGridComponent } from "devextreme-angular";
 import { DataGridColumn } from "../../models/data-grid-column.model";
+import { LogService } from "src/app/core/services/log.service";
 
 @Component({
     selector: 'app-data-grid',
@@ -31,6 +32,10 @@ export class DataGridComponent  {
     showInfo = true;
     showNavButtons = true;
 
+    idSelected!:number
+
+    private logService = inject(LogService);
+
     /**
      * Cette fonction est déclenchée lorsque la sélection change.
      * Elle émet les clés de la ligne sélectionnée.
@@ -58,7 +63,8 @@ export class DataGridComponent  {
      * @param event - L'événement de clic sur l'élément du menu contextuel.
      */
     contextMenuItemClick(e:any) {
-        this.contextMenuClick.emit(this.contextMenu[e.itemIndex]);
+        const eventData = { id: this.idSelected, action: this.contextMenu[e.itemIndex] };
+        this.contextMenuClick.emit(eventData);
     } 
 
     /**
@@ -82,5 +88,9 @@ export class DataGridComponent  {
         }
 
        return rowData[column.dataField];
+    }
+
+    onPreparingData(e:any){
+        this.idSelected = e.row.data.id;
     }
 }

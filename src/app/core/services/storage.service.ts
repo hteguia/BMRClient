@@ -3,16 +3,14 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class StorageService {
     saveData(key:string, data: any){
-        console.log(" key "+key)
-        console.log(data)
-        localStorage.setItem(key, JSON.stringify(data));
-      }
+      localStorage.setItem(key, JSON.stringify(data));
+    }
 
     getData(key:string){
-        return JSON.parse(this.userData(key))
-      }
+      return JSON.parse(this.userData(key))
+    }
     
     private userData(key:string) :any {
-        return localStorage.getItem(key);
-      }
+      return localStorage.getItem(key);
+    }
 }
