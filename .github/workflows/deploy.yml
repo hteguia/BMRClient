@@ -27,7 +27,12 @@ jobs:
     - name: Set release name
       id: releasename
       run: echo "name=release-client-${{steps.releasedate.outputs.date}}" >> $GITHUB_OUTPUT
-      
+    
+    - name: Set env variables
+      run: node server.js 
+      env:
+        APP_SETTINGS: ${{ secrets.APP_SETTINGS }}
+
     - name: Install NPM Modules
       run: npm install
 
