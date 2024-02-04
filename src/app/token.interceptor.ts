@@ -20,6 +20,7 @@ export class TokenInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.auth.token}`
       }
     });
+    
     return next.handle(request).pipe(
       catchError((error) => {
         console.error("1 Error Event");
