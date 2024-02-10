@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CollaboraterService } from '../../../services/collaborater.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleModel } from '../../../models/role.model';
@@ -71,18 +71,17 @@ export class UpdateCollaboraterComponent {
   }
 
   onSubmitForm(){
-    this.action$ = this.mainForm.value.id === null ? this.collaboraterService.addCollaborater(this.mainForm.value) :
-                                            this.collaboraterService.updateCollaborater(this.mainForm.value);
+    this.action$ = this.collaboraterService.updateCollaborater(this.mainForm.value);
 
     this.action$.subscribe(
       (response) =>{
         this.loading = false;
         this.resetForm();
+        this.router.navigateByUrl('/users/collaborater');
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
-          const formControl = this.mainForm.get('name');
-          //this.logService.log(formControl)
+          const formControl = this.mainForm.get(prop.toLowerCase());
           if (formControl) {
             // activate the error message
             formControl.setErrors({
@@ -92,6 +91,11 @@ export class UpdateCollaboraterComponent {
         });
       }
     )
+  }
+
+  onCancel(){
+    this.resetForm();
+    this.router.navigateByUrl('/users/collaborater');
   }
 
   private setFormData(){
@@ -105,5 +109,37 @@ export class UpdateCollaboraterComponent {
 
   private resetForm(){
     this.mainForm.reset();
+  }
+
+  hasError( field: string, error: string ) {
+    return this.phoneNumberCtrl.dirty && this.phoneNumberCtrl.hasError(error);
+  }
+
+  public phoneNumberChange(data: {isInvalid: boolean, value: string}){
+    if(data.value === undefined){
+
+    }
+    else if(data.isInvalid){
+      
+    }
+    else{
+      this.phoneNumberCtrl.setValue(data.value);
+    }
+    //this.phoneNumberCtrl.setErrors({serverError:"true"});
+  }
+
+ 
+
+  getFormControlErrorText(ctrl: AbstractControl){
+    if(ctrl.hasError('required')){
+      return 'Ce champs est obligatoire';
+    }
+    else if (ctrl.hasError('serverError')) {
+      return ctrl.errors?.['serverError'];
+    }
+    else
+    {
+      return 'Ce champs contient une erreur';
+    }
   }
 }

@@ -17,3 +17,15 @@
   
 } 
 
+::ng-deep .dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-focused):not(.dx-row-removed) > td {
+  background-color: rgba(0,0,0,0.1) !important;
+}
+
+::ng-deep .dx-checkbox-checked .dx-checkbox-icon {
+  background-color: #18254a !important;
+}
+
+::ng-deep .dx-checkbox-indeterminate .dx-checkbox-icon{
+  background-color: #18254a !important;
+}
+

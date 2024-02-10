@@ -31,14 +31,13 @@ import { LogService } from 'src/app/core/services/log.service';
 })
 export class CollaboraterComponent {
   columns: DataGridColumn[] = [
-    { dataField: "lastName",caption:"Noms", dataType:"string", visible:true },
-    { dataField: "firstName",caption:"Prénoms", dataType:"string", visible:true },
-    { dataField: "phoneNumber",caption:"Téléphone", dataType:"string", visible:true },
-    { dataField: "email",caption:"Email", dataType:"string", visible:true },
-    { dataField: "role",caption:"Rôle", dataType:"string", visible:true },
+    { dataField: "lastName",caption:"Noms", dataType:"string" },
+    { dataField: "firstName",caption:"Prénoms", dataType:"string" },
+    { dataField: "phoneNumber",caption:"Téléphone", dataType:"string",  width:200 },
+    { dataField: "email",caption:"Email", dataType:"string", },
+    { dataField: "role",caption:"Rôle", dataType:"string",  width:150 },
   ];
   selectedRows = [];
-  listItemAnimateState = 'default';
   displayUpdateButton = false;
 
   showFilterModel = false;
@@ -74,10 +73,8 @@ onAddNewItem(){
 
 onUpdateItem(){
   if(this.selectedRows.length){
-    console.log(this.selectedRows[0]);
     this.collaboraterService.getCollaborater(this.selectedRows[0]).subscribe(result=>{
-      this.logService.log(result);
-      this.router.navigateByUrl('/users/collaborater/add', { state: result });
+      this.router.navigateByUrl('/users/collaborater/update', { state: result });
     });
   }
 }
@@ -86,8 +83,8 @@ onRowClick(event: any){
  
 }
 
-onSelectRow(rows: []){
-  this.selectedRows = rows;
-  this.displayUpdateButton = rows.length > 0;
-}
+  onSelectRow(rows: []){
+      this.selectedRows = rows;
+      this.displayUpdateButton = +rows.length === 1;
+  }
 }

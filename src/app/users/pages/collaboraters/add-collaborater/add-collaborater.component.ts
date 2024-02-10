@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CollaboraterService } from '../../../services/collaborater.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleModel } from '../../../models/role.model';
@@ -71,9 +71,7 @@ export class AddCollaboraterComponent {
   }
 
   onSubmitForm(){
-    this.action$ = this.mainForm.value.id === null ? this.collaboraterService.addCollaborater(this.mainForm.value) :
-                                            this.collaboraterService.updateCollaborater(this.mainForm.value);
-
+    this.action$ = this.collaboraterService.addCollaborater(this.mainForm.value);
     this.action$.subscribe(
       (response) =>{
         this.loading = false;
@@ -82,7 +80,7 @@ export class AddCollaboraterComponent {
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
-          const formControl = this.mainForm.get('name');
+          const formControl = this.mainForm.get(prop.toLowerCase());
           if (formControl) {
             formControl.setErrors({
               serverError: error.error[prop]
@@ -91,6 +89,11 @@ export class AddCollaboraterComponent {
         });
       }
     )
+  }
+
+  onCancel(){
+    this.resetForm();
+    this.router.navigateByUrl('/users/collaborater');
   }
 
   private setFormData(){
@@ -121,6 +124,19 @@ export class AddCollaboraterComponent {
 
   hasError( field: string, error: string ) {
     return this.phoneNumberCtrl.dirty && this.phoneNumberCtrl.hasError(error);
+  }
+
+  getFormControlErrorText(ctrl: AbstractControl){
+    if(ctrl.hasError('required')){
+      return 'Ce champs est obligatoire';
+    }
+    else if (ctrl.hasError('serverError')) {
+      return ctrl.errors?.['serverError'];
+    }
+    else
+    {
+      return 'Ce champs contient une erreur';
+    }
   }
 }
 
