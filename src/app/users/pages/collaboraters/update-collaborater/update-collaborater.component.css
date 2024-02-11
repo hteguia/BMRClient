@@ -1,3 +1,14 @@
 .input-tel{
     height:66px; display:inline-flex; flex-direction: column; width:100%
 }
+
+::ng-deep .mat-mdc-checkbox .mdc-label{
+    margin-bottom:0;
+  }
+
+  
+
+  ::ng-deep .mdc-checkbox .mdc-checkbox__native-control:enabled:checked~.mdc-checkbox__background{
+    border-color:#18254a !important;
+    background-color:#18254a !important;
+  }

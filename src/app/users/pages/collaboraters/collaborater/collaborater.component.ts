@@ -36,6 +36,7 @@ export class CollaboraterComponent {
     { dataField: "phoneNumber",caption:"Téléphone", dataType:"string",  width:200 },
     { dataField: "email",caption:"Email", dataType:"string", },
     { dataField: "role",caption:"Rôle", dataType:"string",  width:150 },
+    { dataField: "serviceRequestNotify",caption:"Notification par SMS", dataType:"string",  width:175, template:"statusTemplate", alignment:'center' },
   ];
   selectedRows = [];
   displayUpdateButton = false;

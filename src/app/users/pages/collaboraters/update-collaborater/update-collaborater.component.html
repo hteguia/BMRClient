@@ -40,12 +40,19 @@
                     </div>              
                 </div>
                 <div class="form-group mb-2">
-                    <label for="exampleInputPassword1">Email</label>
+                    <label for="exampleInputPassword1">Email *</label>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Renseigner l'adresse email du collaborateur" type="email" formControlName="email"  />
                         <mat-error>{{ getFormControlErrorText(mainForm.get('email')!) }}</mat-error>
                     </mat-form-field>               
                 </div>
+                <div class="form-group mb-2">
+                    <mat-checkbox [formControl]="serviceRequestNotifyCtrl" >Reçoit les notifications des nouvelles demandes de service</mat-checkbox>               
+                </div>
+                <span [@pricingInfo] *ngIf="serviceRequestNotifyCtrl.value">
+                    <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
+                    Rassurer vous d'avoir choisir un numéro de téléphone Camerounais, sinon cette option ne pourra être activée.
+                </span>
             </div>
         </div>
     </div>

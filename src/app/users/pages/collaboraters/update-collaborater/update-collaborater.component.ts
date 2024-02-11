@@ -4,11 +4,35 @@ import { CollaboraterService } from '../../../services/collaborater.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleModel } from '../../../models/role.model';
 import { Observable, map } from 'rxjs';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-update-collaborater',
   templateUrl: './update-collaborater.component.html',
-  styleUrls: ['./update-collaborater.component.css']
+  styleUrls: ['./update-collaborater.component.css'],
+  animations:[
+    trigger('pricingInfo', [
+      state('default', style({
+        transform: 'scale(1)',
+        'background-color': 'white',
+        'z-index': 1
+      })),
+      transition('void => *',
+      [
+        style({
+          transform: 'translateY(0)',
+          opacity: 1,
+          'z-index': 1
+        }),
+        animate('300ms ease-out', style({
+          transform: 'translateY(-20%)',
+          opacity: 0,
+          'background-color': 'white',
+          'z-index': 1
+        }))
+      ])
+    ])
+  ]
 })
 export class UpdateCollaboraterComponent {
   constructor(private formBuilder: FormBuilder,
@@ -31,6 +55,7 @@ export class UpdateCollaboraterComponent {
   phoneNumberCtrl!: FormControl;
   emailCtrl!: FormControl;
   roleCtrl!: FormControl;
+  serviceRequestNotifyCtrl!: FormControl;
 
   action$!: Observable<any>;
 
@@ -58,6 +83,7 @@ export class UpdateCollaboraterComponent {
       phoneNumber: this.phoneNumberCtrl,
       email: this.emailCtrl,
       role: this.roleCtrl,
+      serviceRequestNotify: this.serviceRequestNotifyCtrl,
     });
   }
 
@@ -68,6 +94,7 @@ export class UpdateCollaboraterComponent {
     this.phoneNumberCtrl = this.formBuilder.control(this.data?.phoneNumber, Validators.required);
     this.emailCtrl = this.formBuilder.control(this.data?.email, [Validators.required, Validators.email]);
     this.roleCtrl = this.formBuilder.control(this.data?.roleId, Validators.required);
+    this.serviceRequestNotifyCtrl = this.formBuilder.control(this.data?.serviceRequestNotify);
   }
 
   onSubmitForm(){

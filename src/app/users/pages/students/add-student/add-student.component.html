@@ -37,7 +37,7 @@
                         <label for="exampleInputPassword1">Email *</label>
                         <mat-form-field appearance="outline">
                             <input matInput  placeholder="Renseigner l'adresse email de l'étudiant" type="email" formControlName="email" autocomplete="off"  />
-                            <mat-error>Ce champs est obligatoire</mat-error>
+                            <mat-error>{{ getFormControlErrorText(mainForm.get('email')!) }}</mat-error>
                         </mat-form-field>               
                     </div>
                </div>
@@ -77,7 +77,7 @@
     </div>
     <div class="card-footer">
         <mat-card-actions >
-            <button mat-button >Annuler</button>
+            <button mat-button (click)="onCancel()">Annuler</button>
             <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
         </mat-card-actions>
     </div>
