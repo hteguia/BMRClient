@@ -1,0 +1,33 @@
+<p class="lead">
+    Detail du document 
+    <button class="btn btn-sm btn-secondary" (click)="downloadRequestTreatment($event)">
+        <i class="far fa-file-pdf mr-2"></i>Télécharger
+    </button>
+</p>
+<div class="table-responsive">
+    <table class="table" aria-describedby="">
+        <tbody>                          
+            <tr>
+                <th >Date demande</th>
+                <td>{{ requestTreatment.createAt | date }}</td>
+            </tr>
+            <tr>
+                <th>Type du document</th>
+                <td>{{ requestTreatment.serviceType }} </td>
+            </tr>                         
+            <tr>
+                <th>Delai de rendu</th>
+                <td>{{ requestTreatment.deadline }} </td>
+            </tr>
+            <tr>
+                <th>Status du traitement</th>
+                <td>{{ requestTreatment.treatmentStatus| status }}</td>
+            </tr> 
+            <tr>
+                <th>Status du paiement</th>
+                <td>{{ requestTreatment.paymentStatus | status }}</td>
+            </tr>  
+                                    
+        </tbody>
+    </table>
+</div>

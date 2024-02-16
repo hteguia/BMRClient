@@ -43,7 +43,7 @@ export class RequestTreatmentComponent {
   studentId!: string
 
   // ::Service injection
-  private RrquestTreatmentService = inject(RequestTreatmentService);
+  private RequestTreatmentService = inject(RequestTreatmentService);
   private fileService = inject(FileService);
 
   // ::Constructor
@@ -54,7 +54,7 @@ export class RequestTreatmentComponent {
   // ::Methods
   ngOnInit(): void {
     this.studentId = this.route.snapshot.paramMap.get('id')!
-    this.listData$ = this.RrquestTreatmentService.getAllRequestTreatmentByStudent(+this.studentId);
+    this.listData$ = this.RequestTreatmentService.getAllRequestTreatmentByStudent(+this.studentId);
     this.breadcrumpService.setBreadcrump("Liste des demande de services", [
       { title:"Demande de service", link:"/" },
       { title:"Demande de service", link:"/" }
@@ -81,15 +81,26 @@ export class RequestTreatmentComponent {
     
   }
 
+  
+
   onContextMenuClick(event: any){
     if(event.action.code === 'DOWNLOAD'){
-      this.RrquestTreatmentService.getAllRequestTreatmentById(event.id).subscribe(
+      this.RequestTreatmentService.getRequestTreatmentById(event.id).subscribe(
         (response: any) => {
-          this.RrquestTreatmentService.downloadRequestTreatment(event.id).subscribe(async (event) => {
-            this.fileService.download({event:event, name:response.fileName});
-         });
+          this.RequestTreatmentService.downloadRequestTreatment(event.id, response.fileName);
         },
         (error: any)=>{
+          console.log(error);
+        }
+      )
+    }
+
+    if(event.action.code === 'CONSULT'){
+      this.RequestTreatmentService.getRequestTreatmentById(event.id).subscribe(
+        (response:any)=>{
+           this.router.navigateByUrl(`/service-request/request-treatment/${event.id}/consult`, { state: response });
+        },
+        (error:any)=>{
           console.log(error);
         }
       )

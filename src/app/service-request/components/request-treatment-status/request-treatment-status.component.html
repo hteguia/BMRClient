@@ -1,0 +1,23 @@
+<div class="col-12 col-md-12 col-lg-10 float-right">
+    <div  class="text-center alert alert-secondary fade show " role="alert">{{ titleStatus }}</div>
+    <ul class="todo-list ui-sortable" data-widget="todo-list" >
+        <li [class]='status.date === "" ? "" : "done"' *ngFor="let status of statusList">
+            <app-task-check [code]="status.value" 
+                            [label]="status.value | status" 
+                            [date]="status.date" 
+                            [checked]="status.checked" 
+                            [disabled]="status.disabled"
+                            (onCheckedChange)="onCheckStatusChange($event)">
+            </app-task-check>
+        </li>
+    </ul>
+    <div style="margin-top:20px; display: flex;" *ngIf="enableUpdateMonitor">
+
+        <label style="margin-right: 10px;">Moniteur en charge du service</label>
+        <mat-form-field appearance="outline">
+            <mat-select  placeholder="Choisir un moniteur" [formControl]="monitorCtrl">
+                <mat-option *ngFor="let option of monitorsList" [value]="option.id">{{ option.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+</div>

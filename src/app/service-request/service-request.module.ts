@@ -14,6 +14,11 @@ import { RequestTreatmentService } from './services/request-treatment.service';
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { StudentListResolver } from './resolvers/student-list.resolver';
 import { ConsultRequestTreatmentComponent } from './pages/consult-request-treatment/consult-request-treatment.component';
+import { CollaboraterService } from '../users/services/collaborater.service';
+import { RequestTreatmentStatusComponent } from './components/request-treatment-status/request-treatment-status.component';
+import { RequestTreatmentDetailComponent } from './components/request-treatment-detail/request-treatment-detail.component';
+import { RequestTreatmentResultComponent } from './components/request-treatment-result/request-treatment-result.component';
+import { RequestTreatementResolver } from './resolvers/request.treatment.resolver';
 
 
 
@@ -24,13 +29,24 @@ import { ConsultRequestTreatmentComponent } from './pages/consult-request-treatm
     RequestTreatmentComponent,
     AddRequestTreatmentComponent,
     StudentListComponent,
-    ConsultRequestTreatmentComponent
+    ConsultRequestTreatmentComponent,
+    RequestTreatmentStatusComponent,
+    RequestTreatmentDetailComponent,
+    RequestTreatmentResultComponent
   ],
   imports: [
     CommonModule,
     ServiceRequestRoutingModule,
     SharedModule
   ],
-  providers:[DocumentTypeService, DocumentTypeResolver, DocumentTemplateService, DocumentTemplateResolver, RequestTreatmentService, StudentListResolver]
+  providers:[
+    DocumentTypeService, 
+    DocumentTypeResolver, 
+    DocumentTemplateService, 
+    DocumentTemplateResolver, 
+    RequestTreatmentService,
+    CollaboraterService, 
+    StudentListResolver,
+    RequestTreatementResolver]
 })
 export class ServiceRequestModule { }
