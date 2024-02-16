@@ -14,4 +14,8 @@ export class DashboardService {
     getUserProfil(): Observable<any> {
         return this.http.get<any>(`${environment.apiUrl}/v1/user`);
     }
+
+    getDashboardData(): Observable<any> {
+        return this.http.get<any>(`${environment.apiUrl}/v1/dashboard`);
+    }
 }

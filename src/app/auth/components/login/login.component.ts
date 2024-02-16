@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, tap } from 'rxjs/operators';
@@ -29,7 +28,6 @@ import { take, tap } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
 
   private auth = inject(AuthService);
-  private socialAuthService = inject(SocialAuthService);
   constructor(private router: Router, 
               private formBuilder: FormBuilder) 
   { }
@@ -40,10 +38,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.initMainForm();
-    console.log(this.mainForm.valid);
     this.mainForm.get('email')?.valueChanges.subscribe(
       (value) => {
-        console.log(this.mainForm.valid);
+       
       }
     );
   }
@@ -64,7 +61,6 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         if(currentUser){
           this.auth.setUserData(currentUser.data);
-          this.auth.setToken(currentUser.data.jwToken);
           this.router.navigateByUrl('/');
         }
         else{
@@ -74,7 +70,5 @@ export class LoginComponent implements OnInit {
     ).subscribe();
   }
 
-  loginWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
-  }
+  
 }

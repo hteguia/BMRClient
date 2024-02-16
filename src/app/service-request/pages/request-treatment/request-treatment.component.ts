@@ -26,8 +26,7 @@ export class RequestTreatmentComponent {
     { dataField: "createAt",caption:"Date de demande", dataType:"date", template:'dateTemplate', width: 160},
     { dataField: "serviceType",caption:"Type de service", dataType:"string" },
     { dataField: "deadline",caption:"Delai de traitement souhaité", dataType:"string" },
-    { dataField: "treatmentStatus",caption:"Statut du traitement", dataType:"string", template:'statusTemplate', alignment:'center', width: 175 },
-    { dataField: "paymentStatus",caption:"Status du paiement", dataType:"string", template:'statusTemplate', alignment:'center', width: 175 }
+    { dataField: "treatmentStatus",caption:"Statut du traitement", dataType:"string", template:'statusTemplate', alignment:'center', width: 175 }
   ];
   contextMenuItems = [
     { text: 'Consulter', code: 'CONSULT' },

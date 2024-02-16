@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, ViewChild, inject } from "@angu
 import { DxContextMenuComponent, DxDataGridComponent } from "devextreme-angular";
 import { DataGridColumn } from "../../models/data-grid-column.model";
 import { LogService } from "src/app/core/services/log.service";
+import { StatusEnum } from "src/app/core/enums/status.enum";
 
 @Component({
     selector: 'app-data-grid',
@@ -92,5 +93,10 @@ export class DataGridComponent  {
 
     onPreparingData(e:any){
         this.idSelected = e.row.data.id;
+    }
+
+    getClass(val:string):string{
+        return val == StatusEnum.TRAITEMENT_TERMINE ? 'badge-success' : 
+               val == StatusEnum.TRAITEMENT_ENCOURS ? "badge-warning" : "badge-danger";
     }
 }
