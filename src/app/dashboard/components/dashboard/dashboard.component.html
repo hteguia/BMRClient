@@ -3,9 +3,9 @@
       <div class="info-box">
         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-thumbs-up"></i></span>
         <div class="info-box-content">
-          <span class="info-box-text">SOLDE</span>
+          <span class="info-box-text">DOCUMENTS CORRIGÉ</span>
           <span class="info-box-number">
-            10 000
+            {{(data$ | async)?.treatmentCompleted }}
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -18,8 +18,8 @@
         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-sync-alt"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">SMS ENVOYE</span>
-          <span class="info-box-number">41,410</span>
+          <span class="info-box-text">CORRECTION EN COURS</span>
+          <span class="info-box-number">{{(data$ | async)?.treatmentCompleted }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -36,7 +36,7 @@
 
         <div class="info-box-content">
           <span class="info-box-text">EN ATTENTE DE CORRECTION</span>
-          <span class="info-box-number">760</span>
+          <span class="info-box-number">{{(data$ | async)?.waitingForTreatment }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -48,8 +48,8 @@
         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">NOMBRE UTILISATEUR</span>
-          <span class="info-box-number">2,000</span>
+          <span class="info-box-text">NOMBRE D'ETUDIANT</span>
+          <span class="info-box-number">{{(data$ | async)?.student }}</span>
         </div>
         <!-- /.info-box-content -->
       </div>

@@ -2,7 +2,7 @@
     <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
         <h3 class="card-title">
           <i class="fas fa-th mr-1"></i>
-            Nouveau collaborateur
+            Modifier collaborateur
         </h3>
         
     </div>
@@ -22,35 +22,43 @@
                     <label for="exampleInputPassword1">Noms</label>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Renseigner le noms du collaborateur" formControlName="lastName" />
-                        <mat-error></mat-error>
+                        <mat-error>Ce champs est obligatoire</mat-error>
                     </mat-form-field>               
                 </div>
                 <div class="form-group mb-2">
                     <label for="exampleInputPassword1">Prénoms</label>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Renseigner le prénoms du collaborateur" formControlName="firstName"  />
-                        <mat-error></mat-error>
+                        <mat-error>Ce champs est obligatoire</mat-error>
                     </mat-form-field>               
                 </div> 
                 <div class="form-group mb-2">
-                    <label for="exampleInputPassword1">Téléphone</label>
+                    <label for="exampleInputPassword1">Téléphone *</label>
+                    <app-tel-input cssClass="form-control col-md-12" class="input-tel" [control]="phoneNumberCtrl" [formControl]="phoneNumberCtrl" (phoneNumberChange)="phoneNumberChange($event)" ></app-tel-input> 
+                    <div class="invalid-feedback" style="display: block">
+                        <ng-container *ngIf="hasError('phoneNumberCtrl', 'serverError')">This field is required</ng-container>
+                    </div>              
+                </div>
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Email *</label>
                     <mat-form-field appearance="outline">
-                        <input matInput placeholder="Renseigner le numéro de téléphone" formControlName="phoneNumber"  />
-                        <mat-error></mat-error>
+                        <input matInput placeholder="Renseigner l'adresse email du collaborateur" type="email" formControlName="email"  />
+                        <mat-error>{{ getFormControlErrorText(mainForm.get('email')!) }}</mat-error>
                     </mat-form-field>               
                 </div>
                 <div class="form-group mb-2">
-                    <label for="exampleInputPassword1">Email</label>
-                    <mat-form-field appearance="outline">
-                        <input matInput placeholder="Renseigner l'adresse email du collaborateur" type="email" formControlName="email"  />
-                        <mat-error></mat-error>
-                    </mat-form-field>               
+                    <mat-checkbox [formControl]="serviceRequestNotifyCtrl" >Reçoit les notifications des nouvelles demandes de service</mat-checkbox>               
                 </div>
+                <span [@pricingInfo] *ngIf="serviceRequestNotifyCtrl.value">
+                    <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
+                    Rassurer vous d'avoir choisir un numéro de téléphone Camerounais, sinon cette option ne pourra être activée.
+                </span>
             </div>
         </div>
     </div>
     <div class="card-footer">
         <mat-card-actions >
+            <button mat-button (click)="onCancel()">Annuler</button>
             <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
         </mat-card-actions>
     </div>

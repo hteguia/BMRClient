@@ -18,6 +18,8 @@ import { InputComponent } from "./components/input/input.component";
 import { ProgressComponent } from "./components/progress/progress.component";
 import { TelInputComponent } from "./components/tel-input/tel-input.component";
 import { SpinnerComponent } from "./components/spinner/spinner.component";
+import { TaskCheckComponent } from "./components/task-check/task-check.component";
+import { StatusPipe } from "./pipes/status.pipe";
 
 
 
@@ -25,19 +27,22 @@ import { SpinnerComponent } from "./components/spinner/spinner.component";
     declarations: [
         ShorthenPipe,
         TimeAgoPipe,
+        AmountPipe,
+        StatusPipe,
         HighlightDirective,
         DataGridComponent,
         FileUploadComponent,
         FileInputComponent,
         DataGridFilterComponent,
-        AmountPipe,
+        
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
         ButtonComponent,
         InputComponent,
         ProgressComponent,
         TelInputComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        TaskCheckComponent
     ],
     imports: [
         CommonModule,
@@ -51,6 +56,7 @@ import { SpinnerComponent } from "./components/spinner/spinner.component";
         ReactiveFormsModule,
         ShorthenPipe,
         TimeAgoPipe,
+        StatusPipe,
         HighlightDirective,
         DxDataGridModule,
         DataGridComponent,
@@ -64,7 +70,8 @@ import { SpinnerComponent } from "./components/spinner/spinner.component";
         InputComponent,
         ProgressComponent,
         TelInputComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        TaskCheckComponent
     ]
 })
 

@@ -22,10 +22,7 @@ import { AddPartnerComponent } from '../add-partner/add-partner.component';
       state('show', style({
         opacity: 1,
       })),
-      transition('hide => show', [
-        animate('0.5s')
-      ]),
-      transition('show => hide', [
+      transition('hide <=> show', [
         animate('0.5s')
       ])
     ])
@@ -38,7 +35,6 @@ export class PartnerComponent {
   ];
   selectedRows = [];
   showFilterModel = false;
-  buttonItemAnimateState: 'hide' | 'show' = 'hide';
   displayUpdateButton = false;
 
   topups$!: Observable<PartnerModel[]>;
@@ -100,7 +96,6 @@ export class PartnerComponent {
 
   onSelectRow(rows: []){
     this.selectedRows = rows;
-    this.buttonItemAnimateState =  rows.length > 1 ? 'show' : 'hide'
-    this.displayUpdateButton = rows.length > 0;
+    this.displayUpdateButton = +rows.length === 1;
   }
 }

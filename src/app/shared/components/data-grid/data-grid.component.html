@@ -2,6 +2,8 @@
     id="gridContainer"
     [dataSource]="dataSource"
     keyExpr="id"
+    [showColumnLines]="false"
+    [showRowLines]="true"
     [showBorders]="false"
     [hoverStateEnabled]="true"
     [rowAlternationEnabled]="true"
@@ -29,7 +31,7 @@
                     [alignment]="col.alignment"
                     [width]="col.width"/>       
         <div *dxTemplate="let options of 'statusTemplate'">
-            <small class="badge badge-success">{{options.value}}</small>
+            <small style="color: white" class='badge' [ngClass]="getClass(options.value)">{{options.value | status}}</small>
         </div>
         <div *dxTemplate="let options of 'amountTemplate'">
             {{options.value | amount}}

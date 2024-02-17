@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
 import { StudentModel } from 'src/app/users/models/student.model';
@@ -18,6 +18,9 @@ export class StudentListComponent {
     { dataField: "faculty",caption:"Faculté", dataType:"string" },
     { dataField: "category",caption:"Catégorie", dataType:"string"},
     { dataField: "partner",caption:"Partenaire", dataType:"string" },
+  ];
+  contextMenuItems = [
+    { text: 'Consulter les demandes de service', code: 'DEMANDE_SERVICE' },
   ];
   selectedRows = [];
   
@@ -41,6 +44,20 @@ export class StudentListComponent {
   }
 
   onRowClick(event: any) {
-    this.router.navigateByUrl(`/service-request/student/${event.id}/request-treatment`);
+    
+  }
+
+  onContextMenuClick(event: any){
+    console.log(event)
+    if(event.action.code === 'DEMANDE_SERVICE'){
+      let student;
+      this.listData$.pipe(
+        tap(data => 
+          { 
+            student = data.find(x => x.id === event.id)
+          })
+      )
+      this.router.navigateByUrl(`/service-request/student/${event.id}/request-treatment`);
+    }
   }
 }

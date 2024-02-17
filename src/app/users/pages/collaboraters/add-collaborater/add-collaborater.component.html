@@ -22,14 +22,14 @@
                     <label for="exampleInputPassword1">Noms *</label>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Renseigner le noms du collaborateur" formControlName="lastName" autocomplete="off"  />
-                        <mat-error></mat-error>
+                        <mat-error>Ce champs est obligatoire</mat-error>
                     </mat-form-field>               
                 </div>
                 <div class="form-group mb-2">
                     <label for="exampleInputPassword1">Prénoms *</label>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Renseigner le prénoms du collaborateur" formControlName="firstName" autocomplete="off"  />
-                        <mat-error></mat-error>
+                        <mat-error>Ce champs est obligatoire</mat-error>
                     </mat-form-field>               
                 </div> 
                 <div class="form-group mb-2">
@@ -43,15 +43,24 @@
                     <label for="exampleInputPassword1">Email *</label>
                     <mat-form-field appearance="outline">
                         <input matInput placeholder="Renseigner l'adresse email du collaborateur" type="email" formControlName="email" autocomplete="off"  />
-                        <mat-error></mat-error>
+                        <mat-error>{{ getFormControlErrorText(mainForm.get('email')!) }}</mat-error>
                     </mat-form-field>               
                 </div>
+                <div class="form-group mb-2">
+                    <mat-checkbox (change)="showOptions($event)" [formControl]="serviceRequestNotifyCtrl" >Reçoit les notifications des nouvelles demandes de service</mat-checkbox>               
+                </div>
+                <span [@pricingInfo] *ngIf="serviceRequestNotifyCtrl.value">
+                    <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
+                    Rassurer vous d'avoir choisir un numéro de téléphone Camerounais, sinon cette option ne pourra être activée.
+                </span>
+                    
+                
             </div>
         </div>
     </div>
     <div class="card-footer">
         <mat-card-actions >
-            <button mat-button >Annuler</button>
+            <button mat-button (click)="onCancel()">Annuler</button>
             <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
         </mat-card-actions>
     </div>

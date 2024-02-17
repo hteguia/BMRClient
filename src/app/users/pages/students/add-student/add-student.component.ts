@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CollaboraterService } from '../../../services/collaborater.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoleModel } from '../../../models/role.model';
@@ -26,11 +26,11 @@ export class AddStudentComponent {
   listPartner$!: Observable<PartnerModel[]> 
 
   listFaculty=[
-    {id:"ISTM", name:"ISTM"},
-    {id:"FMBS", name:"FMBS"},
-    {id:"FMSP", name:"FMSP"},
-    {id:"UB", name:"UB"},
-    {id:"FHS", name:"FHS"},
+    {id:"ISTM", name:"ISTM (INSTITUT SUPÉRIEUR DES TECHNOLOGIES MEDICALE)"},
+    {id:"FMBS", name:"FMSB (FACULTÉ DE MÉDECINE ET DES SCIENCES BIOMÉDICALES DE YAOUNDÉ)"},
+    {id:"FMSP", name:"FMSP (FACULTÉ DE MÉDECINE ET DES SCIENCES PHARMACEUTIQUES DE DOUALA)"},
+    {id:"UB", name:"UB (UNIVERSITÉ DE BUEA)"},
+    {id:"FHS", name:"FHS (FACULTY OF HEALTH SCIENCES UNIVERSITY OF BUEA)"},
     {id:"UBa", name:"UBa"},
     {id:"AUTRES", name:"AUTRES"},
   ]
@@ -108,7 +108,7 @@ export class AddStudentComponent {
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
-          const formControl = this.mainForm.get('name');
+          const formControl = this.mainForm.get(prop.toLowerCase());
           if (formControl) {
             formControl.setErrors({
               serverError: error.error[prop]
@@ -117,6 +117,11 @@ export class AddStudentComponent {
         });
       }
     )
+  }
+
+  onCancel(){
+    this.resetForm();
+    this.router.navigateByUrl('/users/student');
   }
 
   private setFormData(){
@@ -149,5 +154,18 @@ export class AddStudentComponent {
 
   hasError( field: string, error: string ) {
     return this.phoneNumberCtrl.dirty && this.phoneNumberCtrl.hasError(error);
+  }
+
+  getFormControlErrorText(ctrl: AbstractControl){
+    if(ctrl.hasError('required')){
+      return 'Ce champs est obligatoire';
+    }
+    else if (ctrl.hasError('serverError')) {
+      return ctrl.errors?.['serverError'];
+    }
+    else
+    {
+      return 'Ce champs contient une erreur';
+    }
   }
 }

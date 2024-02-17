@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/ht
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-file-input',
@@ -27,7 +28,10 @@ export class FileInputComponent implements ControlValueAccessor {
 
   @HostListener('change', ['$event.target.files']) emitFiles( event: FileList ) {
     const file = event && event.item(0);
-    this.onChange(file);
+    if(this.onChange){
+      this.onChange(file);
+    }
+
     this.progress = 0;
     this.message = '';
     this.file = file;
@@ -74,7 +78,7 @@ export class FileInputComponent implements ControlValueAccessor {
     const formData = new FormData();
     formData.append('file', this.file, this.file.name);
     
-    this.http.post('https://localhost:5001/api/v1/file/upload', formData, {reportProgress: true, observe: 'events'})
+    this.http.post(`${environment.apiUrl}/v1/file/upload`, formData, {reportProgress: true, observe: 'events'})
       .subscribe({
         next: (event) => {
         if (event.type === HttpEventType.UploadProgress)

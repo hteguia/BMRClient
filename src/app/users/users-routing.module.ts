@@ -9,6 +9,7 @@ import { CollaboraterResolver } from './resolvers/collaborater.resolver';
 import { AddCollaboraterComponent } from './pages/collaboraters/add-collaborater/add-collaborater.component';
 import { RoleResolver } from './resolvers/role.resolver';
 import { AddStudentComponent } from './pages/students/add-student/add-student.component';
+import { UpdateCollaboraterComponent } from './pages/collaboraters/update-collaborater/update-collaborater.component';
 
 
 
@@ -17,7 +18,8 @@ const routes: Routes = [
     { path: "student", component: StudentComponent, resolve: { data: StudentResolver } },
     { path: "student/add", component:AddStudentComponent, resolve: { data: PartnerResolver } },
     { path: "collaborater", component: CollaboraterComponent, resolve: { data: CollaboraterResolver } },
-    { path: "collaborater/add", component:AddCollaboraterComponent, resolve:{data: RoleResolver } }
+    { path: "collaborater/add", component:AddCollaboraterComponent, resolve:{data: RoleResolver } },
+    { path: "collaborater/update", component:UpdateCollaboraterComponent, resolve:{data: RoleResolver } }
 ];
   
 @NgModule({

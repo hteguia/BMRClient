@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { AnyFn } from "@ngrx/store/src/selector";
-import { Observable, catchError, of } from "rxjs";
+import { Observable, catchError, of, tap } from "rxjs";
 import { LogService } from "src/app/core/services/log.service";
 import { environment } from "src/environments/environment";
 
@@ -14,10 +14,9 @@ export class AuthService {
   constructor(private http: HttpClient) {}
     
   login(data: {email: string, password: string}): Observable<any> {
-    this.logService.log(data);
     return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data).pipe(
       catchError(error => {
-        this.logService.log(error);
+        this.logService.error(error);
         return of(false);
       })
     );
@@ -36,15 +35,31 @@ export class AuthService {
   
   }
 
-  setToken(token: string){
-    localStorage.setItem('access_token', token);
+  sendRefreshToken(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/user/jwt/refreshToken?refreshToken=${this.refreshToken}`)
+      .pipe(
+        tap(({ accessToken, refreshToken }) => {
+          this.setToken({token: accessToken, refreshToken: refreshToken});
+        })
+      )
+  }
+
+  setToken(token: {token: string, refreshToken: string}) {
+    let user = this.currentUser;
+    user.accessToken = token.token;
+    user.refreshToken = token.refreshToken;
+    this.setUserData(user);
   }
 
   get token(){
-    return localStorage.getItem('access_token')
+    return  this.currentUser ? this.currentUser.accessToken : '';
   }
 
-  setUserData(user: {email:string, firstName:string, lastName:string, role:string, createAt: string, imageUrl:string}){
+  get refreshToken(){
+    return  this.currentUser ? this.currentUser.refreshToken : '';
+  }
+
+  setUserData(user: any){
     localStorage.setItem('user_data', JSON.stringify(user));
   }
   

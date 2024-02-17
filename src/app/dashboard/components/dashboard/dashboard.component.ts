@@ -5,6 +5,7 @@ import { Observable, map, tap } from 'rxjs';
 import { CollaboraterModel } from 'src/app/users/models/collaborater.model';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,12 +16,15 @@ export class DashboardComponent implements OnInit {
   constructor(private store: Store,private route: ActivatedRoute){}
   topups$!: Observable<CollaboraterModel[]>;
   private storageService = inject(StorageService)
+  private dashboardService = inject(DashboardService)
+  data$!: Observable<any>;
   ngOnInit(): void {
-    this.route.data.pipe(
-      tap(data=>this.storageService.saveData("user_profils", data)),
-      map(data => data['data'])
-    ).subscribe();  
+    // this.route.data.pipe(
+    //   tap(data=>this.storageService.saveData("user_profils", data)),
+    //   map(data => data['data'])
+    // ).subscribe();  
 
+    this.data$ = this.dashboardService.getDashboardData();
     this.setBreadcrump();
   }
 

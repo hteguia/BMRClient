@@ -21,7 +21,6 @@ export class PartnerService {
     }
 
     addPartner(formValue: any): Observable<any>  {
-        this.logService.log(formValue)
         return this.http.post(`${environment.apiUrl}/v1/partner`, formValue);
     }
 

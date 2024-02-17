@@ -48,6 +48,6 @@ export class MenuComponent implements OnInit {
   }
 
   hasRole(roles: any):boolean{
-    return roles.includes(this.currentUser.roles)
+    return roles.includes(this.currentUser.role)
   }
 }

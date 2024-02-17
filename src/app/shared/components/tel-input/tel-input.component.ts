@@ -44,14 +44,13 @@ export class TelInputComponent implements OnInit, AfterViewInit, OnChanges,OnDes
   registerOnTouched(fn: any): void {
     this.onChange = fn;
   }
+  
   setDisabledState?(isDisabled: boolean): void {
     
   }
 
-  
-    
   ngOnInit(){
-        
+       
   }
 
   ngAfterViewInit(){
@@ -70,6 +69,10 @@ export class TelInputComponent implements OnInit, AfterViewInit, OnChanges,OnDes
         } 
     });
     this.selectedCountryCode = this.iti.getSelectedCountryData().dialCode;
+    if(this.control!= undefined && this.control.value != ""){
+      this.iti.setNumber(this.control.value);
+    }
+
   }
 
   ngOnChanges(changes: any) {
