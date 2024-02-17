@@ -17,7 +17,10 @@
         <mat-form-field appearance="outline">
             <mat-select  placeholder="Choisir un moniteur" [formControl]="monitorCtrl">
                 <mat-option *ngFor="let option of monitorsList" [value]="option.id">{{ option.name }}</mat-option>
-            </mat-select>
-        </mat-form-field>
+            </mat-select>           
+        </mat-form-field>      
     </div>
+    <div class="invalid-feedback" style="display: block">
+        <ng-container *ngIf="error">This field is required</ng-container>
+      </div>
 </div>

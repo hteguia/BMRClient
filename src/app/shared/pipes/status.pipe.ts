@@ -16,6 +16,10 @@ export class StatusPipe implements PipeTransform{
               return "Traitement en cours";
             case StatusEnum.TRAITEMENT_TERMINE:
                 return "Traitement terminé";
+            case StatusEnum.OUI:
+              return "Oui";
+            case StatusEnum.NON:
+              return "Non";
             default:
               return "Status inconnu";
           }
