@@ -96,7 +96,12 @@ export class DataGridComponent  {
     }
 
     getClass(val:string):string{
-        return val == StatusEnum.TRAITEMENT_TERMINE ? 'badge-success' : 
-               val == StatusEnum.TRAITEMENT_ENCOURS ? "badge-warning" : "badge-danger";
+        if (val == StatusEnum.TRAITEMENT_TERMINE || val == StatusEnum.OUI) {
+            return 'badge-success';
+        } else if (val == StatusEnum.TRAITEMENT_ENCOURS || val == StatusEnum.NON) {
+            return 'badge-warning';
+        } else {
+            return 'badge-danger';
+        }
     }
 }

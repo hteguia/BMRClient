@@ -33,8 +33,11 @@ export class HttpErrorInterceptor implements HttpInterceptor{
           }
           const errorMessage = this.setError(error, req);
           //this.messageService.openSnackBarError(errorMessage, 'OK');
-          this.authService.logout();
-          this.router.navigateByUrl("auth/login");
+          if(error.status === 401){
+            this.authService.logout();
+            this.router.navigateByUrl("auth/login");
+          }
+
           return throwError(() => errorMessage);
         })
       )

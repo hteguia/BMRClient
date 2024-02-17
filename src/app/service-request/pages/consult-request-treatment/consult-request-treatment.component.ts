@@ -66,6 +66,10 @@ export class ConsultRequestTreatmentComponent {
   }
 
   saveAllChange(event: any){
+    if(!this.statusView.valid || !this.resultView.valid){
+      return;
+    }
+    
     let ob = []
     if(this.statusView.updated){
       ob.push(this.statusView.saveChange());

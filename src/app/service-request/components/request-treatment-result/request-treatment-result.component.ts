@@ -43,10 +43,11 @@ export class RequestTreatmentResultComponent {
 
   reload(){
     this.getFileResult();
+    this.FileToAdd = [];
   }
 
   onUploadFinished(event: any){
-     this.FileToAdd.push(event.id);
+     this.FileToAdd.push({id:event.id, fileName:event.fileName});
      this.fileList.push({id: event.id, fileName:event.fileName, fileSize: event.fileSize, isDownloadable:false});
      this.updated = true;
      this.updatedChange.emit();
@@ -60,6 +61,9 @@ export class RequestTreatmentResultComponent {
     });
   }
 
+  get valid() : boolean {
+    return true;
+  }
   downloadOrDeleteFile(event: any, file:any){
     event.preventDefault();
     file.isDownloadable ? this.downloadFile(file) : this.deleteFile(file);

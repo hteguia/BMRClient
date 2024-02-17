@@ -64,7 +64,7 @@ export class AddRequestTreatmentComponent {
   contentFileCtrl!: FormControl;
   deadlineCtrl!: FormControl;
   file: File | null = null;
-  extension = ['pdf','zip', 'docs']
+  extension = ['pdf','zip','docx','xlsx']
   deadLineList = [
     { id:"24 Heures", name:"24 Heures" },
     { id:"48 Heures", name:"48 Heures" },

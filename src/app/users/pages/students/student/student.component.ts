@@ -31,7 +31,6 @@ export class StudentComponent {
   columns: DataGridColumn[] = [
     { dataField: "lastName",caption:"Noms", dataType:"string", visible:true },
     { dataField: "firstName",caption:"Prénoms", dataType:"string", visible:true },
-    { dataField: "phoneNumber",caption:"Téléphone", dataType:"string", visible:true },
     { dataField: "email",caption:"Email", dataType:"string", visible:true },
     { dataField: "faculty",caption:"Faculté", dataType:"string", visible:true },
     { dataField: "category",caption:"Catégorie", dataType:"string", visible:true },

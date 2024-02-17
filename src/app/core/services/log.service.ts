@@ -5,7 +5,8 @@ import { environment } from "src/environments/environment";
 export class LogService {
    
     log(msg: any, level: "ERROR" | "CRITICAL" | "DEBUG" | "INFO" = "DEBUG") {
-        if(environment.production && level === "DEBUG") return;
+        if(environment.production) return;
+        
         console.log(level + " : " +new Date() + ": " + JSON.stringify(msg));
     }
 

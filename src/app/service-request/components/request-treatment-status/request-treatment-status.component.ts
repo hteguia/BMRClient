@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { RequestTreatmentStatusEnum } from '../../models/enums/request.treatment.status.enum';
 import { CollaboraterService } from 'src/app/users/services/collaborater.service';
 import { RequestTreatmentService } from '../../services/request-treatment.service';
-import { FormControl } from '@angular/forms';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { StatusEnum } from 'src/app/core/enums/status.enum';
 import { LogService } from 'src/app/core/services/log.service';
@@ -35,6 +35,7 @@ export class RequestTreatmentStatusComponent {
 
   monitorCtrl!: FormControl;
   statusCtrl!: FormControl;
+  error = false
 
   initForm(){
     this.monitorCtrl = new FormControl(this.requestTreatment.collaboraterId);
@@ -58,8 +59,17 @@ export class RequestTreatmentStatusComponent {
     this.updatedChange.emit();
   }
 
+  get valid() : boolean{
+    this.error = this.monitorCtrl.value == 0
+    if(!this.updated){
+      return true
+    }
+    return this.statusCtrl.value !== '' && this.monitorCtrl.value !== 0;
+  }
+
   reload(){
     this.getStatus();
+    this.error = false;
   }
   getStatus(){
     this.RequestTreatmentService.getStatus(+this.requestTreatment.id).subscribe({
@@ -97,6 +107,10 @@ export class RequestTreatmentStatusComponent {
   }
 
   saveChange(): Observable<any>{
+    console.log(this.monitorCtrl.value)
+    if(this.monitorCtrl.value === 0){
+      this.error = true;
+    }
     return this.RequestTreatmentService.saveStatus(
     {
       requestTreatmentId: +this.requestTreatment.id, 
@@ -108,5 +122,6 @@ export class RequestTreatmentStatusComponent {
   get enableUpdateMonitor(): boolean{
     return this.requestTreatment.treatmentStatus !== StatusEnum.TRAITEMENT_TERMINE;
   }
+
   
 }
