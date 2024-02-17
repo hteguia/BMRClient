@@ -7,6 +7,7 @@ import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { RequestTreatmentService } from '../../services/request-treatment.service';
 import { RequestTreatmentModel } from '../../models/request-treatment.model';
 import { FileService } from 'src/app/core/services/file.service';
+import { StudentService } from 'src/app/users/services/student.service';
 
 @Component({
   selector: 'app-request-treatment',
@@ -40,24 +41,37 @@ export class RequestTreatmentComponent {
   displayUpdateButton = false;
   showFilterModel = false;
   studentId!: string
+  student!: any; 
 
   // ::Service injection
   private RequestTreatmentService = inject(RequestTreatmentService);
   private fileService = inject(FileService);
+  private studentService = inject(StudentService);
 
   // ::Constructor
   constructor(private route: ActivatedRoute,  
     private router: Router, private breadcrumpService: BreadcrumpService){  
+      if(this.router.getCurrentNavigation()){
+        this.student = this.router.getCurrentNavigation()!.extras!.state;
+        console.log(this.student)
+      }
   }
+  
 
   // ::Methods
   ngOnInit(): void {
     this.studentId = this.route.snapshot.paramMap.get('id')!
     this.listData$ = this.RequestTreatmentService.getAllRequestTreatmentByStudent(+this.studentId);
-    this.breadcrumpService.setBreadcrump("Liste des demande de services", [
-      { title:"Demande de service", link:"/" },
-      { title:"Demande de service", link:"/" }
-    ]);
+    this.studentService.getStudent(+this.studentId).subscribe(
+      (response: any) => {
+        this.student = response;
+        this.breadcrumpService.setBreadcrump(`Demande de services de ${this.student!.firstName} ${this.student!.lastName}`, [
+          { title:"Demande de service", link:"/" },
+          { title:"Demande des étudiants", link:"/" }
+        ]);
+      }
+    )
+    
   }
 
   onRowClick(event: any){

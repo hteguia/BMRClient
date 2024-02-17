@@ -3,15 +3,17 @@
         <div class="margin">
             <span>
                 <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
-                Cliquer sur une ligne pour consulter les demande de service de l'étudiant.
+                Faites un clique droit sur une ligne pour avoir plus options.
             </span>
         </div> 
     </div>
     <div class="card-body">
         <app-data-grid 
             [columns]="columns"
+            [contextMenu]="contextMenuItems" 
             [dataSource]="listData$ | async"
-            (rowClick)="onRowClick($event)">
+            (rowClick)="onRowClick($event)"
+            (contextMenuClick)="onContextMenuClick($event)">
         </app-data-grid>
     </div>
     
