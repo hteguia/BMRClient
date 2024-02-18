@@ -20,6 +20,7 @@ import { RequestTreatmentDetailComponent } from './components/request-treatment-
 import { RequestTreatmentResultComponent } from './components/request-treatment-result/request-treatment-result.component';
 import { RequestTreatementResolver } from './resolvers/request.treatment.resolver';
 import { StudentService } from '../users/services/student.service';
+import { RequestTreatementListResolver } from './resolvers/request.treatment.list.resolver';
 
 
 
@@ -49,6 +50,7 @@ import { StudentService } from '../users/services/student.service';
     CollaboraterService, 
     StudentListResolver,
     StudentService,
+    RequestTreatementListResolver,
     RequestTreatementResolver]
 })
 export class ServiceRequestModule { }

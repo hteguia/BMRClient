@@ -10,7 +10,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src={{currentUser.imageUrl}} class="img-circle elevation-2" alt="User Image">
+          <img src={{currentUser.imgUrl}} class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a routerLink="/" class="d-block">{{currentUser.firstName}} {{currentUser.lastName}}</a>
@@ -32,23 +32,31 @@
           </li>
           <li class="nav-header" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR', 'BASIC'])">Demande de service</li>
           <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
-            <a  routerLink="/service-request/student"  routerLinkActive="active" class="nav-link">
+            <a  routerLink="/service/request-treatment/student"  routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-folder-open"></i>
               <p>
                 Demande des étudiants
               </p>
             </a>
           </li>
-          <li class="nav-item" *ngIf="hasRole(['BASIC'])">
-            <a  routerLink="/service-request/request-treatment"  routerLinkActive="active" class="nav-link">
+          <li class="nav-item" *ngIf="hasRole(['MODERATOR'])">
+            <a  routerLink="/service/request-treatment"  routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-folder-open"></i>
               <p>
                 Demande de service
               </p>
             </a>
           </li>
-          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])">
-            <a  routerLink="/service-request/document-type"  routerLinkActive="active" class="nav-link">
+          <li class="nav-item" *ngIf="hasRole(['BASIC'])">
+            <a  routerLink="/service/request-treatment"  routerLinkActive="active" class="nav-link">
+              <i class="nav-icon fa fa-folder-open"></i>
+              <p>
+                Demande de service
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
+            <a  routerLink="/service/document-type"  routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-folder"></i>
               <p>
                 Type de document
@@ -56,7 +64,7 @@
             </a>
           </li>
           <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])">
-            <a  routerLink="/service-request/document-template"  routerLinkActive="active" class="nav-link">
+            <a  routerLink="/service/document-template"  routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-book"></i>
               <p>
                 Modéle de document
@@ -65,7 +73,7 @@
           </li>
 
           <li class="nav-header" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">Utilisateurs</li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
             <a  routerLink="/users/student"  routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-graduation-cap"></i>
               <p>

@@ -40,9 +40,9 @@ ngOnInit(): void {
     map(data => data['listDocumentTemplate'])
   );  
 
-  this.breadcrumpService.setBreadcrump("Liste des types de documents", [
+  this.breadcrumpService.setBreadcrump("Liste des modéle de document", [
     { title:"Demande de service", link:"/" }, 
-    { title:"Type de document", link:"/" }
+    { title:"Modéle de document", link:"/" }
   ]);
 }
 

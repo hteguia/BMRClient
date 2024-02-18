@@ -8,6 +8,7 @@ import { RequestTreatmentService } from '../../services/request-treatment.servic
 import { LogService } from 'src/app/core/services/log.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { StorageService } from 'src/app/core/services/storage.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 export function toFormData( formValue: any ) {
   const formData = new FormData();
@@ -56,7 +57,7 @@ export class AddRequestTreatmentComponent {
 
   private requestTreatmentService = inject(RequestTreatmentService);
   private logService = inject(LogService);
-  private storageService = inject(StorageService);
+  private authService = inject(AuthService);
 
   loading = false;
   mainForm!: FormGroup;
@@ -83,6 +84,7 @@ export class AddRequestTreatmentComponent {
   showPricing$!: Observable<boolean>;
   servicePricings$!: Observable<ServicePricing[]>;
   id!: string
+  currentUser!: any;
   ngOnInit(): void {  
     this.id = this.route.snapshot.paramMap.get('id')!
     console.log("this.id "+this.id);
@@ -92,7 +94,9 @@ export class AddRequestTreatmentComponent {
     
    this.initFormControls();
    this.initMainForm();  
-   this.initObservables();   
+   this.initObservables(); 
+   
+   this.currentUser = this.authService.userProfil;
   }
 
   initMainForm(){
@@ -121,7 +125,14 @@ export class AddRequestTreatmentComponent {
       (response) =>{
         this.loading = false;
         this.resetForm();
-        this.router.navigateByUrl(`/service-request/student/${this.id}/request-treatment`);
+        if(this.currentUser.role === 'BASIC'){
+          this.router.navigateByUrl(`/service/request-treatment`);
+        }
+        else{
+          this.router.navigateByUrl(`/service/request-treatment/student/${this.id}`);
+        }
+
+        
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {

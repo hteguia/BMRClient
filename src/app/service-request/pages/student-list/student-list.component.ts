@@ -57,7 +57,7 @@ export class StudentListComponent {
             student = data.find(x => x.id === event.id)
           })
       )
-      this.router.navigateByUrl(`/service-request/student/${event.id}/request-treatment`);
+      this.router.navigateByUrl(`/service/request-treatment/student/${event.id}`);
     }
   }
 }

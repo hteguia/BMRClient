@@ -53,7 +53,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
       .pipe(
         switchMap((_data: any) => {
           //return this.authInterceptor.intercept(request, next);
-          const authToken = this.authService.token;
+          const authToken = this.authService.accessToken?.token;
           if(authToken){
             request = request.clone({
               setHeaders: {

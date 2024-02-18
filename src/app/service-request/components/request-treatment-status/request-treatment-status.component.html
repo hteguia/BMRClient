@@ -11,7 +11,7 @@
             </app-task-check>
         </li>
     </ul>
-    <div style="margin-top:20px; display: flex;" *ngIf="enableUpdateMonitor">
+    <div style="margin-top:20px; display: flex;" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])">
 
         <label style="margin-right: 10px;">Moniteur en charge du service</label>
         <mat-form-field appearance="outline">

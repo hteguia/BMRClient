@@ -47,7 +47,7 @@ export class PartnerComponent {
   ngOnInit(): void {
     this.topups$ = this.route.data.pipe(
       map(data => data['data'])
-  );  
+    );  
 
   this.breadcrumpService.setBreadcrump("Liste des partenaires", [
       { title:"Utilisateurs", link:"/" }, 

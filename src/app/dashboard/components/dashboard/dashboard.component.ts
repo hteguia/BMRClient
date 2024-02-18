@@ -6,6 +6,7 @@ import { CollaboraterModel } from 'src/app/users/models/collaborater.model';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
 import { DashboardService } from '../../services/dashboard.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,14 +19,17 @@ export class DashboardComponent implements OnInit {
   private storageService = inject(StorageService)
   private dashboardService = inject(DashboardService)
   data$!: Observable<any>;
+  currentUser: any;
+  private authService = inject(AuthService);
   ngOnInit(): void {
     // this.route.data.pipe(
     //   tap(data=>this.storageService.saveData("user_profils", data)),
     //   map(data => data['data'])
     // ).subscribe();  
-
     this.data$ = this.dashboardService.getDashboardData();
     this.setBreadcrump();
+
+    this.currentUser = this.authService.userProfil;
   }
 
   private setBreadcrump():void{
@@ -37,5 +41,9 @@ export class DashboardComponent implements OnInit {
           { title:"Dashboard", link:"/" }
         ]
       }));
+  }
+
+  hasRole(roles: any):boolean{
+    return roles.includes(this.currentUser.role)
   }
 }

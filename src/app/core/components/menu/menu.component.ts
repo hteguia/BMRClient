@@ -44,7 +44,7 @@ export class MenuComponent implements OnInit {
   });
  }
   ngOnInit(): void {
-    this.currentUser = this.authService.currentUser;
+    this.currentUser = this.authService.userProfil; 
   }
 
   hasRole(roles: any):boolean{

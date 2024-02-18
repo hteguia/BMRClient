@@ -24,13 +24,13 @@
             <span class="role-info">{{currentUser.role}}</span>
           </div>
           <div class="image">
-            <img src={{currentUser.imageUrl}} class="img-circle elevation-2" alt="User Image">
+            <img src={{currentUser.imgUrl}} class="img-circle elevation-2" alt="User Image">
           </div>
           
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right"  >
           <span class="dropdown-item dropdown-header">
-            <img class="rounded" src={{currentUser.imageUrl}} alt="User" width="100" height="100" style="width: 100px; height: 100px;">
+            <img class="rounded" src={{currentUser.imgUrl}} alt="User" width="100" height="100" style="width: 100px; height: 100px;">
             <p>{{currentUser.email}}
               <small>Membre depuis le {{currentUser.createAt | date:'dd MMM yyyy':undefined:'fr'}}</small>
             </p>

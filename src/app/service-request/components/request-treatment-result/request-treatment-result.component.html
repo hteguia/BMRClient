@@ -18,4 +18,5 @@
 </table>
 <app-file-input 
     [upload]="true" 
-    (onUploadFinished)="onUploadFinished($event)" />
+    (onUploadFinished)="onUploadFinished($event)" 
+    *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])"/>

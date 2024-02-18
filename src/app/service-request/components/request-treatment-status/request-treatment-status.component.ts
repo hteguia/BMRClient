@@ -6,6 +6,8 @@ import { AbstractControl, FormControl } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
 import { StatusEnum } from 'src/app/core/enums/status.enum';
 import { LogService } from 'src/app/core/services/log.service';
+import { StorageService } from 'src/app/core/services/storage.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-request-treatment-status',
@@ -20,6 +22,9 @@ export class RequestTreatmentStatusComponent {
   private RequestTreatmentService = inject(RequestTreatmentService);
   private collaboratorService = inject(CollaboraterService);
   private logService = inject(LogService);
+  private authService = inject(AuthService);
+
+  currentUser: any;
 
   titleStatus = "Veuillez cocher les étapes, durant la phase de correction et enregistrer";
   slectedStatus: string = '';
@@ -44,11 +49,20 @@ export class RequestTreatmentStatusComponent {
     this.monitorCtrl.valueChanges.pipe(
       tap((value: any) => { this.updated = true; this.updatedChange.emit(); })
     ).subscribe();
+
+    
+    if(this.currentUser.role === 'MODERATOR'){
+      if(!this.requestTreatment.collaboraterId){
+        this.monitorCtrl.setValue(this.currentUser.id);
+      }
+      this.monitorCtrl.disable();
+      
+    }
   }
 
   ngOnInit(): void {
+    this.currentUser = this.authService.userProfil;
     this.initForm();
-
     this.getStatus();
     this.getCollaborators();
   }
@@ -57,6 +71,10 @@ export class RequestTreatmentStatusComponent {
     this.statusCtrl.setValue(event.val ? event.code : '');
     this.updated = true;
     this.updatedChange.emit();
+
+    if(this.requestTreatment.treatmentStatus !== StatusEnum.TRAITEMENT_TERMINE){
+      this.monitorCtrl.disable();
+    }
   }
 
   get valid() : boolean{
@@ -101,7 +119,8 @@ export class RequestTreatmentStatusComponent {
         element.disabled = true;
       }
       else{
-        element.disabled = index === 0 || this.statusList[index-1].date === '';
+        element.disabled = index === 0 || this.statusList[index-1].date === '' ||
+                           this.currentUser.role === 'BASIC';
       }
      });
   }
@@ -123,5 +142,8 @@ export class RequestTreatmentStatusComponent {
     return this.requestTreatment.treatmentStatus !== StatusEnum.TRAITEMENT_TERMINE;
   }
 
+  hasRole(roles: any):boolean{
+    return roles.includes(this.currentUser.role)
+  }
   
 }

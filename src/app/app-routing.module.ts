@@ -12,7 +12,7 @@ const routes: Routes = [
       children:[
       { path: 'dashboard', loadChildren: ()=>import('./dashboard/dashboard.module').then(m=>m.DashboardModule) },
       { path: 'sms', loadChildren:()=>import('./sms/sms.module').then(m=>m.SmsModule) },
-      { path: 'service-request', loadChildren:()=>import('./service-request/service-request.module').then(m=>m.ServiceRequestModule) },
+      { path: 'service', loadChildren:()=>import('./service-request/service-request.module').then(m=>m.ServiceRequestModule) },
       { path: 'users', loadChildren:()=>import('./users/users.module').then(m=>m.UsersModule) },
       {
         path: '**',
