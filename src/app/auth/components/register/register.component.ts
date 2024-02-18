@@ -159,8 +159,7 @@ export class RegisterComponent implements OnInit {
       tap(currentUser => {
         this.loading = false;
         if(currentUser){
-          this.auth.setUserData(currentUser);
-          this.auth.setToken(currentUser.data.jwToken);
+          this.auth.saveAccessToken(currentUser);
           this.router.navigateByUrl('/');
         }
         else{

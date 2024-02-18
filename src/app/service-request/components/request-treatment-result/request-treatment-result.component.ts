@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { RequestTreatmentService } from '../../services/request-treatment.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { LogService } from 'src/app/core/services/log.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-request-treatment-result',
@@ -17,13 +18,17 @@ export class RequestTreatmentResultComponent {
   private requestTreatmentService = inject(RequestTreatmentService);
   private fileService = inject(FileService);
   private logService = inject(LogService);
+  private authService = inject(AuthService);
 
   FileToAdd: any[] = [];
   fileList: any[] = [];
   updated = false;
 
+  currentUser!:any;
+
   ngOnInit() {
     this.reload();
+    this.currentUser = this.authService.userProfil;
   }
 
   getFileResult(){
@@ -94,5 +99,9 @@ export class RequestTreatmentResultComponent {
       if (indexa > -1) { // only splice array when item is found
         this.FileToAdd.splice(indexa, 1); // 2nd parameter means remove one item only
       }
+  }
+
+  hasRole(roles: any):boolean{
+    return roles.includes(this.currentUser.role)
   }
 }

@@ -1,11 +1,15 @@
 <div class="card" >
-    <div class="card-header">
-        <div class="margin">
+    <div class="card-header" >
+        <div class="margin" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'BASIC'])">
             <div class="btn-group">
                 <app-button label="Nouveau demande de service" icon="add" color="primary" cssClass="btn--primary" (click)="onAddNewItem()"></app-button>
-                <app-button label="Modifier la demande de service" [@fade]="displayUpdateButton ? 'show' : 'hide'" icon="edit" color="primary" (click)="onUpdateItem()" cssClass="btn--primary"></app-button>
-            </div>
-                                           
+            </div>                                
+        </div> 
+        <div class="margin mt-2">
+            <span>
+                <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
+                Faites un clique droit sur une ligne pour avoir plus options.
+            </span>
         </div> 
     </div>
     <div class="card-body">
@@ -13,8 +17,6 @@
             [columns]="columns"
             [contextMenu]="contextMenuItems" 
             [dataSource]="listData$ | async"
-            (selectedRow)="onSelectRow($event)"
-            (rowClick)="onRowClick($event)"
             (contextMenuClick)="onContextMenuClick($event)">
         </app-data-grid>
     </div>

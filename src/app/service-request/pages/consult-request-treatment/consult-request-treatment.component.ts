@@ -7,6 +7,7 @@ import { RequestTreatmentResultComponent } from '../../components/request-treatm
 import { RequestTreatmentStatusComponent } from '../../components/request-treatment-status/request-treatment-status.component';
 import { LogService } from 'src/app/core/services/log.service';
 import { merge } from 'rxjs';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-consult-request-treatment',
@@ -37,7 +38,7 @@ export class ConsultRequestTreatmentComponent {
 
   private requestTreatmentService = inject(RequestTreatmentService);
   private logService = inject(LogService);
-
+  private authService = inject(AuthService);
   requestTreatment!:any;
   id!: any;
   titleStatus = "Veuillez cocher les étapes, durant la phase de correction et enregistrer";
@@ -46,11 +47,17 @@ export class ConsultRequestTreatmentComponent {
   displayUpdateButton = false;
   disabledSaveButton = true;
 
+  currentUser!:any;
+
   constructor(private router: Router)
   {
     if(this.router.getCurrentNavigation()){
       this.requestTreatment = this.router.getCurrentNavigation()!.extras!.state;
     }
+  }
+
+  ngOnInit(): void {
+    this.currentUser = this.authService.userProfil;
   }
   
   private getRequestTreatmentDetail(id: any){
@@ -92,5 +99,9 @@ export class ConsultRequestTreatmentComponent {
       }
     });
     this.disabledSaveButton = true;
+  }
+
+  hasRole(roles: any):boolean{
+    return roles.includes(this.currentUser.role)
   }
 }

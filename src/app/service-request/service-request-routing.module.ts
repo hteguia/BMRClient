@@ -9,13 +9,14 @@ import { AddRequestTreatmentComponent } from './pages/add-request-treatment/add-
 import { StudentListComponent } from './pages/student-list/student-list.component';
 import { StudentListResolver } from './resolvers/student-list.resolver';
 import { ConsultRequestTreatmentComponent } from './pages/consult-request-treatment/consult-request-treatment.component';
-import { RequestTreatementResolver } from './resolvers/request.treatment.resolver';
+import { RequestTreatementListResolver } from './resolvers/request.treatment.list.resolver';
 
 
 const routes: Routes = [
-    { path: "student", component: StudentListComponent, resolve: { data: StudentListResolver } },
-    { path: "student/:id/request-treatment", component: RequestTreatmentComponent },
-    { path: "student/:id/request-treatment/add", component: AddRequestTreatmentComponent, resolve: { data: DocumentTypeResolver } },
+    { path: "request-treatment/student", component: StudentListComponent, resolve: { data: StudentListResolver } },
+    { path: "request-treatment/student/:id", component: RequestTreatmentComponent },
+    { path: "request-treatment", component: RequestTreatmentComponent, resolve: { data: RequestTreatementListResolver } },
+    { path: "request-treatment/student/:id/add", component: AddRequestTreatmentComponent, resolve: { data: DocumentTypeResolver } },
     { 
       path: "request-treatment/:id/consult", component: ConsultRequestTreatmentComponent
     },

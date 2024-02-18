@@ -12,8 +12,7 @@ export class UserBillingsResolver implements Resolve<Billing[]>{
     constructor(private authService: AuthService, private smsService: SmsService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Billing[]> {
-        console.log(this.authService.currentUser.id);
-        return this.smsService.getUserBillings(this.authService.currentUser.id);
+        return this.smsService.getUserBillings(this.authService.userProfil.id);
     }
 
 }

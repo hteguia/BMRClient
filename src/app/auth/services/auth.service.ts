@@ -3,6 +3,7 @@ import { Injectable, inject } from "@angular/core";
 import { AnyFn } from "@ngrx/store/src/selector";
 import { Observable, catchError, of, tap } from "rxjs";
 import { LogService } from "src/app/core/services/log.service";
+import { StorageService } from "src/app/core/services/storage.service";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -10,6 +11,7 @@ import { environment } from "src/environments/environment";
 })
 export class AuthService {
   private logService = inject(LogService);
+  private storageService = inject(StorageService);
 
   constructor(private http: HttpClient) {}
     
@@ -36,41 +38,57 @@ export class AuthService {
   }
 
   sendRefreshToken(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/user/jwt/refreshToken?refreshToken=${this.refreshToken}`)
+    return this.http.get<any>(`${environment.apiUrl}/user/jwt/refreshToken?refreshToken=${this.accessToken.refreshToken}`)
       .pipe(
         tap(({ accessToken, refreshToken }) => {
-          this.setToken({token: accessToken, refreshToken: refreshToken});
+          this.saveAccessToken({token: accessToken, refreshToken: refreshToken});
         })
       )
   }
 
-  setToken(token: {token: string, refreshToken: string}) {
-    let user = this.currentUser;
-    user.accessToken = token.token;
-    user.refreshToken = token.refreshToken;
-    this.setUserData(user);
+  saveAccessToken(accessToken: { token: string, refreshToken: string }){
+    this.storageService.saveData('access_token', accessToken);
   }
 
-  get token(){
-    return  this.currentUser ? this.currentUser.accessToken : '';
+  saveUserPofils(user: any){
+    this.storageService.saveData('user_profil', user);
   }
 
-  get refreshToken(){
-    return  this.currentUser ? this.currentUser.refreshToken : '';
+  get accessToken():any {
+    return this.storageService.getData('access_token');
   }
 
-  setUserData(user: any){
-    localStorage.setItem('user_data', JSON.stringify(user));
+  get userProfil():any {
+    return this.storageService.getData('user_profil');
   }
+
+  // setToken(token: {token: string, refreshToken: string}) {
+  //   let user = this.currentUser;
+  //   user.accessToken = token.token;
+  //   user.refreshToken = token.refreshToken;
+  //   this.setUserData(user);
+  // }
+
+  // get token(){
+  //   return  this.currentUser ? this.currentUser.accessToken : '';
+  // }
+
+  // get refreshToken(){
+  //   return  this.currentUser ? this.currentUser.refreshToken : '';
+  // }
+
+  // setUserData(user: any){
+  //   localStorage.setItem('user_data', JSON.stringify(user));
+  // }
   
 
-  get currentUser(){
-    return JSON.parse(this.userData)
-  }
+  // get currentUser(){
+  //   return JSON.parse(this.userData)
+  // }
 
-  get userData() :any {
-    return localStorage.getItem('user_data');
-  }
+  // get userData() :any {
+  //   return localStorage.getItem('user_data');
+  // }
 
   logout(){
     this.clearLSwithoutExcludedKey()

@@ -13,8 +13,7 @@ export class TopupResolver implements Resolve<Topup[]>{
     constructor(private authService: AuthService, private smsService: SmsService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Topup[]> {
-        console.log(this.authService.currentUser.id);
-        return this.smsService.getTopup(this.authService.currentUser.id);
+        return this.smsService.getTopup(this.authService.userProfil.id);
     }
 
 }
