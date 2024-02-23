@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { AnyFn } from "@ngrx/store/src/selector";
 import { Observable, catchError, of, tap } from "rxjs";
 import { LogService } from "src/app/core/services/log.service";
 import { StorageService } from "src/app/core/services/storage.service";
@@ -37,6 +36,14 @@ export class AuthService {
   
   }
 
+  generateTokenResetPassword(email: string): Observable<string> {
+    return this.http.get<string>(`${environment.apiUrl}/Account/password-reset-token?email=${email}`);
+  }
+
+  ResetPassword(data:{email:string, token:string, password:string, confirmPassword:string}): Observable<any> {
+    return this.http.post<any>(`${environment.apiUrl}/Account/reset-password`, data);
+  }
+
   sendRefreshToken(): Observable<any> {
     return this.http.get<any>(`${environment.apiUrl}/user/jwt/refreshToken?refreshToken=${this.accessToken.refreshToken}`)
       .pipe(
@@ -61,34 +68,6 @@ export class AuthService {
   get userProfil():any {
     return this.storageService.getData('user_profil');
   }
-
-  // setToken(token: {token: string, refreshToken: string}) {
-  //   let user = this.currentUser;
-  //   user.accessToken = token.token;
-  //   user.refreshToken = token.refreshToken;
-  //   this.setUserData(user);
-  // }
-
-  // get token(){
-  //   return  this.currentUser ? this.currentUser.accessToken : '';
-  // }
-
-  // get refreshToken(){
-  //   return  this.currentUser ? this.currentUser.refreshToken : '';
-  // }
-
-  // setUserData(user: any){
-  //   localStorage.setItem('user_data', JSON.stringify(user));
-  // }
-  
-
-  // get currentUser(){
-  //   return JSON.parse(this.userData)
-  // }
-
-  // get userData() :any {
-  //   return localStorage.getItem('user_data');
-  // }
 
   logout(){
     this.clearLSwithoutExcludedKey()
