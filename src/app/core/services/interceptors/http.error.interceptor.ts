@@ -38,6 +38,8 @@ export class HttpErrorInterceptor implements HttpInterceptor{
             this.router.navigateByUrl("auth/login");
           }
 
+          this.router.navigateByUrl("auth/login");
+
           return throwError(() => errorMessage);
         })
       )
