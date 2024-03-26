@@ -84,6 +84,19 @@ onRowClick(event: any){
  
 }
 
+resetPassword(){
+  if(this.selectedRows.length){
+    this.collaboraterService.ResetPasswordCollaborater({id:this.selectedRows[0]}).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: (error: any) => {
+        console.log(error);
+      }
+    });
+  }
+}
+
   onSelectRow(rows: []){
       this.selectedRows = rows;
       this.displayUpdateButton = +rows.length === 1;

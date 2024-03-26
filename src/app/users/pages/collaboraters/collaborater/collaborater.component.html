@@ -4,6 +4,12 @@
             <div class="btn-group">
                 <app-button label="Nouveau collaborateurs" icon="add" color="primary" cssClass="btn--primary" (click)="onAddNewItem()"></app-button>
                 <app-button label="Modifier collaborateurs" [@fade]="displayUpdateButton ? 'show' : 'hide'" icon="edit" color="primary" (click)="onUpdateItem()" cssClass="btn--primary"></app-button>
+                <app-button label="Renitialiser mot de passe" 
+                            [@fade]="displayUpdateButton ? 'show' : 'hide'" 
+                            icon="add" 
+                            color="primary" 
+                            cssClass="btn--primary" 
+                            (click)="resetPassword()"></app-button>
             </div>
                                            
         </div> 
@@ -19,3 +25,4 @@
     </div>
     
 </div>
+<app-spinner></app-spinner>

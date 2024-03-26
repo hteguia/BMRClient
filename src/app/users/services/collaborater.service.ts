@@ -33,4 +33,9 @@ export class CollaboraterService {
         return this.http.put(`${environment.apiUrl}/v1/collaborater`, formValue);
     }
 
+    ResetPasswordCollaborater(formValue: {id:number}): Observable<any>  {
+        this.logService.log(formValue)
+        return this.http.post(`${environment.apiUrl}/v1/collaborater/ResetPasswordCollaborater`, formValue);
+    }
+
 }
