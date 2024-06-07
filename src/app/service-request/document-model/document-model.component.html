@@ -6,9 +6,14 @@
                     <app-button 
                         *ngIf="hasRole(btn.visibleForRoles)"
                         label="{{btn.label}}" 
-                        icon="{{btn.icon}}" color="primary" 
+                        icon="{{btn.icon}}" 
+                        color="primary" 
                         cssClass="btn--primary"
-                        (click)="onActionButtonClick($event)"/>
+                        action="{{btn.action}}"
+                        actionType="{{btn.actionType}}"
+                        [disabled]="false"
+                        (click)="onActionButtonClick($event)">
+                    </app-button>
                 </ng-container>             
                     
             </div>                                          

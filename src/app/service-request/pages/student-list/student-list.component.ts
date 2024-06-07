@@ -18,6 +18,7 @@ export class StudentListComponent {
     { dataField: "faculty",caption:"Faculté", dataType:"string" },
     { dataField: "category",caption:"Catégorie", dataType:"string"},
     { dataField: "partner",caption:"Partenaire", dataType:"string" },
+    
   ];
   contextMenuItems = [
     { text: 'Consulter les demandes de service', code: 'DEMANDE_SERVICE' },
@@ -49,7 +50,7 @@ export class StudentListComponent {
 
   onContextMenuClick(event: any){
     console.log(event)
-    if(event.action.code === 'DEMANDE_SERVICE'){
+    if(event.code === 'DEMANDE_SERVICE'){
       let student;
       this.listData$.pipe(
         tap(data => 

@@ -2,19 +2,18 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
-import { DocumentTemplateModel } from '../../models/document-template.model';
-import { DocumentTemplateService } from '../../services/document-template.service';
 import { FileService } from 'src/app/core/services/file.service';
 import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
+import { DocumentTemplateModel } from '../models/document-template.model';
+import { ServiceRequestService } from '../service.request.service';
 
 @Component({
-  selector: 'app-document-template',
-  templateUrl: './document-template.component.html',
-  styleUrls: ['./document-template.component.css']
+  selector: 'app-document-model',
+  templateUrl: './document-model.component.html',
+  styleUrls: ['./document-model.component.css']
 })
-export class DocumentTemplateComponent extends BaseGridPageComponent {
-  
-  private documentTemplateService = inject(DocumentTemplateService);
+export class DocumentModelComponent extends BaseGridPageComponent {
+  private serviceRequestService = inject(ServiceRequestService);
   private fileService = inject(FileService);
 
   documentTemplates$!: Observable<DocumentTemplateModel[]>;
@@ -29,7 +28,7 @@ export class DocumentTemplateComponent extends BaseGridPageComponent {
       this.contextMenuItems = [
         { 
           text: 'Télécharger', code:'DOWNLOAD', actionType: ActionTypes.FUNCTION, 
-        action: 'donwloadDocumentTemplate' },
+        action: 'DOWNLOAD' },
       ];
 
       this.columns = [
@@ -41,10 +40,10 @@ export class DocumentTemplateComponent extends BaseGridPageComponent {
           label: 'Nouveau modèle de document', 
           icon: 'add', 
           actionType: ActionTypes.NAVIGUATE, 
-          action: '/sms/topup/add', 
+          action: 'service/document-template/add', 
           visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
-          disabled: false ,
-          disabledType: DisabledTypes.NONE
+          disabledType: DisabledTypes.NONE,
+          disabled: false 
         }
       ];
   }
@@ -60,13 +59,13 @@ export class DocumentTemplateComponent extends BaseGridPageComponent {
 
   fetchListOfDocumentTemplate(): void {
     this.loading = true;
-    this.documentTemplates$ = this.documentTemplateService.getAllDocumentTemplate()
+    this.documentTemplates$ = this.serviceRequestService.getDocumentModel()
   }
 
-    donwloadDocumentTemplate(id: number) {
-    this.documentTemplateService.getDocumentTemplate(id).subscribe(
+  donwloadDocumentTemplate(id: number) {
+    this.serviceRequestService.getDocumentModelById(id).subscribe(
       (response: any) => {
-        this.documentTemplateService.downloadDocumentTemplate(id).subscribe(async (event) => {
+        this.serviceRequestService.downloadDocumentModel(id).subscribe(async (event) => {
           this.fileService.download({event:event, name:response.name});
       });
       },
@@ -77,13 +76,16 @@ export class DocumentTemplateComponent extends BaseGridPageComponent {
   }
 
   onActionButtonClick(event: any) {
+    console.log("dddddddddddddddd "+event.id)
     if(event.actionType === ActionTypes.NAVIGUATE){
       this.router.navigateByUrl(event.action);
     }
 
     if(event.actionType === ActionTypes.FUNCTION){
-      if(event.action === 'donwloadDocumentTemplate'){
-      //this[event.action](this.idSelected);
+      console.log("dddddddddddddddd "+event.action)
+      if(event.action === 'DOWNLOAD'){
+        console.log("dddddddddddddddsssssddddd "+event.id)
+      this.donwloadDocumentTemplate(event.id)
     }
 
     if(event.actionType === ActionTypes.API){

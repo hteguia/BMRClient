@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ActionTypes } from '../../pages/base-grid-page/base-grid-page.component';
 
 @Component({
   selector: 'app-button',
@@ -14,11 +15,13 @@ export class ButtonComponent {
   @Input() cssClass: string = "";
   @Input() disabled: boolean = false;
   @Input() loading: boolean = false;
+  @Input() actionType: string = "NAVIGUATE";
+  @Input() action: string = "";
 
   @Output() click = new EventEmitter();
 
   onClick(event: MouseEvent){
     event.stopPropagation();
-    this.click.emit();
+    this.click.emit({actionType: this.actionType, action: this.action});
   }
 }

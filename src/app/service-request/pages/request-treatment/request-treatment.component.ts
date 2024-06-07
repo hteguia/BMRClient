@@ -112,7 +112,7 @@ export class RequestTreatmentComponent {
   }
 
   onContextMenuClick(event: any){
-    if(event.action.code === 'DOWNLOAD'){
+    if(event.code === 'DOWNLOAD'){
       this.RequestTreatmentService.getRequestTreatmentById(event.id).subscribe(
         (response: any) => {
           this.RequestTreatmentService.downloadRequestTreatment(event.id, response.fileName);
@@ -123,7 +123,7 @@ export class RequestTreatmentComponent {
       )
     }
 
-    if(event.action.code === 'CONSULT'){
+    if(event.code === 'CONSULT'){
       this.RequestTreatmentService.getRequestTreatmentById(event.id).subscribe(
         (response:any)=>{
            this.router.navigateByUrl(`/service/request-treatment/${event.id}/consult`, { state: response });

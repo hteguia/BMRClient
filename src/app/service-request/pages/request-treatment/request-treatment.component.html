@@ -2,7 +2,13 @@
     <div class="card-header" >
         <div class="margin" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'BASIC'])">
             <div class="btn-group">
-                <app-button label="Nouveau demande de service" icon="add" color="primary" cssClass="btn--primary" (click)="onAddNewItem()"></app-button>
+                <app-button 
+                    label="Nouveau demande de service" 
+                    icon="add" 
+                    color="primary" 
+                    cssClass="btn--primary" 
+                    (click)="onAddNewItem()">
+               </app-button>
             </div>                                
         </div> 
         <div class="margin mt-2">

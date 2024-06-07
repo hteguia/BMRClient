@@ -21,6 +21,11 @@ import { RequestTreatmentResultComponent } from './components/request-treatment-
 import { RequestTreatementResolver } from './resolvers/request.treatment.resolver';
 import { StudentService } from '../users/services/student.service';
 import { RequestTreatementListResolver } from './resolvers/request.treatment.list.resolver';
+import { DocumentModelComponent } from './document-model/document-model.component';
+import { ServiceRequestService } from './service.request.service';
+import { DocumentModelAddComponent } from './document-model-add/document-model-add.component';
+import { StudentRequestComponent } from './student-request/student-request.component';
+import { StudentListRequestComponent } from './student-list-request/student-list-request.component';
 
 
 
@@ -34,7 +39,11 @@ import { RequestTreatementListResolver } from './resolvers/request.treatment.lis
     ConsultRequestTreatmentComponent,
     RequestTreatmentStatusComponent,
     RequestTreatmentDetailComponent,
-    RequestTreatmentResultComponent
+    RequestTreatmentResultComponent,
+    DocumentModelComponent,
+    DocumentModelAddComponent,
+    StudentRequestComponent,
+    StudentListRequestComponent
   ],
   imports: [
     CommonModule,
@@ -51,6 +60,7 @@ import { RequestTreatementListResolver } from './resolvers/request.treatment.lis
     StudentListResolver,
     StudentService,
     RequestTreatementListResolver,
-    RequestTreatementResolver]
+    RequestTreatementResolver,
+    ServiceRequestService]
 })
 export class ServiceRequestModule { }

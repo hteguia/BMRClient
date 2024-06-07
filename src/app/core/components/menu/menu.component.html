@@ -30,12 +30,11 @@
             </a>
             
           </li>
-          <li class="nav-header" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR', 'BASIC'])">Demande de service</li>
           <li class="nav-item" *ngIf="hasRole(['SUPERADMIN', 'ADMIN'])">
             <a  routerLink="/service/request-treatment/student"  routerLinkActive="active" class="nav-link">
               <i class="nav-icon fa fa-folder-open"></i>
               <p>
-                Demande des étudiants
+                Demandes de service
               </p>
             </a>
           </li>

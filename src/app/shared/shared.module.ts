@@ -20,6 +20,8 @@ import { TelInputComponent } from "./components/tel-input/tel-input.component";
 import { SpinnerComponent } from "./components/spinner/spinner.component";
 import { TaskCheckComponent } from "./components/task-check/task-check.component";
 import { StatusPipe } from "./pipes/status.pipe";
+import { BaseGridPageComponent } from "./pages/base-grid-page/base-grid-page.component";
+import { BaseFormPageComponent } from "./pages/base-form-page/base-form-page.component";
 
 
 
@@ -34,6 +36,8 @@ import { StatusPipe } from "./pipes/status.pipe";
         FileUploadComponent,
         FileInputComponent,
         DataGridFilterComponent,
+        BaseGridPageComponent,
+        
         
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
@@ -71,7 +75,8 @@ import { StatusPipe } from "./pipes/status.pipe";
         ProgressComponent,
         TelInputComponent,
         SpinnerComponent,
-        TaskCheckComponent
+        TaskCheckComponent,
+        BaseGridPageComponent
     ]
 })
 

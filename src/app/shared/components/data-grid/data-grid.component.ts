@@ -3,6 +3,7 @@ import { DxContextMenuComponent, DxDataGridComponent } from "devextreme-angular"
 import { DataGridColumn } from "../../models/data-grid-column.model";
 import { LogService } from "src/app/core/services/log.service";
 import { StatusEnum } from "src/app/core/enums/status.enum";
+import { DataGridButtonAction } from "../../pages/base-grid-page/base-grid-page.component";
 
 @Component({
     selector: 'app-data-grid',
@@ -15,6 +16,7 @@ export class DataGridComponent  {
     @Input() dataSource!: any;
     @Input() contextMenu!: any;
     @Input() showCheckBox: 'always' | 'never' = 'never';
+    @Input() buttonActions!: Array<DataGridButtonAction>;
     @Output() selectedRow = new EventEmitter<[]>();
     @Output() rowClick = new EventEmitter<any>();
     @Output() contextMenuClick = new EventEmitter<any>();
@@ -32,6 +34,7 @@ export class DataGridComponent  {
     showPageSizeSelector = true;
     showInfo = true;
     showNavButtons = true;
+    rowsSelected!:any;
 
     idSelected!:number
 
@@ -44,7 +47,22 @@ export class DataGridComponent  {
      * @param event - L'événement de changement de sélection.
      */
     onSelectionChanged(event:any){
+        this.rowsSelected = event.selectedRowKeys;
         this.selectedRow.emit(event.selectedRowKeys);
+
+        this.buttonActions.forEach((action: DataGridButtonAction) => {
+            switch (action.disabledType) {
+              case 'SINGLE':
+                action.disabled = this.rowsSelected.length !== 1;
+                break;
+              case 'MULTIPLE':
+                action.disabled = this.rowsSelected.length === 0;
+                break;
+              default:
+                action.disabled = true;
+                break;
+            }
+          });
     }
 
     /**
@@ -64,9 +82,21 @@ export class DataGridComponent  {
      * @param event - L'événement de clic sur l'élément du menu contextuel.
      */
     contextMenuItemClick(e:any) {
-        const eventData = { id: this.idSelected, action: this.contextMenu[e.itemIndex] };
+        const eventData = { id: this.idSelected, ...e.itemData };
         this.contextMenuClick.emit(eventData);
     } 
+
+    buttonActionsClick(action:DataGridButtonAction){
+        if (this.rowsSelected.length === 0) {
+            this.contextMenuClick.emit({ action });
+        }
+        else if(this.rowsSelected.length === 1){
+            this.contextMenuClick.emit({ id: this.rowsSelected[0], ...action });
+        }
+        else {
+            this.contextMenuClick.emit({ id: this.rowsSelected, ...action });
+        }
+    }
 
     /**
      * Cette fonction est utilisée pour personnaliser la valeur affichée dans une cellule de la grille de données.
