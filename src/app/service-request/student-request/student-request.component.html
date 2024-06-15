@@ -1,1 +1,8 @@
-<p>student-request works!</p>
+<app-data-grid 
+    [columns]="columns" 
+    showCheckBox="always"
+    [dataSource]="listData$ | async"
+    [contextMenu]="contextMenuItems"
+    [buttonActions]="buttonActions"
+    (contextMenuClick)="onActionButtonClick($event)" />
+    <app-spinner></app-spinner>

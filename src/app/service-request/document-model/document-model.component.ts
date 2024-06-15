@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
-import { FileService } from 'src/app/core/services/file.service';
 import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { DocumentTemplateModel } from '../models/document-template.model';
 import { ServiceRequestService } from '../service.request.service';
@@ -14,21 +13,18 @@ import { ServiceRequestService } from '../service.request.service';
 })
 export class DocumentModelComponent extends BaseGridPageComponent {
   private serviceRequestService = inject(ServiceRequestService);
-  private fileService = inject(FileService);
 
   documentTemplates$!: Observable<DocumentTemplateModel[]>;
 
   constructor(
-    private route: ActivatedRoute,  
-    private router: Router, 
+    route: ActivatedRoute,  
+    router: Router, 
     private breadcrumpService: BreadcrumpService)
   {  
-      super();
+      super(router, route);
 
       this.contextMenuItems = [
-        { 
-          text: 'Télécharger', code:'DOWNLOAD', actionType: ActionTypes.FUNCTION, 
-        action: 'DOWNLOAD' },
+        { text: 'Télécharger', code:'DOWNLOAD', actionType: ActionTypes.FUNCTION, action: 'DOWNLOAD' },
       ];
 
       this.columns = [
@@ -38,17 +34,26 @@ export class DocumentModelComponent extends BaseGridPageComponent {
       this.buttonActions = [
         { 
           label: 'Nouveau modèle de document', 
-          icon: 'add', 
+          icon: 'fas fa-plus', 
           actionType: ActionTypes.NAVIGUATE, 
-          action: 'service/document-template/add', 
+          action: 'service-request/document-template/add', 
           visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
           disabledType: DisabledTypes.NONE,
-          disabled: false 
+          disabled: false, 
+        },
+        { 
+          label: 'Telecharger', 
+          icon: 'fas fa-download', 
+          actionType: ActionTypes.FUNCTION, 
+          action: "donwloadDocumentTemplate", 
+          visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+          disabledType: DisabledTypes.SINGLE,
+          disabled: true, 
         }
       ];
   }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
     this.fetchListOfDocumentTemplate(); 
 
     this.breadcrumpService.setBreadcrump("Liste des modéle de document", [
@@ -63,34 +68,6 @@ export class DocumentModelComponent extends BaseGridPageComponent {
   }
 
   donwloadDocumentTemplate(id: number) {
-    this.serviceRequestService.getDocumentModelById(id).subscribe(
-      (response: any) => {
-        this.serviceRequestService.downloadDocumentModel(id).subscribe(async (event) => {
-          this.fileService.download({event:event, name:response.name});
-      });
-      },
-      (error: any)=>{
-       console.log(error);
-      }
-    )
+    this.serviceRequestService.downloadDocumentModel(id);
   }
-
-  onActionButtonClick(event: any) {
-    console.log("dddddddddddddddd "+event.id)
-    if(event.actionType === ActionTypes.NAVIGUATE){
-      this.router.navigateByUrl(event.action);
-    }
-
-    if(event.actionType === ActionTypes.FUNCTION){
-      console.log("dddddddddddddddd "+event.action)
-      if(event.action === 'DOWNLOAD'){
-        console.log("dddddddddddddddsssssddddd "+event.id)
-      this.donwloadDocumentTemplate(event.id)
-    }
-
-    if(event.actionType === ActionTypes.API){
-      //this[event.action](this.idSelected);
-    }   
-  }
-}
 }

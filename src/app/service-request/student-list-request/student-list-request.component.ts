@@ -16,51 +16,43 @@ export class StudentListRequestComponent extends BaseGridPageComponent {
 
   studentRequests$!: Observable<StudentRequest[]>;
 
-  constructor(private route: ActivatedRoute, private router: Router, private breadcrumpService: BreadcrumpService)
+  constructor(route: ActivatedRoute, router: Router, private breadcrumpService: BreadcrumpService)
   {  
-      super();
-      this.columns = [
-        { dataField: "concat:lastName:firstName",caption:"Noms & Prénoms", dataType:"string" },
-        { dataField: "email", caption:"Email", dataType:"string", visible:true },
-        { dataField: "partner", caption:"Partenaire", dataType:"string", visible:true },
-        { dataField: "numberOfRequests",caption:"Nombre de demande", dataType:"string" },
-      ];
-
-      this.buttonActions = [
-        { 
-          label: 'Consulter les demandes de service', 
-          icon: 'consult', 
-          actionType: ActionTypes.NAVIGUATE, 
-          action: '/service/request-treatment/student', 
-          visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
-          disabled: true,
-          disabledType: DisabledTypes.SINGLE 
-        }
-      ];
+    super(router, route);
   }
 
-  ngOnInit(): void {
-    this.fetchDatas(); 
-
+  override ngOnInit(): void {
+    super.ngOnInit();
+    
     this.breadcrumpService.setBreadcrump("Liste des étudiants", [
       { title:"Demande de service", link:"/" }, 
       { title:"Modéle de document", link:"/" }
     ]);
+
+    this.columns = [
+      { dataField: "concat:lastName:firstName",caption:"Noms & Prénoms", dataType:"string" },
+      { dataField: "email", caption:"Email", dataType:"string", visible:true },
+      { dataField: "partner", caption:"Partenaire", dataType:"string", visible:true },
+      { dataField: "numberOfRequests",caption:"Nombre de demande", dataType:"string" },
+    ];
+
+    this.buttonActions = [
+      { 
+        label: 'Liste les demandes de service', 
+        icon: 'fas fa-list', 
+        actionType: ActionTypes.NAVIGUATE_WITH_ID, 
+        action: '/service-request/student/:id/request-treatment', 
+        visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+        disabled: true,
+        disabledType: DisabledTypes.SINGLE 
+      }
+    ];
+
+    this.fetchDatas();
   }
 
   fetchDatas(): void {
     this.loading = true;
     this.studentRequests$ = this.serviceRequestService.getStudentRequests()
-  }
-
-
-  onActionButtonClick(event: any) {
-    if(event.actionType === ActionTypes.NAVIGUATE){
-      if(event.id !== undefined){
-        this.router.navigateByUrl(`${event.action}/${event.id}`);
-        return;
-      }
-     
-    }    
   }
 }

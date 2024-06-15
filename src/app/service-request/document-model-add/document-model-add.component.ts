@@ -1,22 +1,15 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServiceRequestService } from '../service.request.service';
 import { BaseFormPageComponent } from 'src/app/shared/pages/base-form-page/base-form-page.component';
 import {OnInit} from '@angular/core';
 import { BaseFormPage } from 'src/app/shared/pages/BaseFormPage';
 import { ActivatedRoute, Router } from '@angular/router';
+import { startWith } from 'rxjs';
+import { toFormData } from '../service-request.model';
 
 
-export function toFormData( formValue: any ) {
-  const formData = new FormData();
 
-  for ( const key of Object.keys(formValue) ) {
-    const value = formValue[key];
-    formData.append(key, value);
-  }
-
-  return formData;
-}
 
 
 @Component({
@@ -26,12 +19,10 @@ export function toFormData( formValue: any ) {
 })
 export class DocumentModelAddComponent extends BaseFormPage {
   
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router)
+  constructor(formBuilder: FormBuilder, route: ActivatedRoute, router: Router)
   {
-    super();
+    super(router, route, formBuilder);
   }
- 
-  
  
   private serviceRequestService = inject(ServiceRequestService);
   
@@ -48,15 +39,18 @@ export class DocumentModelAddComponent extends BaseFormPage {
   ngOnInit(): void {
     this.initFormControls();
     this.initMainForm();  
+
+    this.contentFileCtrl.valueChanges.pipe(startWith('')).subscribe((file: File) => {console.log(file.name)});
   }
   
   protected override  onSubmitForm() : void {
     const formData = toFormData(this.mainForm.value);
-    formData.append('file', this.file!, this.file!.name);
+    formData.append('file', this.contentFileCtrl.value);
     this.serviceRequestService.addDoumentModel(formData).subscribe(
       (response) =>{
         this.loading = false;
-        this.resetForm();              
+        this.resetForm(); 
+        this.router.navigateByUrl(`service-request/document-template`);              
       },
       (error) =>{
         Object.keys(error.error).forEach(prop => {
@@ -74,12 +68,13 @@ export class DocumentModelAddComponent extends BaseFormPage {
   protected override initMainForm(){
     this.mainForm = this.formBuilder.group({
       name: this.nameCtrl,
-      contentFile: this.contentFileCtrl
+      file: this.contentFileCtrl
     });
   }
 
   protected override initFormControls() : void {
-    this.nameCtrl = this.formBuilder.control('');
+    this.nameCtrl = this.formBuilder.control('', Validators.required);
+    this.contentFileCtrl = this.formBuilder.control('', Validators.required);
   }
   
 

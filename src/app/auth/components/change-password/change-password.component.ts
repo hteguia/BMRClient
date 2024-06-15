@@ -3,7 +3,6 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import {MatDialog, MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { Observable, tap } from 'rxjs';
 import { LogService } from 'src/app/core/services/log.service';
-import { PartnerModel } from 'src/app/users/models/partner.model';
 import { PartnerService } from 'src/app/users/services/partner.service';
 import { AuthService } from '../../services/auth.service';
 import { confirmEqualValidator } from 'src/app/shared/validators/confirm-equal.validator';

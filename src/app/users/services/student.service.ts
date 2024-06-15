@@ -2,8 +2,8 @@ import { Injectable, inject } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from "rxjs";
 import { environment } from "src/environments/environment";
-import { StudentModel } from "../models/student.model";
 import { LogService } from "src/app/core/services/log.service";
+import { StudentModel } from "../users.model";
 
 
 

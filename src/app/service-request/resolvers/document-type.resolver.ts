@@ -3,17 +3,17 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 
 import { Observable } from "rxjs";
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { DocumentTypeService } from "../services/document-type.service";
 import { DocumentTypeModel } from "../models/document-type.model";
+import { ServiceRequestService } from "../service.request.service";
 
 
 
 @Injectable()
 export class DocumentTypeResolver implements Resolve<DocumentTypeModel[]>{
-    constructor(private authService: AuthService, private documentTypeService: DocumentTypeService) { }
+    constructor(private authService: AuthService, private serviceRequestService: ServiceRequestService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<DocumentTypeModel[]> {
-        return this.documentTypeService.getAllDocumentType();
+        return this.serviceRequestService.getAllDocumentType();
     }
 
 }

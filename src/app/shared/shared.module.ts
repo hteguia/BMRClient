@@ -22,6 +22,7 @@ import { TaskCheckComponent } from "./components/task-check/task-check.component
 import { StatusPipe } from "./pipes/status.pipe";
 import { BaseGridPageComponent } from "./pages/base-grid-page/base-grid-page.component";
 import { BaseFormPageComponent } from "./pages/base-form-page/base-form-page.component";
+import { InputFileComponent } from "./form-control/input-file.component";
 
 
 
@@ -36,9 +37,7 @@ import { BaseFormPageComponent } from "./pages/base-form-page/base-form-page.com
         FileUploadComponent,
         FileInputComponent,
         DataGridFilterComponent,
-        BaseGridPageComponent,
-        
-        
+        BaseGridPageComponent,              
         ButtonCloseCardComponent,
         DecimalSeparatorPipe,
         ButtonComponent,
@@ -46,7 +45,8 @@ import { BaseFormPageComponent } from "./pages/base-form-page/base-form-page.com
         ProgressComponent,
         TelInputComponent,
         SpinnerComponent,
-        TaskCheckComponent
+        TaskCheckComponent,
+        InputFileComponent
     ],
     imports: [
         CommonModule,
@@ -76,7 +76,8 @@ import { BaseFormPageComponent } from "./pages/base-form-page/base-form-page.com
         TelInputComponent,
         SpinnerComponent,
         TaskCheckComponent,
-        BaseGridPageComponent
+        BaseGridPageComponent,
+        InputFileComponent
     ]
 })
 

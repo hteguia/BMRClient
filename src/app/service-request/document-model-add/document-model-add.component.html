@@ -15,13 +15,13 @@
                         <mat-error>Ce champs est obligatoire</mat-error>
                     </mat-form-field>               
                 </div>   
-                <div class="form-group mb-2" >
-                    <label for="exampleInputPassword1">Fichier *</label>                 
-                    <app-file-input (onFileChange)="onFileChange($event)" [formControl]="contentFileCtrl"  [upload]="false" ></app-file-input>    
-                    <div class="invalid-feedback" style="display: block">
-                        
-                    </div>         
-                </div>                        
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Fichier *</label>
+                    <app-input-file 
+                        [formControl]="contentFileCtrl"
+                        placeholder="or drag and drop file here" 
+                        label="Choose file"   />
+                </div>
             </div>
         </div>
     </div>

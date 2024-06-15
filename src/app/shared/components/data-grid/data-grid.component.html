@@ -3,16 +3,16 @@
         <div class="margin">
             <div class="btn-group">
                 <ng-container *ngFor="let btn of buttonActions">
-                    <app-button 
-                        label="{{btn.label}}" 
-                        icon="{{btn.icon}}" 
+                    <app-button        
                         color="primary" 
                         cssClass="btn--primary"
                         action="{{btn.action}}"
                         actionType="{{btn.actionType}}"
                         [disabled]="btn.disabled"
                         (click)="buttonActionsClick($event)"
-                        (keydown)="null"/>
+                        (keydown)="null">
+                        <i class='{{btn.icon}}'></i> {{btn.label}}
+                    </app-button>
                 </ng-container>
             </div>
         </div>

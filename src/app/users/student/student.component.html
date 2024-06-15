@@ -1,0 +1,10 @@
+<app-data-grid 
+    [columns]="columns"
+    showCheckBox="always"
+    [buttonActions]="buttonActions"
+    [dataSource]="student$ | async"
+    (selectedRow)="onSelectRow($event)"
+    (rowClick)="onRowClick($event)"
+    (contextMenuClick)="onActionButtonClick($event)">
+</app-data-grid>
+<app-spinner></app-spinner>

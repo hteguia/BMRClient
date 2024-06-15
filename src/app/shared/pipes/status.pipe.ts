@@ -6,7 +6,8 @@ import { StatusEnum } from "src/app/core/enums/status.enum";
     name :'status'
 })
 export class StatusPipe implements PipeTransform{
-    transform(value: string): string {
+    transform(value: string | undefined | null): string {
+        if(value === null || value === undefined) return "";
         switch (value) {
             case StatusEnum.INITIATE:
               return "Enregistrement initiale";

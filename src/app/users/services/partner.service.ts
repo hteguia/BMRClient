@@ -2,8 +2,8 @@ import { Injectable, inject } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, delay, mapTo, of, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
-import { PartnerModel } from "../models/partner.model";
 import { LogService } from "src/app/core/services/log.service";
+import { PartnerModel } from "../users.model";
 
 
 @Injectable()

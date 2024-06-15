@@ -6,7 +6,5 @@
     (click)="onClick($event)"
     [disabled]="disabled" 
     [class.spinner]="loading">
-    <mat-icon *ngIf="icon">{{icon}}</mat-icon>               
-    {{label}}
-    
+    <ng-content/>
 </button>

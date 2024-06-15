@@ -4,4 +4,5 @@ export interface RequestTreatmentModel{
     deadline: string;
     contentFile: File;
     file: File;
+    createAt: Date;
 }

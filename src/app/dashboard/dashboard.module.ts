@@ -3,8 +3,7 @@ import { NgModule } from "@angular/core";
 import { SharedModule } from "../shared/shared.module";
 import { DashboardRoutingModule } from "./dashboard-routing.module";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardResolver } from "./resolvers/dashboard.resolver";
-import { DashboardService } from "./services/dashboard.service";
+import { DashboardService } from "./dashboard.service";
 
 @NgModule({
     declarations: [
@@ -18,8 +17,7 @@ import { DashboardService } from "./services/dashboard.service";
         SharedModule,
     ],
     providers: [
-      DashboardService,
-      DashboardResolver
+      DashboardService
     ]
 })
 

@@ -1,5 +1,5 @@
     <div class="icheck-primary d-inline ml-2">
-        <input type="checkbox" [value]="code" name='task_{{code}}' id='task_{{code}}' [checked]="checked" [disabled]="disabled" (change)="onChange($event)"  >
+        <input type="checkbox" [value]="code" name='task_{{code}}' id='task_{{code}}' [formControl]="inputCtrl" (change)="onCheckedChange($event)"  >
         <label htmlFor="task_{{code}}"></label>
     </div>
     <span class="text">{{ label }} </span>

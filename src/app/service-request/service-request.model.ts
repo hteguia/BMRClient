@@ -28,3 +28,26 @@ export interface StudentRequest{
     partner: string;
     numberOfRequests: number;
 }
+
+export interface RequestTreatmentDetail{
+    id:number;
+    serviceType: string | undefined | null;
+    deadline: string | undefined | null;
+    contentFile: File;
+    file: File;
+    createAt: Date | undefined | null;
+    treatmentStatus: string | undefined | null;
+    fileName: string;
+    collaboraterId: number;
+}
+
+export function toFormData( formValue: any ) {
+    const formData = new FormData();
+  
+    for ( const key of Object.keys(formValue) ) {
+      const value = formValue[key];
+      formData.append(key, value);
+    }
+  
+    return formData;
+  }

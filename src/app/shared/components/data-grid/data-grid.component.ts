@@ -59,7 +59,7 @@ export class DataGridComponent  {
                 action.disabled = this.rowsSelected.length === 0;
                 break;
               default:
-                action.disabled = true;
+                action.disabled = false;
                 break;
             }
           });
@@ -87,8 +87,8 @@ export class DataGridComponent  {
     } 
 
     buttonActionsClick(action:DataGridButtonAction){
-        if (this.rowsSelected.length === 0) {
-            this.contextMenuClick.emit({ action });
+        if (this.rowsSelected == undefined || this.rowsSelected.length === 0) {
+            this.contextMenuClick.emit({ ...action });
         }
         else if(this.rowsSelected.length === 1){
             this.contextMenuClick.emit({ id: this.rowsSelected[0], ...action });
