@@ -3,8 +3,9 @@ import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from "@angular/r
 
 import { Observable } from "rxjs";
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { DocumentTypeModel } from "../models/document-type.model";
-import { ServiceRequestService } from "../service.request.service";
+import { ServiceRequestService } from "./service.request.service";
+import { DocumentTypeModel } from "./service-request.model";
+
 
 
 

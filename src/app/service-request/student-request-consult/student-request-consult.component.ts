@@ -5,7 +5,7 @@ import { BasePageComponent } from 'src/app/shared/pages/base-page.component';
 import { ServiceRequestService } from '../service.request.service';
 import { StatusEnum } from 'src/app/core/enums/status.enum';
 import { FormControl } from '@angular/forms';
-import { CollaboraterService } from 'src/app/users/services/collaborater.service';
+import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-student-request-consult',
@@ -17,7 +17,7 @@ export class StudentRequestConsultComponent extends BasePageComponent {
   id!: any;
 
   #serviceRequestService = inject(ServiceRequestService);
-  #collaboratorService = inject(CollaboraterService);
+  #usersService = inject(UsersService);
   
   requestTreatment$!: Observable<any>;
   requestTreatmentStatus$!: Observable<any>
@@ -51,7 +51,7 @@ export class StudentRequestConsultComponent extends BasePageComponent {
     this.requestTreatment$ = this.#serviceRequestService.getRequestTreatmentById(this.id);
     this.requestTreatmentStatus$ = this.#serviceRequestService.getRequestTreatmentStatus(this.id);
     this.requestTreatmentResult$ = this.#serviceRequestService.getRequestTreatmentResult(this.id);
-    this.monitors$ = this.#collaboratorService.getAllCollaborater();
+    this.monitors$ = this.#usersService.getAllCollaborater();
 
     this.fetchDatas();
 

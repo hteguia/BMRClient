@@ -2,9 +2,8 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable, switchMap } from "rxjs";
 import { environment } from "src/environments/environment";
-import { DocumentModel, RequestTreatmentDetail, StudentRequest } from "./service-request.model";
+import { DocumentModel, DocumentTypeModel, RequestTreatmentDetail, StudentRequest } from "./service-request.model";
 import { FileService } from "../core/services/file.service";
-import { DocumentTypeModel } from "./models/document-type.model";
 
 @Injectable()
 export class ServiceRequestService 

@@ -3,9 +3,9 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CollaboraterService } from '../services/collaborater.service';
 import { BaseFormPage } from 'src/app/shared/pages/BaseFormPage';
 import { RoleModel } from '../users.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-collaborater-add',
@@ -37,7 +37,7 @@ import { RoleModel } from '../users.model';
 })
 export class CollaboraterAddComponent extends BaseFormPage{
   constructor(formBuilder: FormBuilder,
-    private collaboraterService: CollaboraterService, route: ActivatedRoute,
+    private usersService: UsersService, route: ActivatedRoute,
     router: Router)
   {
     super(router, route, formBuilder)
@@ -98,7 +98,7 @@ export class CollaboraterAddComponent extends BaseFormPage{
   }
 
   protected override onSubmitForm(){
-    this.action$ = this.collaboraterService.addCollaborater(this.mainForm.value);
+    this.action$ = this.usersService.addCollaborater(this.mainForm.value);
     this.action$.subscribe(
       (response) =>{
         this.loading = false;

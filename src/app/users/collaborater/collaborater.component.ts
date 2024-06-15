@@ -3,7 +3,6 @@ import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CollaboraterService } from 'src/app/users/services/collaborater.service';
 import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { UsersService } from '../users.service';
 import { CollaboraterModel } from '../users.model';
@@ -43,8 +42,7 @@ export class CollaboraterComponent extends BaseGridPageComponent{
 
 
   constructor(route: ActivatedRoute,  
-    router: Router, private breadcrumpService: BreadcrumpService,
-    private collaboraterService: CollaboraterService){  
+    router: Router, private breadcrumpService: BreadcrumpService){  
       super(router, route);
   }
 
@@ -98,7 +96,7 @@ onAddNewItem(){
 
 onUpdateItem(){
   if(this.selectedRows.length){
-    this.collaboraterService.getCollaborater(this.selectedRows[0]).subscribe(result=>{
+    this.userService.getCollaborater(this.selectedRows[0]).subscribe(result=>{
       this.router.navigateByUrl('/users/collaborater/update', { state: result });
     });
   }
@@ -108,7 +106,7 @@ onUpdateItem(){
 
 resetPassword(){
   if(this.selectedRows.length){
-    this.collaboraterService.ResetPasswordCollaborater({id:this.selectedRows[0]}).subscribe({
+    this.userService.ResetPasswordCollaborater({id:this.selectedRows[0]}).subscribe({
       next: (response: any) => {
         console.log(response);
       },

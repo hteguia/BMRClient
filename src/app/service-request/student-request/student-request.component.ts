@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { DataGridColumn } from 'src/app/shared/models/data-grid-column.model';
-import { RequestTreatmentModel } from '../models/request-treatment.model';
-import { StudentService } from 'src/app/users/services/student.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { ServiceRequestService } from '../service.request.service';
 import { RequestTreatmentDetail } from '../service-request.model';
+import { UsersService } from 'src/app/users/users.service';
 
 export const COLUMN_ADMIN: DataGridColumn[] = [
   { dataField: "createAt",caption:"Date de demande", dataType:"date", template:'dateTemplate', width: 160},
@@ -43,7 +42,7 @@ export class StudentRequestComponent extends BaseGridPageComponent{
    student!: any; 
 
    private serviceRequestService = inject(ServiceRequestService);
-   private studentService = inject(StudentService);
+   private usersService = inject(UsersService);
 
    constructor(route: ActivatedRoute,  
      router: Router, private breadcrumpService: BreadcrumpService){  
@@ -99,7 +98,7 @@ export class StudentRequestComponent extends BaseGridPageComponent{
        this.columns = COLUMN_STUDENT;
      }
      
-     this.studentService.getStudent(+this.studentId).subscribe(
+     this.usersService.getStudent(+this.studentId).subscribe(
        (response: any) => {
          this.student = response;
          this.breadcrumpService.setBreadcrump(`${this.student!.firstName} ${this.student!.lastName} // Demande de services de`, [

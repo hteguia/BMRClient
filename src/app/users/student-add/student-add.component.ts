@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CollaboraterService } from '../services/collaborater.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
-import { StudentService } from 'src/app/users/services/student.service';
 import { BaseFormPage } from 'src/app/shared/pages/BaseFormPage';
 import { PartnerModel } from '../users.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-student-add',
@@ -14,7 +13,7 @@ import { PartnerModel } from '../users.model';
 })
 export class StudentAddComponent extends BaseFormPage{
   constructor(formBuilder: FormBuilder,
-    private studentService: StudentService, route: ActivatedRoute,
+    private usersService: UsersService, route: ActivatedRoute,
     router: Router)
   {
     super(router, route, formBuilder);
@@ -98,8 +97,8 @@ export class StudentAddComponent extends BaseFormPage{
   }
 
   protected override onSubmitForm(){
-    this.action$ = this.mainForm.value.id === null ? this.studentService.addStudent(this.mainForm.value) :
-                                            this.studentService.updateStudent(this.mainForm.value);
+    this.action$ = this.mainForm.value.id === null ? this.usersService.addStudent(this.mainForm.value) :
+                                            this.usersService.updateStudent(this.mainForm.value);
 
     this.action$.subscribe(
       (response) =>{

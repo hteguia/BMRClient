@@ -4,7 +4,6 @@ import { Observable, map, tap } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { PartnerService } from 'src/app/users/services/partner.service';
 import { AddPartnerComponent } from '../partner-add/add-partner.component';
 import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { UsersService } from '../users.service';
@@ -39,7 +38,7 @@ export class PartnerComponent extends BaseGridPageComponent {
   partner$!: Observable<PartnerModel[]>;
 
   constructor(route: ActivatedRoute, router: Router, private breadcrumpService: BreadcrumpService,
-    public dialog: MatDialog, private partnerService: PartnerService) {  
+    public dialog: MatDialog) {  
       super(router, route);
   }
 
@@ -81,7 +80,7 @@ export class PartnerComponent extends BaseGridPageComponent {
     console.log(this.selectedRows)
     if(this.selectedRows.length){
       console.log(this.selectedRows[0]);
-      this.partnerService.getPartner(this.selectedRows[0]).subscribe(result=>{
+      this.userService.getPartner(this.selectedRows[0]).subscribe(result=>{
         this.openPartnerForm('Modifier le partenaire', result)
       });
     }
@@ -99,7 +98,7 @@ export class PartnerComponent extends BaseGridPageComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result === "RELOAD_GRID"){
-        this.partner$ = this.partnerService.getAllPartner();
+        this.partner$ = this.userService.getAllPartner();
       }
     });
   }

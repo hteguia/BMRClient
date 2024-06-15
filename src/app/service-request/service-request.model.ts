@@ -51,3 +51,23 @@ export function toFormData( formValue: any ) {
   
     return formData;
   }
+
+  export interface DocumentTemplateModel{
+    id:number;
+    name: string;
+}
+
+export interface DocumentTypeModel{
+    id:number;
+    name: string;
+    description:string;
+}
+
+export interface RequestTreatmentModel{
+    id:number;
+    serviceType: string;
+    deadline: string;
+    contentFile: File;
+    file: File;
+    createAt: Date;
+}
