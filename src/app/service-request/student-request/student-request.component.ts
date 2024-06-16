@@ -60,7 +60,7 @@ export class StudentRequestComponent extends BaseGridPageComponent{
         icon: 'fas fa-plus', 
         actionType: ActionTypes.NAVIGUATE, 
         action: `/service-request/student/${this.studentId}/request-treatment/add`, 
-        visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+        visibleForRoles: ['SUPERADMIN', 'ADMIN'],
         disabled: false,
         disabledType: DisabledTypes.NONE
       },
@@ -69,7 +69,7 @@ export class StudentRequestComponent extends BaseGridPageComponent{
         icon: 'far fa-eye', 
         actionType: ActionTypes.NAVIGUATE_WITH_ID, 
         action: `/service-request/student/${this.studentId}/request-treatment/:id/consult`, 
-        visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+        visibleForRoles: ['SUPERADMIN', 'ADMIN'],
         disabled: true,
         disabledType: DisabledTypes.SINGLE
       }

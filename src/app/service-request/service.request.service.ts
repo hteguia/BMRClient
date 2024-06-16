@@ -55,6 +55,10 @@ export class ServiceRequestService
         return this.http.get<RequestTreatmentDetail[]>(`${environment.apiUrl}/v1/requestTreatment/GetByStudent/${id}`);
     }
 
+    getRequestTreatments(): Observable<RequestTreatmentDetail[]> {
+        return this.http.get<RequestTreatmentDetail[]>(`${environment.apiUrl}/v1/requestTreatment`);
+    }
+
     getRequestTreatmentById(id: any) : Observable<RequestTreatmentDetail>{
         return this.http.get<RequestTreatmentDetail>(`${environment.apiUrl}/v1/requestTreatment/${id}`);
     }

@@ -91,8 +91,12 @@ export class StudentRequestConsultComponent extends BasePageComponent {
         this.requestTreatmentResult = response.requestTreatmentResult;
         this.monitors = response.monitors;
        
+
         if(this.requestTreatment.collaboraterId){
           this.monitorCtrl.setValue(this.requestTreatment.collaboraterId);
+        } 
+        else if(this.currentUser.role === 'MODERATOR'){
+          this.monitorCtrl.setValue(this.currentUser.id);
         }
 
         if(this.requestTreatment.treatmentStatus === StatusEnum.TRAITEMENT_TERMINE){
