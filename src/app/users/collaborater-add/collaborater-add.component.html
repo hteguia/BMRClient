@@ -1,0 +1,67 @@
+<div class="card" [formGroup]="mainForm">
+    <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
+        <h3 class="card-title">
+          <i class="fas fa-th mr-1"></i>
+            Nouveau collaborateur
+        </h3>
+        
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="form-group mb-2">
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Rôle *</label>
+                        <mat-form-field appearance="outline">
+                            <mat-select  placeholder="Choisir le rôle du collaborateur" formControlName="role">
+                                <mat-option *ngFor="let option of listRoles$ | async" [value]="option.id">{{ option.name }}</mat-option>
+                            </mat-select>
+                            <mat-error>Ce champs est obligatoire</mat-error>
+                        </mat-form-field>               
+                       </div> 
+                    <label for="exampleInputPassword1">Noms *</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner le noms du collaborateur" formControlName="lastName" autocomplete="off"  />
+                        <mat-error>Ce champs est obligatoire</mat-error>
+                    </mat-form-field>               
+                </div>
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Prénoms *</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner le prénoms du collaborateur" formControlName="firstName" autocomplete="off"  />
+                        <mat-error>Ce champs est obligatoire</mat-error>
+                    </mat-form-field>               
+                </div> 
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Téléphone *</label>
+                    <app-tel-input cssClass="form-control col-md-12" class="input-tel" [formControl]="phoneNumberCtrl" >
+                        <app-error *ngIf="phoneNumberCtrl.errors">Champ obligatoire ou format invalide</app-error>
+                    </app-tel-input>                                
+                </div>
+                <div class="form-group mb-2">
+                    <label for="exampleInputPassword1">Email *</label>
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="Renseigner l'adresse email du collaborateur" type="email" formControlName="email" autocomplete="off"  />
+                        <mat-error>{{ getFormControlErrorText(mainForm.get('email')!) }}</mat-error>
+                    </mat-form-field>               
+                </div>
+                <div class="form-group mb-2">
+                    <mat-checkbox (change)="showOptions($event)" [formControl]="serviceRequestNotifyCtrl" >Reçoit les notifications des nouvelles demandes de service</mat-checkbox>               
+                </div>
+                <span [@pricingInfo] *ngIf="serviceRequestNotifyCtrl.value">
+                    <i class="fas fa-info-circle text-warning" style="margin-right: 5px;"></i>
+                    Rassurer vous d'avoir choisir un numéro de téléphone Camerounais, sinon cette option ne pourra être activée.
+                </span>
+                    
+                
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <mat-card-actions >
+            <button mat-button (click)="onCancel()">Annuler</button>
+            <button mat-flat-button class="btn--primary" (click)="onSubmitForm()"  [disabled]="!mainForm.valid">Enregistrer</button>
+        </mat-card-actions>
+    </div>
+</div>
+<app-spinner></app-spinner>

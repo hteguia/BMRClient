@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, provideRouter, withComponentInputBinding, withRouterConfig } from '@angular/router';
 import { AuthRoutingModule } from './auth/auth-routing.module';
 import { AuthGuard } from './core/guards/auth.guard';
 import { PageNotFoundComponent } from './page.not.found.component';
@@ -11,9 +11,8 @@ const routes: Routes = [
       path: '', component:LayoutComponent, canActivate:[AuthGuard],
       children:[
       { path: 'dashboard', loadChildren: ()=>import('./dashboard/dashboard.module').then(m=>m.DashboardModule) },
-      { path: 'sms', loadChildren:()=>import('./sms/sms.module').then(m=>m.SmsModule) },
-      { path: 'service', loadChildren:()=>import('./service-request/service-request.module').then(m=>m.ServiceRequestModule) },
-      { path: 'users', loadChildren:()=>import('./users/users.module').then(m=>m.UsersModule) },
+      { path: 'service-request', loadChildren:()=>import('./service-request/service-request.module').then(m=>m.ServiceRequestModule) },
+      { path: 'user', loadChildren:()=>import('./users/users.module').then(m=>m.UsersModule) },
       {
         path: '**',
         redirectTo: 'dashboard',
@@ -27,6 +26,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes), AuthRoutingModule],
   exports: [RouterModule],
-  providers:[AuthGuard]
+  providers:[AuthGuard, provideRouter(routes, withComponentInputBinding(), withRouterConfig({ paramsInheritanceStrategy: 'always' }))]
 })
 export class AppRoutingModule { }

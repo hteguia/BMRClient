@@ -1,10 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { DashboardResolver } from "./resolvers/dashboard.resolver";
 
 const routes: Routes = [
-    { path: '', component:DashboardComponent,  resolve: { data: DashboardResolver } }
+    { path: '', component:DashboardComponent }
   ];
   
   @NgModule({

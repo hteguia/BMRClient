@@ -2,11 +2,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { changeBreadcrump } from '../../../state/root-action';
 import { Observable, map, tap } from 'rxjs';
-import { CollaboraterModel } from 'src/app/users/models/collaborater.model';
 import { ActivatedRoute } from '@angular/router';
 import { StorageService } from 'src/app/core/services/storage.service';
-import { DashboardService } from '../../services/dashboard.service';
+import { DashboardService } from '../../dashboard.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { CollaboraterModel } from 'src/app/users/users.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   topups$!: Observable<CollaboraterModel[]>;
   private storageService = inject(StorageService)
   private dashboardService = inject(DashboardService)
-  data$!: Observable<any>;
+  dashboardData!: any;
   currentUser: any;
   private authService = inject(AuthService);
   ngOnInit(): void {
@@ -26,7 +26,9 @@ export class DashboardComponent implements OnInit {
     //   tap(data=>this.storageService.saveData("user_profils", data)),
     //   map(data => data['data'])
     // ).subscribe();  
-    this.data$ = this.dashboardService.getDashboardData();
+    this.dashboardService.getDashboardData().pipe(
+      tap((data:any) => this.dashboardData = data)
+    ).subscribe();
     this.setBreadcrump();
 
     this.currentUser = this.authService.userProfil;

@@ -1,19 +1,20 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { Observable, catchError, retryWhen, switchMap, throwError } from "rxjs";
 import { genericRetryPolicy } from "../utilities.service";
-import { Injectable, inject } from "@angular/core";
-import { AuthInterceptor } from "./auth.interceptor";
+import { Injectable } from "@angular/core";
 import { AuthService } from "src/app/auth/services/auth.service";
 import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
+import { LogService } from "../log.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorInterceptor implements HttpInterceptor{
   //private authInterceptor = inject(AuthInterceptor);
-  private authService = inject(AuthService);
-  constructor(private router: Router) {}
+  //private authService = inject(AuthService);
+  //private logService = inject(LogService);
+  constructor(private router: Router, private authService: AuthService, private logService: LogService) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.startsWith(environment.apiUrl)) {
       return next.handle(req).pipe(
@@ -21,26 +22,18 @@ export class HttpErrorInterceptor implements HttpInterceptor{
           excludedStatusCodes: [400, 401, 403, 404, 500]
         })),
         catchError((error: HttpErrorResponse) => {
-          console.log('HttpErrorInterceptor');
-          if (error.status === 401 /*&& authToken && userOrigin === null*/) {
-            return this.handleRefrehToken(req, next);
+          if (error.status === 401) {
+            //return this.handleRefrehToken(req, next);
+            this.authService.logout();
+            this.router.navigateByUrl("auth/login");           
           }
   
-          if (error.status === 0 && !navigator.onLine) {
-            console.log('Connexion internet perdue!');
-  
-            return throwError(() => 'Connexion internet perdue!');
-          }
-          const errorMessage = this.setError(error, req);
-          //this.messageService.openSnackBarError(errorMessage, 'OK');
-          if(error.status === 401){
+          if (error.status === 0 || !navigator.onLine) {
+            this.logService.log('Connexion internet perdue!');
             this.authService.logout();
             this.router.navigateByUrl("auth/login");
           }
-
-          this.authService.logout();
-          this.router.navigateByUrl("auth/login");
-
+          const errorMessage = this.setError(error, req);
           return throwError(() => errorMessage);
         })
       )
@@ -81,7 +74,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
    * When No response from the server and database is down => statusCode == 500 && statusText == 'Internal Server Error' 
    * Ex: CORS block, Internet Failed
    */
-  setError(error: HttpErrorResponse, req: any): string {
+  setError(error: HttpErrorResponse, req: any): any {
     let errorMessage = "Oopss... Un problème est survenu !";
 
     if (error.status === 0) {
@@ -100,7 +93,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
         //this.messageService.authError(this.router)
       }
     }
-
-    return errorMessage;
+   
+    return error;
   }
 }

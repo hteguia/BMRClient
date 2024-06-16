@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderInterceptor } from './core/services/interceptors/loader.interceptor';
 import { AuthInterceptor } from './core/services/interceptors/auth.interceptor';
 import { HttpErrorInterceptor } from './core/services/interceptors/http.error.interceptor';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 registerLocaleData(localeFr, 'fr');
 
 

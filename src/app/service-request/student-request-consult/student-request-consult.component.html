@@ -1,0 +1,113 @@
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <app-button *ngIf="hasRole(['SUPERADMIN', 'ADMIN','MODERATOR'])" 
+                icon="add" 
+                color="primary" 
+                cssClass="btn--primary"
+                [disabled]="disabledSaveButton"
+                (click)="savechange()"
+                (keydown)="null">
+                <i class="far fa-edit"></i> Enregistrer les modifications
+            </app-button>             
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-6 order-2 order-md-1">
+                    <p class="lead">
+                        Detail du document 
+                        <button class="btn btn-sm btn-secondary" (click)="downloadRequestTreatment($event)" style="color:#fff">
+                            <i class="far fa-file-pdf mr-2"></i>Télécharger
+                        </button>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table" aria-describedby="table-description">
+                            <tbody>                          
+                                <tr>
+                                    <th >Date demande</th>
+                                    <td>{{ requestTreatment!.createAt | date }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Type du document</th>
+                                    <td>{{ requestTreatment!.serviceType }} </td>
+                                </tr>                         
+                                <tr>
+                                    <th>Delai de rendu</th>
+                                    <td>{{ requestTreatment!.deadline }} </td>
+                                </tr>
+                                <tr>
+                                    <th>Status du traitement</th>
+                                    <td>{{ requestTreatment!.treatmentStatus | status  }}</td>
+                                </tr>                                  
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="col-12 col-md-12 col-lg-6 order-1 order-md-2">
+                    <div class="col-12 col-md-12 col-lg-10 float-right">
+                        <div  class="text-center alert alert-secondary fade show " role="alert">Veuillez cocher les étapes, durant la phase de correction et enregistrer</div>
+                        <ul class="todo-list ui-sortable" data-widget="todo-list" >
+                            <li [class]='status.date === "" ? "" : "done"' *ngFor="let status of requestTreatmentStatus">
+                                <app-task-check [code]="status.value" 
+                                                [label]="status.value | status" 
+                                                [date]="status.date" 
+                                                [checked]="status.checked" 
+                                                [disabled]="status.disabled"
+                                                [formControl]="statusCtrl"
+                                                (onCheckedChange)="onCheckStatusChange($event)">
+                                </app-task-check>
+                            </li>
+                        </ul>
+                        <div style="margin-top:20px; display: flex;" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])">
+                    
+                            <label style="margin-right: 10px;">Moniteur en charge du service</label>
+                            <mat-form-field appearance="outline">
+                                <mat-select  placeholder="Choisir un moniteur" [formControl]="monitorCtrl">
+                                    <mat-option *ngFor="let option of monitors" [value]="option.id">{{ option.firstName }} {{ option.lastName }}</mat-option>
+                                </mat-select>           
+                            </mat-form-field>      
+                        </div>
+                        <!-- <div class="invalid-feedback" style="display: block">
+                            <ng-container *ngIf="error">This field is required</ng-container>
+                          </div> -->
+                    </div>
+                </div>                   
+            </div>
+
+            <div class="row" style="margin-top: 50px;" *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR']) || requestTreatment.treatmentStatus === 'TRAITEMENT_TERMINE'">
+                <div class="col-12 col-md-12 col-lg-6 order-1 order-md-2">
+                    <p class="lead">Resultat du traitement </p>
+                    <p class="lead">Moniteur en charge:  <strong>{{requestTreatment.collaborater}}</strong></p>
+                    <table class="table" aria-describedby="table-description">
+                        <thead>
+                            <tr>
+                                <th>File Name</th>
+                                <th>File Size</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let file of requestTreatmentResult">
+                                <td>{{file.fileName}}</td>
+                                <td>{{file.fileSize}}</td>
+                                <td><a href="#" (click)="downloadOrDeleteFile($event, file)">{{file.canDelete ? 'Delete' : 'Download' }}</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <app-input-file *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])"
+                        [formControl]="fileCtrl"
+                        placeholder="or drag and drop file here" 
+                        label="Choose file" 
+                        uploadUrl='/v1/file/upload'  />
+                    <!-- <app-file-input 
+                        [formControl]="fileCtrl"
+                        [upload]="true" 
+                        (onUploadFinished)="onUploadFinished($event)"
+                        *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])"/> -->
+                </div>                
+            </div>            
+        </div>
+    </div>
+</section>
+<app-spinner></app-spinner>

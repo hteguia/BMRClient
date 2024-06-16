@@ -1,0 +1,6 @@
+<app-data-grid 
+    [columns]="columns" 
+    [dataSource]="documentType$ | async"
+    (selectedRow)="onSelectRow($event)"
+    (rowClick)="onRowClick($event)">
+</app-data-grid>

@@ -1,0 +1,9 @@
+<app-data-grid 
+    [columns]="columns" 
+    [buttonActions]="buttonActions"
+    showCheckBox="always"
+    [dataSource]="collaborater$ | async"
+    (selectedRow)="onSelectRow($event)"
+    (rowClick)="onRowClick($event)"
+    (contextMenuClick)="onActionButtonClick($event)"/>
+<app-spinner></app-spinner>

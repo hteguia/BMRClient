@@ -15,6 +15,7 @@ import { BreadcrumpService } from "./services/breadcrump.service";
 import { LogService } from "./services/log.service";
 import { StorageService } from "./services/storage.service";
 import { FileService } from "./services/file.service";
+import { FormControlDirective } from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { FileService } from "./services/file.service";
     providers: [
       AuthGuard,
       BreadcrumpService,
-      LogService,StorageService, FileService
+      LogService,StorageService, FileService,
+      FormControlDirective
     ] 
 })
 

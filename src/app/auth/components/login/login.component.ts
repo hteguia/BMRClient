@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { take, tap } from 'rxjs/operators';
-import { UserService } from 'src/app/users/services/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -29,7 +29,7 @@ import { UserService } from 'src/app/users/services/user.service';
 export class LoginComponent implements OnInit {
 
   private auth = inject(AuthService);
-  private userService = inject(UserService);
+ 
   constructor(private router: Router, 
               private formBuilder: FormBuilder) 
   { }
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         if(currentUser){
           this.auth.saveAccessToken(currentUser.data);
-          this.userService.getUserProfil().subscribe({
+          this.auth.getUserProfil().subscribe({
             next: (user) => {
               this.auth.saveUserPofils(user);
               this.router.navigateByUrl('/');

@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DocumentTemplateComponent } from './pages/document-template/document-template.component';
-import { DocumentTypeComponent } from './pages/document-type/document-type.component';
-import { DocumentTypeResolver } from './resolvers/document-type.resolver';
-import { DocumentTemplateResolver } from './resolvers/document-template.resolver';
-import { RequestTreatmentComponent } from './pages/request-treatment/request-treatment.component';
-import { AddRequestTreatmentComponent } from './pages/add-request-treatment/add-request-treatment.component';
-import { StudentListComponent } from './pages/student-list/student-list.component';
-import { StudentListResolver } from './resolvers/student-list.resolver';
-import { ConsultRequestTreatmentComponent } from './pages/consult-request-treatment/consult-request-treatment.component';
-import { RequestTreatementListResolver } from './resolvers/request.treatment.list.resolver';
-
+import { DocumentTypeComponent } from './document-type/document-type.component';
+import { DocumentModelComponent } from './document-model/document-model.component';
+import { DocumentModelAddComponent } from './document-model-add/document-model-add.component';
+import { StudentListRequestComponent } from './student-list-request/student-list-request.component';
+import { StudentRequestComponent } from './student-request/student-request.component';
+import { StudentRequestConsultComponent } from './student-request-consult/student-request-consult.component';
+import { StudentRequestAddComponent } from './student-request-add/student-request-add.component';
+import { DocumentTypeResolver } from './service-request.resolver';
 
 const routes: Routes = [
-    { path: "request-treatment/student", component: StudentListComponent, resolve: { data: StudentListResolver } },
-    { path: "request-treatment/student/:id", component: RequestTreatmentComponent },
-    { path: "request-treatment", component: RequestTreatmentComponent, resolve: { data: RequestTreatementListResolver } },
-    { path: "request-treatment/student/:id/add", component: AddRequestTreatmentComponent, resolve: { data: DocumentTypeResolver } },
-    { 
-      path: "request-treatment/:id/consult", component: ConsultRequestTreatmentComponent
-    },
-    { path: "document-type", component: DocumentTypeComponent, resolve: { listDocumentType: DocumentTypeResolver } },
-    { path: "document-template", component: DocumentTemplateComponent, resolve: { listDocumentTemplate: DocumentTemplateResolver }  },
+    { path: "student", component: StudentListRequestComponent },
+    { path: "student/:id/request-treatment", component: StudentRequestComponent },
+    { path: "student/:id/request-treatment/:id/consult", component: StudentRequestConsultComponent },
+    { path: "student/:id/request-treatment/add", component: StudentRequestAddComponent, resolve: { data: DocumentTypeResolver } },
+    { path: "document-type", component: DocumentTypeComponent },
+    { path: "document-template", component: DocumentModelComponent },
+    { path: "document-template/add", component: DocumentModelAddComponent },
 ];
   
 @NgModule({
@@ -29,7 +24,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
   
-
 export class ServiceRequestRoutingModule {
 
 }

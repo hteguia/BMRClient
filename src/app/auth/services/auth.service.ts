@@ -83,4 +83,8 @@ export class AuthService {
     const clearables = keys.filter(key => key !== excludedKey)
     clearables.forEach(key => localStorage.removeItem(key!))
   }
+
+  getUserProfil(): Observable<any> {
+    return this.http.get<any>(`${environment.apiUrl}/v1/user`);
+  }
 }

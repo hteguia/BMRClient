@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,8 +20,10 @@ export class FileInputComponent implements ControlValueAccessor {
   file: File | null = null;
   @Input() progress = 0;
   @Input() upload = false;
+  // @Input() formControlName!: string;
+  // formControl!: FormControl;
   
-
+ 
   message: string = '';
   uploaded = true;
 
@@ -52,11 +53,13 @@ export class FileInputComponent implements ControlValueAccessor {
 
   
   constructor( private host: ElementRef<HTMLInputElement>, private http: HttpClient ) {
+   //this.formControl = this.rootFormControl.control.get('file') as FormControl;
+   
   }
 
   writeValue( value: null ) {
     // clear file input
-    this.host.nativeElement.value = '';
+    this.host.nativeElement.value = 'muu';
     this.file = null;
   }
 

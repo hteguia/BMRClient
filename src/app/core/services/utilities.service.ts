@@ -1,10 +1,14 @@
+import { inject } from "@angular/core";
 import { Observable, delay, finalize, mergeMap, throwError, timer } from "rxjs";
+import { LogService } from "./log.service";
 
 interface iRetryPolicy {
     maxRetryAttempts?: number;
     scalingDuration?: number;
     excludedStatusCodes?: number[];
   }
+
+
   
 export const genericRetryPolicy =
   ({
@@ -13,6 +17,7 @@ export const genericRetryPolicy =
     excludedStatusCodes = [],
   }: iRetryPolicy = {}) =>
     (attempts: Observable<any>) => {
+      //const logService = inject(LogService);
       return attempts.pipe(
         delay(scalingDuration), // Start retries after 2s from the initial req fail.
         mergeMap((error, i) => {
@@ -27,7 +32,7 @@ export const genericRetryPolicy =
           }
 
           // retry after 1s, 2s, 3s
-          console.log(`RETRY --> ${retryAttempt}`);
+          //console.log(`RETRY --> ${retryAttempt}`);
           return timer(retryAttempt * scalingDuration);
         }),
         finalize(() => console.log('Fin de rejeu, Requete echouée !'))
