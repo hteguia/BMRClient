@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ServiceRequestService } from '../service.request.service';
-import { BaseFormPageComponent } from 'src/app/shared/pages/base-form-page/base-form-page.component';
+import { BaseFormPageComponent } from 'src/app/shared/pages/base-form-page.component';
 import {OnInit} from '@angular/core';
 import { BaseFormPage } from 'src/app/shared/pages/BaseFormPage';
 import { ActivatedRoute, Router } from '@angular/router';

@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
-import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { ServiceRequestService } from '../service.request.service';
 import { DocumentTemplateModel } from '../service-request.model';
+import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page.component';
 
 @Component({
   selector: 'app-document-model',

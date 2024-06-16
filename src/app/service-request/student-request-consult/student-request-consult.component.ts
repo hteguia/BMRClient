@@ -5,7 +5,6 @@ import { BasePageComponent } from 'src/app/shared/pages/base-page.component';
 import { ServiceRequestService } from '../service.request.service';
 import { StatusEnum } from 'src/app/core/enums/status.enum';
 import { FormControl } from '@angular/forms';
-import { UsersService } from 'src/app/users/users.service';
 
 @Component({
   selector: 'app-student-request-consult',
@@ -17,7 +16,6 @@ export class StudentRequestConsultComponent extends BasePageComponent {
   id!: any;
 
   #serviceRequestService = inject(ServiceRequestService);
-  #usersService = inject(UsersService);
   
   requestTreatment$!: Observable<any>;
   requestTreatmentStatus$!: Observable<any>
@@ -31,9 +29,9 @@ export class StudentRequestConsultComponent extends BasePageComponent {
   fileToAdd: any[] = [];
   disabledSaveButton = true;
 
-  monitorCtrl = new FormControl('');
-  fileCtrl = new FormControl('');
-  statusCtrl = new FormControl('');
+  monitorCtrl!: FormControl;
+  fileCtrl!: FormControl;
+  statusCtrl!: FormControl;
 
   req:{[key: string]:any} = {}
   
@@ -51,7 +49,12 @@ export class StudentRequestConsultComponent extends BasePageComponent {
     this.requestTreatment$ = this.#serviceRequestService.getRequestTreatmentById(this.id);
     this.requestTreatmentStatus$ = this.#serviceRequestService.getRequestTreatmentStatus(this.id);
     this.requestTreatmentResult$ = this.#serviceRequestService.getRequestTreatmentResult(this.id);
-    this.monitors$ = this.#usersService.getAllCollaborater();
+    this.monitors$ = this.#serviceRequestService.getAllCollaborater();
+
+    this.monitorCtrl = new FormControl('');
+    this.statusCtrl = new FormControl('');
+    this.fileCtrl = new FormControl('');
+
 
     this.fetchDatas();
 
@@ -63,7 +66,12 @@ export class StudentRequestConsultComponent extends BasePageComponent {
         }
       })
     ).subscribe();
+
     
+    this.fileCtrl.valueChanges.pipe().subscribe((file: any) => {this.onUploadFinished(file)});
+
+    
+
     if(this.currentUser.role === 'MODERATOR'){
       this.monitorCtrl.disable()
     }
@@ -131,8 +139,11 @@ export class StudentRequestConsultComponent extends BasePageComponent {
   }
 
   onUploadFinished(event: any){
-    this.fileToAdd.push({id:event.id, fileName:event.fileName});
-    this.requestTreatmentResult.push({id: event.id, fileName:event.fileName, fileSize: event.fileSize, canDelete:true});
+    if(event.id !== null && event.id !== undefined){
+      this.fileToAdd.push({id:event.id, fileName:event.fileName});
+      this.requestTreatmentResult.push({id: event.id, fileName:event.fileName, fileSize: event.fileSize, canDelete:true});
+    }
+    
  }
 
  downloadOrDeleteFile(event: any, file:any){
@@ -157,7 +168,6 @@ export class StudentRequestConsultComponent extends BasePageComponent {
   }
 
   savechange() {
-    console.log("this.monitorCtrl.value "+this.monitorCtrl.value)
     if(this.monitorCtrl.value === ''){
       return;
     }

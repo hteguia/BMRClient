@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SendSmsComponent } from './send-sms.component';
+import { ErrorComponent } from './error.component';
 
-describe('SendSmsComponent', () => {
-  let component: SendSmsComponent;
-  let fixture: ComponentFixture<SendSmsComponent>;
+describe('ErrorComponent', () => {
+  let component: ErrorComponent;
+  let fixture: ComponentFixture<ErrorComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [SendSmsComponent]
+      declarations: [ErrorComponent]
     });
-    fixture = TestBed.createComponent(SendSmsComponent);
+    fixture = TestBed.createComponent(ErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

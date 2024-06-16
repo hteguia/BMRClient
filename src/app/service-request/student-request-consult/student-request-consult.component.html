@@ -95,11 +95,16 @@
                             </tr>
                         </tbody>
                     </table>
-                    <app-file-input 
+                    <app-input-file *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])"
+                        [formControl]="fileCtrl"
+                        placeholder="or drag and drop file here" 
+                        label="Choose file" 
+                        uploadUrl='/v1/file/upload'  />
+                    <!-- <app-file-input 
                         [formControl]="fileCtrl"
                         [upload]="true" 
                         (onUploadFinished)="onUploadFinished($event)"
-                        *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])"/>
+                        *ngIf="hasRole(['SUPERADMIN', 'ADMIN', 'MODERATOR'])"/> -->
                 </div>                
             </div>            
         </div>

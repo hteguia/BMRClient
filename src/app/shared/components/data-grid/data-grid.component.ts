@@ -1,9 +1,8 @@
 import { Component, EventEmitter, Input, Output, ViewChild, inject } from "@angular/core";
 import { DxContextMenuComponent, DxDataGridComponent } from "devextreme-angular";
-import { DataGridColumn } from "../../models/data-grid-column.model";
 import { LogService } from "src/app/core/services/log.service";
 import { StatusEnum } from "src/app/core/enums/status.enum";
-import { DataGridButtonAction } from "../../pages/base-grid-page/base-grid-page.component";
+import { DataGridButtonAction, DataGridColumn } from "../../pages/base-grid-page.component";
 
 @Component({
     selector: 'app-data-grid',

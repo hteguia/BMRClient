@@ -3,8 +3,8 @@ import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-base-form-page',
-  templateUrl: './base-form-page.component.html',
-  styleUrls: ['./base-form-page.component.css']
+  template: `<div></div>`,
+  styles: [``]
 })
 export class BaseFormPageComponent {
 

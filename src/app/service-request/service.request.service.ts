@@ -4,6 +4,7 @@ import { Observable, switchMap } from "rxjs";
 import { environment } from "src/environments/environment";
 import { DocumentModel, DocumentTypeModel, RequestTreatmentDetail, StudentRequest } from "./service-request.model";
 import { FileService } from "../core/services/file.service";
+import { CollaboraterModel, StudentModel } from "../users/users.model";
 
 @Injectable()
 export class ServiceRequestService 
@@ -114,4 +115,14 @@ export class ServiceRequestService
     getAllDocumentType(): Observable<DocumentTypeModel[]> {
         return this.http.get<DocumentTypeModel[]>(`${environment.apiUrl}/v1/documenttype`);
     }
+
+    getStudent(id: number): Observable<any> {
+        return this.http.get(`${environment.apiUrl}/v1/student/${id}`);
+    }
+
+
+    getAllCollaborater(): Observable<CollaboraterModel[]> {
+        return this.http.get<CollaboraterModel[]>(`${environment.apiUrl}/v1/collaborater`);
+    }
+
 }

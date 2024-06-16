@@ -137,11 +137,10 @@ export class InputFileComponent implements ControlValueAccessor {
         this.file = file;
 
         if(this.uploadUrl?.trim() !== ''){
-            console.log('uploadUrl', this.uploadUrl)
             this.onUpload();
-        } 
-
-        this.onChange(this.file!);
+        } else {
+          this.onChange(this.file!);
+        }
     }
 
     onUpload(): void {
@@ -158,10 +157,7 @@ export class InputFileComponent implements ControlValueAccessor {
             if (event.type === HttpEventType.UploadProgress)
               this.progress = Math.round(100 * event.loaded / event.total!);
             else if (event.type === HttpEventType.Response) {
-              //this.uploaded = true;
-              //this.message = 'Fichier chargé avec success.';
-              //this.onUploadFinished.emit(event.body);
-              //this.logService.log(event.body)
+              this.onChange(event.body);
             }
           },
           error: (err: HttpErrorResponse) => {

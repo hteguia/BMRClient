@@ -30,7 +30,7 @@ export class RoleResolver implements Resolve<RoleModel[]>{
     constructor(private authService: AuthService, private usersService: UsersService) { }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<RoleModel[]> {
-        return this.usersService.getAllRole();
+        return this.usersService.GetRoleForCreateUser();
     }
 
 }

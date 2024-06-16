@@ -3,9 +3,9 @@ import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { UsersService } from '../users.service';
 import { CollaboraterModel } from '../users.model';
+import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page.component';
 
 @Component({
   selector: 'app-collaborater',
@@ -62,20 +62,30 @@ override ngOnInit(): void {
       icon: 'fas fa-plus', 
       actionType: ActionTypes.NAVIGUATE, 
       action: '/user/collaborater/add', 
-      visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+      visibleForRoles: ['SUPERADMIN', 'ADMIN'],
       disabled: false,
       disabledType: DisabledTypes.NONE 
     },
     { 
       label: 'Modifier', 
       icon: 'fas fa-edit', 
-      actionType: ActionTypes.NAVIGUATE, 
+      actionType: ActionTypes.NAVIGUATE_WITH_ID_AND_DATA, 
       action: '/user/collaborater/:id/update', 
-      visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+      action_url: "/v1/collaborater",
+      visibleForRoles: ['SUPERADMIN', 'ADMIN'],
       disabled: true,
       disabledType: DisabledTypes.SINGLE
        
-    }
+    },
+    { 
+      label: 'Modofier mot de passe', 
+      icon: 'fas fa-unlock', 
+      actionType: ActionTypes.FUNCTION, 
+      action: 'resetPassword', 
+      visibleForRoles: ['SUPERADMIN', 'ADMIN'],
+      disabled: true,
+      disabledType: DisabledTypes.SINGLE 
+    },
   ];  
 
   this.breadcrumpService.setBreadcrump("Liste des collaborateurs", [
@@ -94,6 +104,12 @@ onAddNewItem(){
   this.router.navigateByUrl('/users/collaborater/add');
 }
 
+getCollaborater() : any{
+  this.userService.getCollaborater(this.selectedRows[0]).subscribe(result=>{
+    this.router.navigateByUrl('/users/collaborater/update', { state: result });
+  });
+}
+
 onUpdateItem(){
   if(this.selectedRows.length){
     this.userService.getCollaborater(this.selectedRows[0]).subscribe(result=>{
@@ -104,9 +120,9 @@ onUpdateItem(){
 
 
 
-resetPassword(){
+resetPassword(id: any){
   if(this.selectedRows.length){
-    this.userService.ResetPasswordCollaborater({id:this.selectedRows[0]}).subscribe({
+    this.userService.ResetPasswordCollaborater({id:id}).subscribe({
       next: (response: any) => {
         console.log(response);
       },

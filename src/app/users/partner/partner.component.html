@@ -4,5 +4,6 @@
     [dataSource]="partner$ | async"
     showCheckBox="always"
     (selectedRow)="onSelectRow($event)"
-    (rowClick)="onRowClick($event)"/>
+    (rowClick)="onRowClick($event)"
+    (contextMenuClick)="onActionButtonClick($event)"/>
 <app-spinner></app-spinner>

@@ -1,15 +1,48 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Optional, Output, Self, ViewChild, forwardRef } from '@angular/core';
-import { ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { AfterViewInit, Component, OnDestroy, ViewChild, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
 import * as intlTelInput from 'intl-tel-input';
-import { Subject } from 'rxjs';
+import { BaseControlValueAccessor } from '../base-control-value-accessor.component';
 
 @Component({
   selector: 'app-tel-input',
-  templateUrl: './tel-input.component.html',
-  styleUrls: ['./tel-input.component.css'],
+  template: `
+    <div class="container" style="padding-left:0px; padding-right:0px"> <input #telInput matInput type="tel"
+                    class="form-control {{isInvalid ? 'text-danger': ''}}"
+                        (focus)="onFocus()"
+                        (blur)="onBlur()"
+                        (keypress)="onInputKeyPress($event)" 
+                        (input)="onChange(iti.getNumber())" >
+    </div>
+    <div class="error-container">
+      <ng-container *ngIf="control.touched">
+        <ng-content select="app-error"/>
+      </ng-container>
+    </div>
+  `,
+  styles: [`
+      ::ng-deep .iti{
+        position: relative!important;
+        display: inline!important;
+        height: auto!important;
+      }
+
+      ::ng-deep .iti .form-control{
+          border:1px solid  rgba(0,0,0,0.3)!important;
+      }
+
+      .text-danger{
+          border:1px solid  red!important;
+      }
+
+      ::ng-deep .iti input{
+          width:100%!important; 
+          padding-top:9px; 
+          padding-bottom:9px; 
+          height: auto!important
+      }
+  `],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -18,46 +51,17 @@ import { Subject } from 'rxjs';
     }
   ]
 })
-export class TelInputComponent implements OnInit, AfterViewInit, OnChanges,OnDestroy, ControlValueAccessor {
+export class TelInputComponent extends BaseControlValueAccessor<string> implements AfterViewInit,OnDestroy {
   
   @ViewChild('telInput') telInput:any;
-  myForm! : FormGroup;
-  public phoneNumber!: string;
   iti:any;
   selectedCountryCode:any;
-
-  @Input() cssClass = 'form-control';
-  @Output() phoneNumberChange = new EventEmitter<{isInvalid: boolean, value: string}>();
-  @Input()control!:FormControl
   isInvalid = false
 
-  private onChange!: (value: string) => void;
-  private onTouched!: () => void;
-
-
-  writeValue(obj: any): void {
-    this.phoneNumber = obj;
-  }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-  registerOnTouched(fn: any): void {
-    this.onChange = fn;
-  }
-  
-  setDisabledState?(isDisabled: boolean): void {
-    
-  }
-
-  ngOnInit(){
-       
-  }
-
   ngAfterViewInit(){
-    // const input = document.querySelector("#" + this.inputId);
+    //definir le format du numero de telephone par defaut
     this.iti = intlTelInput(this.telInput.nativeElement, {
         utilsScript: "assets/scripts/utils.js",
-        //initialCountry: "auto",
         nationalMode: true,
         formatOnDisplay: true,
         initialCountry : "auto" , 
@@ -68,15 +72,9 @@ export class TelInputComponent implements OnInit, AfterViewInit, OnChanges,OnDes
             . catch ( function ( )  {  callback ( "nous" ) ;  } ) ; 
         } 
     });
-    this.selectedCountryCode = this.iti.getSelectedCountryData().dialCode;
-    if(this.control!= undefined && this.control.value != ""){
+    if(this.control.value !== null && this.control.value !== undefined){
       this.iti.setNumber(this.control.value);
     }
-
-  }
-
-  ngOnChanges(changes: any) {
-		
   }
 
   ngOnDestroy(){
@@ -84,60 +82,35 @@ export class TelInputComponent implements OnInit, AfterViewInit, OnChanges,OnDes
   }
   
   onFocus = () =>{
-      if(this.phoneNumber == undefined || this.phoneNumber == ""){
-          let getCode = this.iti.getSelectedCountryData().dialCode;
-          this.phoneNumber = "+" + getCode;
-      }
+   
   }
     
   onBlur = ()=>{
-      this.isInvalid = false;
-      if(this.phoneNumber != undefined && this.phoneNumber.trim()){
-          if(this.iti.isValidNumber()){
-              this.isInvalid = false;
-          }
-          else{
-              this.isInvalid = true;
-          }
-      } 
+    this.isInvalid = !this.iti.isValidNumber();
+    this.onTouched();
   }
 
-    onInputKeyPress = (event: KeyboardEvent) =>{
-        const allowedChars = /[0-9\+\-\ ]/;
-        const allowedCtrlChars = /[axcv]/; // Allows copy-pasting
-        const allowedOtherKeys = [
-          'ArrowLeft',
-          'ArrowUp',
-          'ArrowRight',
-          'ArrowDown',
-          'Home',
-          'End',
-          'Insert',
-          'Delete',
-          'Backspace',
-        ];
+  onInputKeyPress = (event: KeyboardEvent) =>{
+      const allowedChars = /[0-9\+\-\ ]/;
+      const allowedCtrlChars = /[axcv]/; // Allows copy-pasting
+      const allowedOtherKeys = [
+        'ArrowLeft',
+        'ArrowUp',
+        'ArrowRight',
+        'ArrowDown',
+        'Home',
+        'End',
+        'Insert',
+        'Delete',
+        'Backspace',
+      ];
 
-      if (
-        !allowedChars.test(event.key) &&
-        !(event.ctrlKey && allowedCtrlChars.test(event.key)) &&
-        !allowedOtherKeys.includes(event.key)
-      ) {
-        event.preventDefault();
-      }
+    if (
+      !allowedChars.test(event.key) &&
+      !(event.ctrlKey && allowedCtrlChars.test(event.key)) &&
+      !allowedOtherKeys.includes(event.key)
+    ) {
+      event.preventDefault();
     }
-
-    formatIntlTelInput() {
-        if (typeof intlTelInputUtils !== 'undefined') { // utils are lazy loaded, so must check
-            var currentText = this.iti.getNumber(intlTelInputUtils.numberFormat.E164);
-            if (typeof currentText === 'string') { // sometimes the currentText is an object :)
-                this.iti.setNumber(currentText); // will autoformat because of formatOnDisplay=true
-            }
-        }
-    }
-
-    onPhoneNumberChange = () =>{
-        this.selectedCountryCode = this.iti.getSelectedCountryData().dialCode;
-        //this.formatIntlTelInput();
-        this.phoneNumberChange.emit({isInvalid: this.isInvalid, value: this.iti.getNumber()});
-    }
+  }
 }

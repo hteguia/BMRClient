@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { LogService } from 'src/app/core/services/log.service';
 import { UserService } from 'src/app/core/services/user.service';
-import { DataGridColumn } from '../../models/data-grid-column.model';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 export interface DataGridButtonAction
 {
@@ -12,9 +13,22 @@ export interface DataGridButtonAction
     icon: string;
     actionType: string;
     action: string | Function;
+    action_url?: string;
     visibleForRoles: Array<string>;
     disabledType: DisabledTypes;
     disabled: boolean;
+}
+
+export class DataGridColumn
+{
+    dataField!: string;
+    caption!: string;
+    dataType!: string;
+    visible?: boolean = true;
+    template?: '' | 'statusTemplate' | 'amountTemplate' | 'dateTemplate' = ''; 
+    calculateCellValue?:  '' | 'concatValue' = ''
+    alignment?: 'center' | 'left' | 'right' = 'left';
+    width?: number = 100;
 }
 
 export enum DisabledTypes{
@@ -34,8 +48,8 @@ export enum ActionTypes{
 
 @Component({
   selector: 'app-base-grid-page',
-  templateUrl: './base-grid-page.component.html',
-  styleUrls: ['./base-grid-page.component.css'],
+  template: `<div></div>`,
+  styles: [``],
   animations: [
     trigger('fade', [
       state('hide', style({
@@ -60,6 +74,7 @@ export class BaseGridPageComponent {
   private uerService = inject(UserService);
   private logService = inject(LogService);
   private authService = inject(AuthService);
+  private http = inject(HttpClient);
 
   currentUser!:any;
   id!: string;
@@ -92,27 +107,30 @@ export class BaseGridPageComponent {
   }
 
   onActionButtonClick(event: any) {
-    console.log("event.action");
     if(event.actionType === ActionTypes.NAVIGUATE){
-      console.log(event.action);
       this.router.navigateByUrl(`${event.action}`);  
       return;   
     }    
 
     if(event.actionType === ActionTypes.NAVIGUATE_WITH_ID){
       if(event.id !== undefined){
-        console.log(event.action.replace(':id', this.id));
         this.router.navigateByUrl(event.action.replace(':id', event.id));
         return;
       }
     }
 
     if(event.actionType === ActionTypes.NAVIGUATE_WITH_ID_URL){
-      if(this.id !== undefined){
-        console.log(event.action.replace(':id', this.id));
-        this.router.navigateByUrl(event.action.replace(':id:', this.id));
+      if(event.id !== undefined){
+        this.router.navigateByUrl(event.action.replace(':id', this.id));
         return;
       }
+    }
+
+    if(event.actionType === ActionTypes.NAVIGUATE_WITH_ID_AND_DATA){
+      const url = event.action.replace(':id', event.id);
+      this.http.get(`${environment.apiUrl}${event.action_url}/${event.id}`).subscribe((response: any) => {
+        this.router.navigateByUrl(url, { state: response });
+      });
     }
 
     if(event.actionType === ActionTypes.FUNCTION){

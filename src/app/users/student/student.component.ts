@@ -3,9 +3,9 @@ import { Observable, map } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { UsersService } from '../users.service';
 import { StudentModel } from '../users.model';
+import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page.component';
 
 @Component({
   selector: 'app-student',

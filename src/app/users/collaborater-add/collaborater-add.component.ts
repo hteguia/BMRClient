@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, startWith } from 'rxjs';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { BaseFormPage } from 'src/app/shared/pages/BaseFormPage';
 import { RoleModel } from '../users.model';
 import { UsersService } from '../users.service';
+import { phoneNumberValidator } from 'src/app/shared/validators/phone-number.validator';
 
 @Component({
   selector: 'app-collaborater-add',
@@ -36,9 +37,10 @@ import { UsersService } from '../users.service';
   ]
 })
 export class CollaboraterAddComponent extends BaseFormPage{
-  constructor(formBuilder: FormBuilder,
-    private usersService: UsersService, route: ActivatedRoute,
-    router: Router)
+
+  private usersService = inject(UsersService);
+
+  constructor(router: Router, route: ActivatedRoute, formBuilder: FormBuilder)
   {
     super(router, route, formBuilder)
       if(this.router.getCurrentNavigation()){
@@ -72,7 +74,6 @@ export class CollaboraterAddComponent extends BaseFormPage{
     if(this.data){
       this.setFormData()
     }
-    
   }
 
   protected override initMainForm(){
@@ -91,7 +92,7 @@ export class CollaboraterAddComponent extends BaseFormPage{
     this.idCtrl = this.formBuilder.control(this.data?.id)
     this.firstNameCtrl = this.formBuilder.control(this.data?.firstName, Validators.required);
     this.lastNameCtrl = this.formBuilder.control(this.data?.lastName, Validators.required);
-    this.phoneNumberCtrl = this.formBuilder.control(this.data?.phoneNumber, Validators.required);
+    this.phoneNumberCtrl = this.formBuilder.control(this.data?.phoneNumber, [Validators.required, phoneNumberValidator]);
     this.emailCtrl = this.formBuilder.control(this.data?.email, [Validators.required, Validators.email]);
     this.roleCtrl = this.formBuilder.control(this.data?.roleId, Validators.required);
     this.serviceRequestNotifyCtrl = this.formBuilder.control(false);
@@ -99,6 +100,10 @@ export class CollaboraterAddComponent extends BaseFormPage{
 
   protected override onSubmitForm(){
     this.action$ = this.usersService.addCollaborater(this.mainForm.value);
+    if(this.idCtrl.value != null && this.idCtrl.value != undefined && this.idCtrl.value != 0){
+      this.action$ = this.usersService.updateCollaborater(this.mainForm.value);
+    }
+
     this.action$.subscribe(
       (response) =>{
         this.loading = false;
@@ -106,6 +111,7 @@ export class CollaboraterAddComponent extends BaseFormPage{
         this.router.navigateByUrl('/user/collaborater');
       },
       (error) =>{
+        //console.log("error "+error);
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get(prop.toLowerCase());
           if (formControl) {
@@ -136,21 +142,6 @@ export class CollaboraterAddComponent extends BaseFormPage{
     this.mainForm.reset();
   }
 
-  public phoneNumberChange(data: {isInvalid: boolean, value: string}){
-    if(data.value === undefined){
-
-    }
-    else if(data.isInvalid){
-      
-    }
-    else{
-      this.phoneNumberCtrl.setValue(data.value);
-    }
-  }
-
-  hasError( field: string, error: string ) {
-    return this.phoneNumberCtrl.dirty && this.phoneNumberCtrl.hasError(error);
-  }
 
   getFormControlErrorText(ctrl: AbstractControl){
     if(ctrl.hasError('required')){
@@ -164,9 +155,10 @@ export class CollaboraterAddComponent extends BaseFormPage{
       return 'Ce champs contient une erreur';
     }
   }
+
   showOptions(event:any): void {
     console.log(event.checked);
-}
+  }
 }
 
 

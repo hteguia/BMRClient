@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { ServiceRequestService } from '../service.request.service';
 import { Observable } from 'rxjs';
 import { StudentRequest } from '../service-request.model';
+import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page.component';
 
 @Component({
   selector: 'app-student-list-request',

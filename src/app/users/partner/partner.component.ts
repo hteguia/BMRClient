@@ -5,9 +5,9 @@ import { BreadcrumpService } from 'src/app/core/services/breadcrump.service';
 import { MatDialog } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AddPartnerComponent } from '../partner-add/add-partner.component';
-import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page/base-grid-page.component';
 import { UsersService } from '../users.service';
 import { PartnerModel } from '../users.model';
+import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page.component';
 
 
 @Component({
@@ -52,8 +52,8 @@ export class PartnerComponent extends BaseGridPageComponent {
       { 
         label: 'Ajouter', 
         icon: 'fas fa-plus', 
-        actionType: ActionTypes.NAVIGUATE, 
-        action: '/user/student/add', 
+        actionType: ActionTypes.FUNCTION, 
+        action: 'addPartner', 
         visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
         disabled: false,
         disabledType: DisabledTypes.NONE 
@@ -84,6 +84,23 @@ export class PartnerComponent extends BaseGridPageComponent {
         this.openPartnerForm('Modifier le partenaire', result)
       });
     }
+  }
+
+  addPartner(id:any){
+    const dialogRef = this.dialog.open(AddPartnerComponent, {
+      data: 
+      {
+        data: null, 
+        title:'Nouveau partenaire'
+      }, 
+      minWidth: '500px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === "RELOAD_GRID"){
+        this.partner$ = this.userService.getAllPartner();
+      }
+    });
   }
 
   private openPartnerForm(title:string, partnerModel?: PartnerModel){

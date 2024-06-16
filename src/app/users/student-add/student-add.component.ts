@@ -5,6 +5,7 @@ import { Observable, map } from 'rxjs';
 import { BaseFormPage } from 'src/app/shared/pages/BaseFormPage';
 import { PartnerModel } from '../users.model';
 import { UsersService } from '../users.service';
+import { phoneNumberValidator } from 'src/app/shared/validators/phone-number.validator';
 
 @Component({
   selector: 'app-student-add',
@@ -89,7 +90,7 @@ export class StudentAddComponent extends BaseFormPage{
     this.idCtrl = this.formBuilder.control(this.data?.id)
     this.firstNameCtrl = this.formBuilder.control(this.data?.firstName, Validators.required);
     this.lastNameCtrl = this.formBuilder.control(this.data?.lastName, Validators.required);
-    this.phoneNumberCtrl = this.formBuilder.control(this.data?.phoneNumber, Validators.required);
+    this.phoneNumberCtrl = this.formBuilder.control(this.data?.phoneNumber, [Validators.required, phoneNumberValidator]);
     this.emailCtrl = this.formBuilder.control(this.data?.email, [Validators.required, Validators.email]);
     this.facultyCtrl = this.formBuilder.control(this.data?.faculty, Validators.required);
     this.categoryCtrl = this.formBuilder.control(this.data?.category, Validators.required);
