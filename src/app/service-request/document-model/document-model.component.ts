@@ -37,7 +37,7 @@ export class DocumentModelComponent extends BaseGridPageComponent {
           icon: 'fas fa-plus', 
           actionType: ActionTypes.NAVIGUATE, 
           action: 'service-request/document-template/add', 
-          visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+          visibleForRoles: ['SUPERADMIN', 'ADMIN'],
           disabledType: DisabledTypes.NONE,
           disabled: false, 
         },
@@ -46,7 +46,7 @@ export class DocumentModelComponent extends BaseGridPageComponent {
           icon: 'fas fa-download', 
           actionType: ActionTypes.FUNCTION, 
           action: "donwloadDocumentTemplate", 
-          visibleForRoles: ['SUPERADMIN', 'ADMIN', 'BASIC'],
+          visibleForRoles: ['SUPERADMIN', 'ADMIN', 'MODERATOR'],
           disabledType: DisabledTypes.SINGLE,
           disabled: true, 
         }

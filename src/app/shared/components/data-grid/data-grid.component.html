@@ -3,7 +3,7 @@
         <div class="margin">
             <div class="btn-group">
                 <ng-container *ngFor="let btn of buttonActions">
-                    <app-button        
+                    <app-button  *ngIf="hasRole(btn.visibleForRoles)"      
                         color="primary" 
                         cssClass="btn--primary"
                         action="{{btn.action}}"

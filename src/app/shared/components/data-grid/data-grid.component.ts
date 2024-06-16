@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, Output, ViewChild, inject } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, inject } from "@angular/core";
 import { DxContextMenuComponent, DxDataGridComponent } from "devextreme-angular";
 import { LogService } from "src/app/core/services/log.service";
 import { StatusEnum } from "src/app/core/enums/status.enum";
 import { DataGridButtonAction, DataGridColumn } from "../../pages/base-grid-page.component";
+import { AuthService } from "src/app/auth/services/auth.service";
 
 @Component({
     selector: 'app-data-grid',
     templateUrl: './data-grid.component.html',
     styleUrls: ['./data-grid.component.css'],
 })
-export class DataGridComponent  {
+export class DataGridComponent implements OnInit  {
 
     @Input() columns!: DataGridColumn[];
     @Input() dataSource!: any;
@@ -37,7 +38,14 @@ export class DataGridComponent  {
 
     idSelected!:number
 
+    currentUser!: any;
+
     private logService = inject(LogService);
+    private authService = inject(AuthService);
+
+    ngOnInit(): void {
+        this.currentUser = this.authService.userProfil;
+    }
 
     /**
      * Cette fonction est déclenchée lorsque la sélection change.
@@ -133,4 +141,8 @@ export class DataGridComponent  {
             return 'badge-danger';
         }
     }
+
+    hasRole(roles: any):boolean{
+        return roles.includes(this.currentUser.role)
+      }
 }

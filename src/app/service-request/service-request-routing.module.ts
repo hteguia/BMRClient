@@ -8,6 +8,7 @@ import { StudentRequestComponent } from './student-request/student-request.compo
 import { StudentRequestConsultComponent } from './student-request-consult/student-request-consult.component';
 import { StudentRequestAddComponent } from './student-request-add/student-request-add.component';
 import { DocumentTypeResolver } from './service-request.resolver';
+import { RequestTreatmentListComponent } from './request-treatment-list/request-treatment-list.component';
 
 const routes: Routes = [
     { path: "student", component: StudentListRequestComponent },
@@ -17,6 +18,8 @@ const routes: Routes = [
     { path: "document-type", component: DocumentTypeComponent },
     { path: "document-template", component: DocumentModelComponent },
     { path: "document-template/add", component: DocumentModelAddComponent },
+    { path: "request-treatment", component: RequestTreatmentListComponent },
+    { path: "request-treatment/:id/consult", component: StudentRequestConsultComponent },
 ];
   
 @NgModule({

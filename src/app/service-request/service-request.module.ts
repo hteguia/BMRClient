@@ -11,6 +11,7 @@ import { StudentListRequestComponent } from './student-list-request/student-list
 import { StudentRequestConsultComponent } from './student-request-consult/student-request-consult.component';
 import { StudentRequestAddComponent } from './student-request-add/student-request-add.component';
 import { DocumentTypeResolver } from './service-request.resolver';
+import { RequestTreatmentListComponent } from './request-treatment-list/request-treatment-list.component';
 
 
 
@@ -22,7 +23,8 @@ import { DocumentTypeResolver } from './service-request.resolver';
     StudentRequestComponent,
     StudentListRequestComponent,
     StudentRequestConsultComponent,
-    StudentRequestAddComponent
+    StudentRequestAddComponent,
+    RequestTreatmentListComponent
   ],
   imports: [
     CommonModule,
