@@ -6,8 +6,8 @@ import { environment } from "src/environments/environment";
 
 
 
-@Injectable()
-export class DashboardService {
+@Injectable({providedIn: 'root'})
+export class CoreService {
 
     constructor(private http: HttpClient) {}
 
