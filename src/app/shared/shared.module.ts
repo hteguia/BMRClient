@@ -23,6 +23,7 @@ import { StatusPipe } from "./pipes/status.pipe";
 import { InputFileComponent } from "./form-control/input-file.component";
 import { BaseGridPageComponent } from "./pages/base-grid-page.component";
 import { ErrorComponent } from "./components/error/error.component";
+import { PopupConfirmComponent } from "./components/popup-confirm/popup-confirm.component";
 
 
 
@@ -47,7 +48,8 @@ import { ErrorComponent } from "./components/error/error.component";
         SpinnerComponent,
         TaskCheckComponent,
         InputFileComponent,
-        ErrorComponent
+        ErrorComponent,
+        PopupConfirmComponent
     ],
     imports: [
         CommonModule,
@@ -79,7 +81,8 @@ import { ErrorComponent } from "./components/error/error.component";
         TaskCheckComponent,
         BaseGridPageComponent,
         InputFileComponent,
-        ErrorComponent
+        ErrorComponent,
+        PopupConfirmComponent
     ]
 })
 

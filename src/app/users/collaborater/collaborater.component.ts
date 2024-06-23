@@ -6,6 +6,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { UsersService } from '../users.service';
 import { CollaboraterModel } from '../users.model';
 import { ActionTypes, BaseGridPageComponent, DisabledTypes } from 'src/app/shared/pages/base-grid-page.component';
+import { PopupConfirmComponent } from 'src/app/shared/components/popup-confirm/popup-confirm.component';
 
 @Component({
   selector: 'app-collaborater',
@@ -78,7 +79,7 @@ override ngOnInit(): void {
        
     },
     { 
-      label: 'Modofier mot de passe', 
+      label: 'Renitialiser le mot de passe', 
       icon: 'fas fa-unlock', 
       actionType: ActionTypes.FUNCTION, 
       action: 'resetPassword', 
@@ -121,16 +122,34 @@ onUpdateItem(){
 
 
 resetPassword(id: any){
-  if(this.selectedRows.length){
-    this.userService.ResetPasswordCollaborater({id:id}).subscribe({
-      next: (response: any) => {
-        console.log(response);
-      },
-      error: (error: any) => {
-        console.log(error);
+  const dialogRef = this.dialog.open(PopupConfirmComponent, {
+    data: 
+    {
+      data: "Voulez-vous vraiment réinitialiser le mot de passe de cet utilisateur ?", 
+      title:'Confirmation',
+    }, 
+    minWidth: '500px'
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if(result === "YES"){
+      if(this.selectedRows.length){
+        this.userService.ResetPasswordCollaborater({id:id}).subscribe({
+          next: (response: any) => {
+            console.log(response);
+          },
+          error: (error: any) => {
+            console.log(error);
+          }
+        });
       }
-    });
-  }
+    } else{
+
+    }
+  });
+
+
+  
 }
 
  fetchDatas(): void {

@@ -7,7 +7,7 @@ import { PartnerModel } from '../users.model';
 import { UsersService } from '../users.service';
 
 export interface DialogData {
-  data?: PartnerModel,
+  data?: any,
   title: string
 }
 

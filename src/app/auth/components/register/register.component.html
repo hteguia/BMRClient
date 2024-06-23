@@ -147,7 +147,8 @@
                               <div>
                                 <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
                                 <button mat-raised-button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
-                                <button mat-raised-button class="btn btn--primary" mat-button >Enregistrer</button>
+                                <app-button style="width:100%" [disabled]="!mainForm.valid"   color="primary" cssClass="btn btn--primary btn-block" >Enregistrer</app-button>
+                              
                               </div>
                             </mat-step>
                         </mat-vertical-stepper>
@@ -203,10 +204,10 @@
                                       <div class="form-group">
                                           
                                           <label for="exampleInputPassword1">Téléphone</label>
-                                          <mat-form-field appearance="outline">
-                                              <input matInput formControlName="phoneNumber" placeholder="Renseigner votre téléphone mobile"
-                                                    required>
-                                            </mat-form-field>
+                                          <app-tel-input cssClass="form-control col-md-12" class="input-tel" [formControl]="phoneNumberCtrl" >
+                                            <app-error *ngIf="phoneNumberCtrl.errors">Champ obligatoire ou format invalide</app-error>
+                                        </app-tel-input> 
+                                        
                                       </div>
                                     
                                     <div>
@@ -287,7 +288,7 @@
                                 <div>
                                   <button mat-raised-button class="btn btn--default" mat-button matStepperPrevious>Précédent</button>
                                   <button mat-raised-button class="btn btn--default" mat-button (click)="stepper.reset()">Réinitialiser</button>
-                                  <button mat-raised-button class="btn btn--primary" mat-button (click)="onRegister()">Enregistrer</button>
+                                  <button [disabled]="!mainForm.valid"  mat-raised-button class="btn btn--primary" mat-button (click)="onRegister()">Enregistrer</button>
                                 </div>
                               </mat-step>
                         
