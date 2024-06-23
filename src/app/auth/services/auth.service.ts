@@ -15,7 +15,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
     
   login(data: {email: string, password: string}): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data, {withCredentials: true}).pipe(
       catchError(error => {
         this.logService.error(error);
         return of(false);
