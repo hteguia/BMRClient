@@ -34,9 +34,6 @@ export class DashboardComponent implements OnInit {
     this.setBreadcrump();
 
     this.currentUser = this.authService.userProfil;
-
-    //this.renderStudentsChart();
-    this.renderDocumentsEvolutionChart();
   }
 
   private setBreadcrump():void{
@@ -94,8 +91,6 @@ export class DashboardComponent implements OnInit {
       }
       acc[month].totalValue += value;
       acc[month].count += 1;
-      console.log("acc "+acc)
-      console.log("month "+month)
       return acc;
     }, {});
 
@@ -109,38 +104,5 @@ export class DashboardComponent implements OnInit {
     });
     
     return finalTable;
-  }
-
-  renderDocumentsEvolutionChart(): void {
-    const ctx = (document.getElementById('documentsEvolutionChart') as HTMLCanvasElement);
-    const documentsEvolutionChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai'], // Remplacez par vos périodes réelles
-        datasets: [{
-          label: 'Documents corrigés',
-          data: [50, 60, 70, 80, 90], // Remplacez ces valeurs par vos données réelles
-          borderColor: 'rgba(54, 162, 235, 1)',
-          fill: false
-        }, {
-          label: 'Correction en cours',
-          data: [30, 35, 40, 45, 50], // Remplacez ces valeurs par vos données réelles
-          borderColor: 'rgba(255, 206, 86, 1)',
-          fill: false
-        }, {
-          label: 'En attente de correction',
-          data: [20, 25, 90, 35, 40], // Remplacez ces valeurs par vos données réelles
-          borderColor: 'rgba(255, 99, 132, 1)',
-          fill: false
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
   }
 }
