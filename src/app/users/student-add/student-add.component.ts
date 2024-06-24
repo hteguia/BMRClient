@@ -98,6 +98,7 @@ export class StudentAddComponent extends BaseFormPage{
   }
 
   protected override onSubmitForm(){
+    this.loading = true;
     this.action$ = this.mainForm.value.id === null ? this.usersService.addStudent(this.mainForm.value) :
                                             this.usersService.updateStudent(this.mainForm.value);
 
@@ -108,6 +109,7 @@ export class StudentAddComponent extends BaseFormPage{
         this.router.navigateByUrl('/user/student');
       },
       (error) =>{
+        this.loading = false;
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get(prop.toLowerCase());
           if (formControl) {

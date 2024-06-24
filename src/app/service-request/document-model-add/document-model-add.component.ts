@@ -44,6 +44,7 @@ export class DocumentModelAddComponent extends BaseFormPage {
   }
   
   protected override  onSubmitForm() : void {
+    this.loading = true;
     const formData = toFormData(this.mainForm.value);
     formData.append('file', this.contentFileCtrl.value);
     this.serviceRequestService.addDoumentModel(formData).subscribe(
@@ -53,6 +54,7 @@ export class DocumentModelAddComponent extends BaseFormPage {
         this.router.navigateByUrl(`service-request/document-template`);              
       },
       (error) =>{
+        this.loading = false;
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get('name');
           if (formControl) {
