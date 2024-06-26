@@ -59,11 +59,6 @@ export class DashboardComponent implements OnInit {
 
   renderStudentsChart(data:[{key:any,count:any}]): void {
     //sum data by count   
-
-
-
-
-
     const custmData = this.aggregateDataByMonth(data);
     const ctx = (document.getElementById('studentsChart') as HTMLCanvasElement)//.getContext('2d');
     const studentsChart = new Chart(ctx, {
