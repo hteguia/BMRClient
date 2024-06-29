@@ -5,6 +5,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { confirmEqualValidator } from 'src/app/shared/validators/confirm-equal.validator';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { phoneNumberValidator } from 'src/app/shared/validators/phone-number.validator';
 
 @Component({
   selector: 'app-register',
@@ -45,6 +46,7 @@ export class RegisterComponent implements OnInit {
   schoolInformationForm!: FormGroup;
   passwordCtrl!: FormControl;
   confirmPasswordCtrl!: FormControl;
+  phoneNumberCtrl!: FormControl;
 
   showPasswordError$!: Observable<boolean>;
 
@@ -113,6 +115,7 @@ export class RegisterComponent implements OnInit {
   private initFormControls(): void {
     this.passwordCtrl = this.formBuilder.control('', Validators.required);
     this.confirmPasswordCtrl = this.formBuilder.control('', Validators.required);
+    this.phoneNumberCtrl = this.formBuilder.control('', [Validators.required, phoneNumberValidator]);
 
     this.credentialsForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -124,9 +127,9 @@ export class RegisterComponent implements OnInit {
     });
 
     this.personalInformationForm = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      phoneNumber: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phoneNumber: this.phoneNumberCtrl,
     });
 
     this.schoolInformationForm = this.formBuilder.group({

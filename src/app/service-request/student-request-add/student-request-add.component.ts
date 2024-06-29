@@ -64,6 +64,7 @@ export class StudentRequestAddComponent extends BaseFormPage {
   }
 
   protected override onSubmitForm(): void {
+    this.loading = true;
     const formData = toFormData(this.mainForm.value);
     formData.append('studentId', this.studentId);
     formData.append('file', this.contentFileCtrl.value);
@@ -74,6 +75,7 @@ export class StudentRequestAddComponent extends BaseFormPage {
         this.router.navigateByUrl(`/service-request/student/${this.studentId}/request-treatment`);
       },
       (error) =>{
+        this.loading = false;
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get('name');
           if (formControl) {

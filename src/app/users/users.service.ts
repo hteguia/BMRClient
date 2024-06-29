@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Observable } from "rxjs";
+import { Observable, catchError, of } from "rxjs";
 import { CollaboraterModel, PartnerModel, RoleModel, StudentModel } from "./users.model";
+import { handleError } from "../core/core.service";
 
 
 @Injectable()
@@ -11,7 +12,9 @@ export class UsersService {
     constructor(private http: HttpClient) {}
 
     getAllStudent(): Observable<StudentModel[]> {
-        return this.http.get<StudentModel[]>(`${environment.apiUrl}/v1/student`);
+        return this.http.get<StudentModel[]>(`${environment.apiUrl}/v1/student`).pipe(
+            catchError(handleError<StudentModel[]>('getAllStudent', []))
+        );
     }
 
     getStudent(id: number): Observable<any> {
@@ -80,4 +83,6 @@ export class UsersService {
     updatePartner(formValue: any): Observable<any>  {
         return this.http.put(`${environment.apiUrl}/v1/partner`, formValue);
     }
+
+    
 }

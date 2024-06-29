@@ -1,0 +1,11 @@
+<div >
+    <h1 mat-dialog-title>{{title}}</h1>
+    <mat-dialog-content class="mat-typography">
+      <p>{{content}}</p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close="CLOSE_MODAL" (click)='onAction("NO")'>NON</button>
+      <button mat-flat-button class="btn--primary" (click)='onAction("YES")' >OUI</button>
+    </mat-dialog-actions>
+  </div>
+  <app-spinner></app-spinner>

@@ -13,15 +13,25 @@ export class AuthService {
   private storageService = inject(StorageService);
 
   constructor(private http: HttpClient) {}
+
+
+  isLoggedIn(): boolean {
+    const user = this.userProfil;
+    return  user != undefined && user != null;
+  }
     
   login(data: {email: string, password: string}): Observable<any> {
-    return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data).pipe(
+    return this.http.post<any>(`${environment.apiUrl}/Account/Authenticate`,data, {withCredentials: true}).pipe(
       catchError(error => {
         this.logService.error(error);
         return of(false);
       })
     );
   }
+
+  public signOut() {
+    return this.http.get(`${environment.apiUrl}/Account/signout`);
+}
 
   register(data: any): Observable<any> {
     return this.http.post<any>(`${environment.apiUrl}/Account/register`,data);
@@ -70,6 +80,7 @@ export class AuthService {
   }
 
   logout(){
+    this.signOut().subscribe();
     this.clearLSwithoutExcludedKey()
   }
 
@@ -85,6 +96,6 @@ export class AuthService {
   }
 
   getUserProfil(): Observable<any> {
-    return this.http.get<any>(`${environment.apiUrl}/v1/user`);
+    return this.http.get<any>(`${environment.apiUrl}/v1/user`, {withCredentials: true});
   }
 }

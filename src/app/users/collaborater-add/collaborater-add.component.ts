@@ -99,6 +99,7 @@ export class CollaboraterAddComponent extends BaseFormPage{
   }
 
   protected override onSubmitForm(){
+    this.loading = true;
     this.action$ = this.usersService.addCollaborater(this.mainForm.value);
     if(this.idCtrl.value != null && this.idCtrl.value != undefined && this.idCtrl.value != 0){
       this.action$ = this.usersService.updateCollaborater(this.mainForm.value);
@@ -111,6 +112,7 @@ export class CollaboraterAddComponent extends BaseFormPage{
         this.router.navigateByUrl('/user/collaborater');
       },
       (error) =>{
+        this.loading = false;
         //console.log("error "+error);
         Object.keys(error.error).forEach(prop => {
           const formControl = this.mainForm.get(prop.toLowerCase());

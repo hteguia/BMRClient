@@ -11,10 +11,9 @@ import { LogService } from "../log.service";
   providedIn: 'root'
 })
 export class HttpErrorInterceptor implements HttpInterceptor{
-  //private authInterceptor = inject(AuthInterceptor);
-  //private authService = inject(AuthService);
-  //private logService = inject(LogService);
+  
   constructor(private router: Router, private authService: AuthService, private logService: LogService) {}
+  
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (req.url.startsWith(environment.apiUrl)) {
       return next.handle(req).pipe(
@@ -23,14 +22,14 @@ export class HttpErrorInterceptor implements HttpInterceptor{
         })),
         catchError((error: HttpErrorResponse) => {
           if (error.status === 401) {
-            //return this.handleRefrehToken(req, next);
-            this.authService.logout();
             this.router.navigateByUrl("auth/login");           
+          }
+
+          if(error.status === 403){
+            this.router.navigateByUrl("forbidden"); 
           }
   
           if (error.status === 0 || !navigator.onLine) {
-            this.logService.log('Connexion internet perdue!');
-            this.authService.logout();
             this.router.navigateByUrl("auth/login");
           }
           const errorMessage = this.setError(error, req);
@@ -38,9 +37,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
         })
       )
     }
-
-    return next.handle(req);
-    
+    return next.handle(req);   
   }
 
   handleRefrehToken(request: HttpRequest<any>, next: HttpHandler) {
@@ -61,7 +58,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
           return next.handle(request);
         }),
         catchError(errordata => {
-          this.authService.logout();
+          //this.authService.logout();
           //this.messageService.sessionExpired(this.router)
           return throwError(() => errordata)
         })
@@ -89,7 +86,7 @@ export class HttpErrorInterceptor implements HttpInterceptor{
       }
 
       if (error.status === 401) {
-        this.authService.logout();
+        //this.authService.logout();
         //this.messageService.authError(this.router)
       }
     }

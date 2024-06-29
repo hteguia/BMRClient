@@ -37,8 +37,7 @@ export class PartnerComponent extends BaseGridPageComponent {
 
   partner$!: Observable<PartnerModel[]>;
 
-  constructor(route: ActivatedRoute, router: Router, private breadcrumpService: BreadcrumpService,
-    public dialog: MatDialog) {  
+  constructor(route: ActivatedRoute, router: Router, private breadcrumpService: BreadcrumpService) {  
       super(router, route);
   }
 

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface DataGridButtonAction
 {
@@ -74,6 +75,7 @@ export class BaseGridPageComponent {
   private uerService = inject(UserService);
   private logService = inject(LogService);
   private authService = inject(AuthService);
+  protected dialog = inject(MatDialog);
   private http = inject(HttpClient);
 
   currentUser!:any;

@@ -59,24 +59,17 @@ export class LoginComponent implements OnInit {
     this.showErrorMessage = false;
     this.auth.login(this.mainForm.value).pipe(
       take(1),
-      tap(currentUser => {
+      tap(response => {
         this.loading = false;
-        if(currentUser){
-          this.auth.saveAccessToken(currentUser.data);
-          this.auth.getUserProfil().subscribe({
-            next: (user) => {
-              this.auth.saveUserPofils(user);
-              this.router.navigateByUrl('/');
-            },
-            error: (error) => {
-              this.loading = false;
-            }
-          });
-          
-        }
-        else{
-          this.showErrorMessage = true;
-        }
+        this.auth.getUserProfil().subscribe({
+          next: (user) => {
+            this.auth.saveUserPofils(user);
+            this.router.navigateByUrl('/');
+          },
+          error: (error) => {
+            this.loading = false;
+          }
+        });
       })
     ).subscribe();
   }

@@ -8,15 +8,20 @@ export function confirmEqualValidator(main: string, confirm: string): null | Val
             };
         }
 
-        const mainValue = ctrl.get(main)!.value;
-        const confirmalue = ctrl.get(confirm)!.value;
+        // const mainValue = ctrl.get(main)!.value;
+        // const confirmalue = ctrl.get(confirm)!.value;
         
-        return mainValue === confirmalue ? null : {
-            confirmEqual: {
-                main: mainValue,
-                confirm: confirmalue
-            }
-        };
+        // return mainValue === confirmalue ? null : {
+        //     confirmEqual: {
+        //         main: mainValue,
+        //         confirm: confirmalue
+        //     }
+        // };
+
+        return {
+            error: 'Not implemented'
+        }
         
     };
 }
+
