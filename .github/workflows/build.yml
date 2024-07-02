@@ -1,53 +1,20 @@
-
-name: Angular build Pipeline
-
+name: Build
 on:
   push:
     branches:
       - develop
-      
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
-  build:
-    name: Build Angular App
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
-
     steps:
-      - name: Get latest code
-        uses: actions/checkout@v2.3.2
- 
-      - name: Use Node.js 18.17.1 LTS
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
         with:
-          node-version: '18.17.1'
-        
-      - name: Install NPM Modules
-        run: npm install
-  
-      - name: Build Project
-        run: npm run build
-
-      - name: SonarCloud Analysis
-        uses: sonarsource/sonarcloud-github-action@v1.8
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Get commit author email
-        if: ${{ failure() }}
-        run: |
-          COMMIT_AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
-          echo "COMMIT_AUTHOR_EMAIL=$COMMIT_AUTHOR_EMAIL" >> $GITHUB_ENV
-            
-      - name: Send email on failed
-        uses: dawidd6/action-send-mail@v2.5.0
-        with:
-            server_address: smtp.ionos.com
-            server_port: 587
-            username: ${{ secrets.EMAIL_USERNAME }}
-            password: ${{ secrets.EMAIL_PASSWORD }}
-            subject: "Workflow failed on ${{ github.repository }}/${{ github.head_ref }} (commit ${{ github.sha }})"
-            body: |
-              Workflow failed on ${{ github.repository }}/${{ github.head_ref }} (commit ${{ github.sha }}). \nSee the workflow run log for more details: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            from: "GitHub Actions <${{ vars.EMAIL_FROM }}>"
-            to: ${{ env.COMMIT_AUTHOR_EMAIL }}
-        if: ${{ failure() }}
